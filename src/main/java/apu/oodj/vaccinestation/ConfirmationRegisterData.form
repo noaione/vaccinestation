@@ -33,21 +33,21 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" alignment="0" min="-2" pref="344" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="jLabel8" min="-2" pref="139" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblPassword" min="-2" pref="292" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnShow" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="lblPassword" min="-2" pref="306" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnShow" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnRegister" min="-2" pref="198" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                               <Component id="btnRegister1" min="-2" pref="198" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jLabel1" alignment="0" min="-2" pref="380" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="51" max="32767" attributes="0"/>
+                      <EmptySpace pref="47" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -57,16 +57,11 @@
                                   <Component id="jLabel3" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
                                   <Component id="jLabel6" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblPhone" max="32767" attributes="0"/>
+                                  <Component id="lblAddress" max="32767" attributes="0"/>
                                   <Component id="lblUsername" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblPhone" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lblAddress" alignment="1" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -116,10 +111,7 @@
               <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel4" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                      <Component id="lblAddress" min="-2" pref="22" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblAddress" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -132,10 +124,10 @@
                   <Component id="lblUsername" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel8" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblPassword" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btnShow" alignment="1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnShow" max="32767" attributes="0"/>
+                  <Component id="jLabel8" pref="30" max="32767" attributes="0"/>
+                  <Component id="lblPassword" pref="30" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">

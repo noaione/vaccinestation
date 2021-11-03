@@ -90,7 +90,7 @@ public class DetermineUsers extends javax.swing.JFrame {
 
     private void btnPersonnelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonnelActionPerformed
         // TODO add your handling code here:
-        new PeopleForm().show();
+        new PersonelForm().show();
         this.hide();
     }//GEN-LAST:event_btnPersonnelActionPerformed
 
