@@ -8,6 +8,8 @@ public class EntryPoint
 {
     public static void main( String[] args )
     {
-        System.out.println("Initializing System...");
+        DetermineUsers du = new DetermineUsers();
+        du.setVisible(true);
+        //System.out.println("Initializing System...");
     }
 }
