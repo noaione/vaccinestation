@@ -96,7 +96,8 @@ public class DetermineUsers extends javax.swing.JFrame {
 
     private void btnPeopleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeopleActionPerformed
         // TODO add your handling code here:
-        new PeopleForm().show();
+        String username = "", password = "";
+        new PeopleForm(username, password).show();
         this.hide();
     }//GEN-LAST:event_btnPeopleActionPerformed
 
