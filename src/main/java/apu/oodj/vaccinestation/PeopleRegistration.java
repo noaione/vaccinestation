@@ -426,7 +426,7 @@ public class PeopleRegistration extends javax.swing.JFrame {
         txtCountry.setEnabled(false);
         txtCountry.setFont(jLabel7.getFont());
         txtCountry.setBackground(Color.DARK_GRAY);
-        txtCountry.setText("Indonesia");
+        txtCountry.setText("Malaysia");
     }//GEN-LAST:event_rbtnCitizenActionPerformed
 
     private void rbtnNonCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNonCitizenActionPerformed

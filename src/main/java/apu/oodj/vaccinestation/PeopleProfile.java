@@ -75,7 +75,7 @@ public class PeopleProfile extends javax.swing.JFrame {
 
         jLabel8.setText("Full Name");
 
-        jLabel9.setText("TP Number");
+        jLabel9.setText("ID Number");
 
         lblEmail.setText("l");
 

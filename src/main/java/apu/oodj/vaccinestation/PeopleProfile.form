@@ -205,7 +205,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
-        <Property name="text" type="java.lang.String" value="TP Number"/>
+        <Property name="text" type="java.lang.String" value="ID Number"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblEmail">
