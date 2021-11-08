@@ -7,6 +7,7 @@ package apu.oodj.vaccinestation;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 
 /**

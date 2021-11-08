@@ -175,6 +175,11 @@ public class PeopleForm extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         //MATCHING USERNAME AND INPUT TO DATABASE
+        //FOR THE MEANTIME
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        new HomepageUsers(username, password).show();
+        this.hide();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
