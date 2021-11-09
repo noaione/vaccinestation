@@ -11,12 +11,12 @@ import javax.swing.JOptionPane;
  *
  * @author asus
  */
-public class PeopleForm extends javax.swing.JFrame {
+public class LoginPage extends javax.swing.JFrame {
 
     /**
      * Creates new form PeopleForm
      */
-    public PeopleForm(String username, String password) {
+    public LoginPage(String username, String password) {
         initComponents();
         txtUsername.setText(username + "");
         txtPassword.setText(password + "");
@@ -48,10 +48,10 @@ public class PeopleForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        jLabel1.setText("KINDLY INPUT YOUR USERNAME AND PASSWORD BELOW");
+        jLabel1.setText("KINDLY INPUT YOUR USERNAME AND PASSWORD BELOW ");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        jLabel2.setText("HI ! PEOPLE");
+        jLabel2.setText("HI ! PEOPLE ");
 
         jLabel3.setText("Username");
 
@@ -199,13 +199,11 @@ public class PeopleForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "PLEASE CHOOSE THE AVAILABLE OPTION BELOW\n                        OTHER THAN THIS !!");
         }
         if(selectedIndex == 1){
-            new DetermineUsers().show();
-            this.hide();
-        }else if(selectedIndex == 2){
             String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
             new PeopleRegistration(name, born, email, address, phone, username, password, type).show();
             this.hide();
         }
+        
     }//GEN-LAST:event_btnMoveActionPerformed
     boolean showPassword = false;
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
@@ -236,21 +234,22 @@ public class PeopleForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PeopleForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PeopleForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PeopleForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PeopleForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 String username = "", password = "";
-                new PeopleForm(username, password).setVisible(true);
+                new LoginPage(username, password).setVisible(true);
             }
         });
     }

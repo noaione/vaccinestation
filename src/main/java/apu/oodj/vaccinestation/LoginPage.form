@@ -116,7 +116,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="3"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="KINDLY INPUT YOUR USERNAME AND PASSWORD BELOW"/>
+        <Property name="text" type="java.lang.String" value="KINDLY INPUT YOUR USERNAME AND PASSWORD BELOW "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -124,7 +124,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="3"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="HI ! PEOPLE"/>
+        <Property name="text" type="java.lang.String" value="HI ! PEOPLE "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
