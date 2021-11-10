@@ -41,7 +41,10 @@ public class AdminInit extends javax.swing.JFrame {
         txtAdminUsername = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         confirmBtn = new javax.swing.JButton();
-        txtPassword = new javax.swing.JPasswordField();
+        txtAdminPassword = new javax.swing.JPasswordField();
+        btnShow = new javax.swing.JButton();
+        txtAdminConPassword = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,6 +53,11 @@ public class AdminInit extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Admin Account");
 
+        txtAdminUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAdminUsernameActionPerformed(evt);
+            }
+        });
         txtAdminUsername.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtAdminUsernameKeyTyped(evt);
@@ -65,14 +73,14 @@ public class AdminInit extends javax.swing.JFrame {
             }
         });
 
-        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPasswordKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPasswordKeyTyped(evt);
+        btnShow.setText("jButton1");
+        btnShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Confirm your password:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,14 +88,20 @@ public class AdminInit extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(confirmBtn)
-                    .addComponent(txtAdminUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPassword))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtAdminConPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(confirmBtn, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAdminUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAdminPassword, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,10 +115,16 @@ public class AdminInit extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnShow))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtAdminConPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(confirmBtn)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -120,31 +140,38 @@ public class AdminInit extends javax.swing.JFrame {
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
         String username = txtAdminUsername.getText();
-        String password = txtPassword.getText();
+        String password = txtAdminPassword.getText();
+        String conpassword = txtAdminConPassword.getText();
         System.out.println(password);
+        System.out.println(conpassword);
         if (password.length() < 1) {
             // Show popup box
             JOptionPane.showMessageDialog(null, "Password cannot be empty");
             return;
         }
-        if (password.length() < 5) {
+        else if (password.length() < 5) {
             // Show popup box
             JOptionPane.showMessageDialog(null, "Password must be at least 6 characters");
             return;
         }
-        if (username.length() < 1) {
+        else if (username.length() < 1) {
             // Show popup box
             JOptionPane.showMessageDialog(null, "Username cannot be empty");
             return;
         }
-        if (username.contains(";;;")) {
+        else if (username.contains(";;;")) {
             // Show popup box
             JOptionPane.showMessageDialog(null, "Username cannot contain ';;;'");
             return;
         }
-        if (password.contains(";;;")) {
+        else if (password.contains(";;;")) {
             // Show popup box
             JOptionPane.showMessageDialog(null, "Password cannot contain ';;;'");
+            return;
+        }
+        else if (!password.equals(conpassword)){
+            // Show popup box
+            JOptionPane.showMessageDialog(null, "DIFFERENT Password and Confirm Password");
             return;
         }
         // Success, now register
@@ -164,14 +191,17 @@ public class AdminInit extends javax.swing.JFrame {
         this.setVisible(false);
         new LoginPage("", "").setVisible(true);
     }//GEN-LAST:event_confirmBtnActionPerformed
-
-    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-
-    }//GEN-LAST:event_txtPasswordKeyPressed
-
-    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
-
-    }//GEN-LAST:event_txtPasswordKeyTyped
+    boolean showPassword = false;
+    private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
+        // TODO add your handling code here:
+        if (showPassword == false) {
+            txtAdminPassword.setEchoChar((char)0);
+        }
+        else {
+            txtAdminPassword.setEchoChar('*');
+        }
+        showPassword = !showPassword;
+    }//GEN-LAST:event_btnShowActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,11 +239,14 @@ public class AdminInit extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnShow;
     private javax.swing.JButton confirmBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField txtAdminConPassword;
+    private javax.swing.JPasswordField txtAdminPassword;
     private javax.swing.JTextField txtAdminUsername;
-    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
