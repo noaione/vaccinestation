@@ -14,7 +14,7 @@ public class FileHandling {
         };
 
         Path currentPath = Paths.get(System.getProperty("user.dir"));
-        Path savePath = Paths.get(currentPath.toString(), prefixWith + "VaccineStation");
+        Path savePath = Paths.get(currentPath.toString(), prefixWith + "appdata");
         try {
             Files.createDirectories(savePath);
         } catch (IOException e) {
@@ -47,7 +47,7 @@ public class FileHandling {
             lines.add(data);
         }
         reader.close();
-        return (String[])lines.toArray();
+        return lines.toArray(new String[lines.size()]);
     }
 
     public static void WriteString(String fileName, String text) throws IOException {
