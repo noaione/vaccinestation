@@ -186,7 +186,6 @@ public class AdminInit extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Unable to save the admin information to disk");
             return;
         }
-            //kalau gw mau liat kyk gmn
         JOptionPane.showMessageDialog(null, "Admin account successfully registered!");
         this.setVisible(false);
         new LoginPage("", "").setVisible(true);
