@@ -204,7 +204,8 @@ public class AdminCheckUsernameModifyManagerAccount extends javax.swing.JFrame {
             new AdminApprovedRequest().show();
             this.hide();
         }else if(selectedIndex == 4){
-            new AdminRegisterManagerAccount().show();
+            String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
+            new AdminRegisterManagerAccount(name, born, email, address, phone, username, password, type).show();
             this.hide();
         }
     }//GEN-LAST:event_btnMoveActionPerformed

@@ -17,8 +17,35 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
     /**
      * Creates new form AdminModifyManagerAccount
      */
-    public AdminModifyManagerAccount() {
+    public AdminModifyManagerAccount(String cname, String cborn, String cemail, String caddress, String cphone, String cusername, String cpassword, String ctype) {
         initComponents();
+        String pname = cname;
+        String pborn = cborn;
+        String pemail = cemail;
+        String paddress = caddress;
+        String pphone = cphone;
+        String pusername = cusername;
+        String ppassword = cpassword;
+        String ptype = ctype;
+        
+        if(ptype.equals("Citizen")){
+            rbtnCitizen.setSelected(true);
+            txtCountry.setEnabled(false);
+            txtCountry.setFont(jLabel7.getFont());
+            txtCountry.setBackground(Color.DARK_GRAY);
+            txtCountry.setText("Malaysia");
+        }else{
+            rbtnNonCitizen.setSelected(true);
+        }
+        txtFullName.setText(pname + "");
+        //NOT YET SET THE BORN
+        //txtDOB.setCalendar(born);
+        txtEmail.setText(pemail + "");
+        txtAddress.setText("" + paddress);
+        txtPhone.setText(pphone + "");
+        txtUsername.setText(pusername);
+        txtPassword.setText(ppassword);
+        txtConPassword.setText(ppassword);
     }
 
     /**
@@ -30,6 +57,28 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtPassword = new javax.swing.JPasswordField();
+        btnShow = new javax.swing.JButton();
+        rbtnCitizen = new javax.swing.JRadioButton();
+        jLabel12 = new javax.swing.JLabel();
+        rbtnNonCitizen = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtAddress = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtPhone = new javax.swing.JTextField();
+        btnMove = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lblCheckPassword = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cmbMove = new javax.swing.JComboBox<>();
+        txtConPassword = new javax.swing.JPasswordField();
+        lblCheckUsername = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        btnRegister = new javax.swing.JButton();
+        txtCountry = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtDOB = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
@@ -38,55 +87,17 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
-        btnShow = new javax.swing.JButton();
-        txtPhone = new javax.swing.JTextField();
-        btnMove = new javax.swing.JButton();
-        rbtnCitizen = new javax.swing.JRadioButton();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        rbtnNonCitizen = new javax.swing.JRadioButton();
-        jLabel10 = new javax.swing.JLabel();
-        txtAddress = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        cmbMove = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        txtConPassword = new javax.swing.JPasswordField();
-        lblCheck = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        btnRegister = new javax.swing.JButton();
-        txtCountry = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel8.setText("Password");
-
-        txtDOB.setDateFormatString("d MMM, yyyy");
-
-        jLabel9.setText("Confirm Password");
-
-        jLabel4.setText("Home Address");
-
-        jLabel11.setText("Country");
-
-        txtUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsernameActionPerformed(evt);
-            }
-        });
-        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtUsernameKeyPressed(evt);
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtUsernameKeyTyped(evt);
+                txtPasswordKeyTyped(evt);
             }
         });
-
-        jLabel3.setText("Phone Number");
 
         btnShow.setText("jButton1");
         btnShow.addActionListener(new java.awt.event.ActionListener() {
@@ -94,6 +105,41 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
                 btnShowActionPerformed(evt);
             }
         });
+
+        rbtnCitizen.setText("Citizen");
+        rbtnCitizen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnCitizenActionPerformed(evt);
+            }
+        });
+        rbtnCitizen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                rbtnCitizenKeyPressed(evt);
+            }
+        });
+
+        jLabel12.setText("Date of Birth (DOB)");
+
+        rbtnNonCitizen.setText("Non-Citizen");
+        rbtnNonCitizen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnNonCitizenActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("WHO IS THE MANAGER ??");
+
+        txtAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAddressActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Phone Number");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel1.setText("REGISTER NEW MANAGER ACCOUNT BELOW !! ");
 
         txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -114,59 +160,65 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
             }
         });
 
-        rbtnCitizen.setText("Citizen");
-        rbtnCitizen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnCitizenActionPerformed(evt);
-            }
-        });
-        rbtnCitizen.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                rbtnCitizenKeyPressed(evt);
-            }
-        });
-
-        jLabel12.setText("Date of Birth (DOB)");
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel2.setText("HI ! ADMIN ");
-
-        rbtnNonCitizen.setText("Non-Citizen");
-        rbtnNonCitizen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnNonCitizenActionPerformed(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Move To :");
 
-        txtAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddressActionPerformed(evt);
+        lblCheckPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                lblCheckPasswordKeyTyped(evt);
             }
         });
 
         jLabel6.setText("Username");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("WHO IS THE MANAGER ?? ");
-
         cmbMove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmbMove.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=======CLICK HERE=======", "View Vaccine Slots", "View & Modify Request of Vaccine From Users", "Approved Request", "Register Manager Account", "LogOut (Re-Input Username & Password For Modify)" }));
+        cmbMove.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=======CLICK HERE=======", "View Vaccine Slots", "View & Modify Request of Vaccine From Users", "Approved Request", "Modify Manager Account" }));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel1.setText("MODIFY THE MANAGER ACCOUNT BELOW !! ");
+        lblCheckUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblCheckUsernameKeyPressed(evt);
+            }
+        });
 
         jLabel7.setText("Email Address");
 
         jLabel13.setText("Full Name");
 
         btnRegister.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnRegister.setText("Modify");
+        btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisterActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Password");
+
+        txtDOB.setDateFormatString("d MMM, yyyy");
+
+        jLabel9.setText("Confirm Password");
+
+        jLabel4.setText("Home Address");
+
+        jLabel11.setText("Country");
+
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyTyped(evt);
             }
         });
 
@@ -174,28 +226,28 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(rbtnCitizen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbtnNonCitizen)))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(209, 209, 209)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnMove))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(65, 65, 65)
+                                        .addComponent(jLabel10)))
+                                .addGap(52, 52, 52)
+                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 86, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,37 +270,37 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
                                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblCheckUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblCheckPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnMove))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(65, 65, 65)
-                                        .addComponent(jLabel10)))
-                                .addGap(52, 52, 52)
-                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rbtnCitizen)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(99, 99, 99)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(rbtnNonCitizen)))
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCountry, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59)))
+                        .addGap(43, 43, 43))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +308,7 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -295,14 +347,15 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCheckUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnShow)))
+                        .addComponent(btnShow)
+                        .addComponent(lblCheckPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -324,28 +377,27 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
-
-    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameKeyPressed
-
-    private void txtUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyTyped
-        // TODO add your handling code here:
-        if(txtUsername.getText().length() >= 5 && txtUsername.getText().length() < 16){
-            lblCheck.setText("NOW IT'S FINE");
-        }else if(txtUsername.getText().length() <=4){
-            lblCheck.setText("'6' LETTERS REQUIRED");
-        }else{
-            lblCheck.setText("MAXIMUM LETTERS !! REDUCE IT !!");
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        if(txtPassword.getText().length() >= 12 && txtPassword.getText().length() <= 21){
+            lblCheckPassword.setText("VERY STRONG !!");
+            lblCheckPassword.setForeground(Color.BLUE);
+        }else if(txtPassword.getText().length() >= 6 && txtPassword.getText().length() < 12){
+            lblCheckPassword.setText("STRONG !!");
+            lblCheckPassword.setForeground(Color.GREEN);
         }
-        if(txtUsername.getText().length() >= 15){
-            JOptionPane.showMessageDialog(this, "MAXIMUM '15' LENGTH OF ALPHABETS FOR USERNAME !!");
-            txtUsername.setText(txtUsername.getText().substring(0,14));
+        else{
+            lblCheckPassword.setText("WEAK !! '6' LETTERS REQUIRED");
+            lblCheckPassword.setForeground(Color.RED);
         }
-    }//GEN-LAST:event_txtUsernameKeyTyped
+        if(txtPassword.getText().length() == 21){
+            JOptionPane.showMessageDialog(this, "MAXIMUM '20' LENGTH OF ALPHABETS FOR USERNAME !!");
+            txtPassword.setText(txtPassword.getText().substring(0,20));
+        }
+    }//GEN-LAST:event_txtPasswordKeyReleased
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordKeyTyped
     boolean showPassword = false;
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         // TODO add your handling code here:
@@ -357,6 +409,30 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
         }
         showPassword = !showPassword;
     }//GEN-LAST:event_btnShowActionPerformed
+
+    private void rbtnCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCitizenActionPerformed
+        // TODO add your handling code here:
+        txtCountry.setEnabled(false);
+        txtCountry.setFont(jLabel7.getFont());
+        txtCountry.setBackground(Color.DARK_GRAY);
+        txtCountry.setText("Malaysia");
+    }//GEN-LAST:event_rbtnCitizenActionPerformed
+
+    private void rbtnCitizenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rbtnCitizenKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnCitizenKeyPressed
+
+    private void rbtnNonCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNonCitizenActionPerformed
+        // TODO add your handling code here:
+        txtCountry.setText("");
+        txtCountry.setFont(jLabel7.getFont());
+        txtCountry.setBackground(Color.WHITE);
+        txtCountry.setEnabled(true);
+    }//GEN-LAST:event_rbtnNonCitizenActionPerformed
+
+    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddressActionPerformed
 
     private void txtPhoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyPressed
         // TODO add your handling code here:
@@ -386,37 +462,18 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
             new AdminApprovedRequest().show();
             this.hide();
         }else if(selectedIndex == 4){
-            new AdminRegisterManagerAccount().show();
-            this.hide();
-        }else if(selectedIndex ==5){
             new AdminCheckUsernameModifyManagerAccount().show();
             this.hide();
         }
     }//GEN-LAST:event_btnMoveActionPerformed
 
-    private void rbtnCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCitizenActionPerformed
+    private void lblCheckPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblCheckPasswordKeyTyped
         // TODO add your handling code here:
-        txtCountry.setEnabled(false);
-        txtCountry.setFont(jLabel7.getFont());
-        txtCountry.setBackground(Color.DARK_GRAY);
-        txtCountry.setText("Malaysia");
-    }//GEN-LAST:event_rbtnCitizenActionPerformed
+    }//GEN-LAST:event_lblCheckPasswordKeyTyped
 
-    private void rbtnCitizenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rbtnCitizenKeyPressed
+    private void lblCheckUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblCheckUsernameKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbtnCitizenKeyPressed
-
-    private void rbtnNonCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNonCitizenActionPerformed
-        // TODO add your handling code here:
-        txtCountry.setText("");
-        txtCountry.setFont(jLabel7.getFont());
-        txtCountry.setBackground(Color.WHITE);
-        txtCountry.setEnabled(true);
-    }//GEN-LAST:event_rbtnNonCitizenActionPerformed
-
-    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressActionPerformed
+    }//GEN-LAST:event_lblCheckUsernameKeyPressed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
@@ -459,8 +516,8 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
             }else if(username.isEmpty()){
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>USERNAME<< HERE!!");
                 txtUsername.requestFocusInWindow();
-            }else if(txtUsername.getText().length() <= 4){
-                JOptionPane.showMessageDialog(this, "MINIMUM '5' LENGTH OF ALPHABETS FOR USERNAME !!");
+            }else if(txtUsername.getText().length() <= 5){
+                JOptionPane.showMessageDialog(this, "MINIMUM '6' LENGTH OF ALPHABETS FOR USERNAME !!");
                 txtUsername.requestFocusInWindow();
             }else if(password.isEmpty()){
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>PASSWORD<< HERE!!");
@@ -469,7 +526,7 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>CONFIRM PASSWORD<< HERE!!");
                 txtConPassword.requestFocusInWindow();
             }else if(password.equals(confirmpassword)) {
-                new ConfirmationRegisterData(name, born, email, homeAddress, phoneNumber, username, password, type, country).show();
+                new AdminConfirmationRegisterManager(name, born, email, homeAddress, phoneNumber, username, password, type, country).show();
                 this.hide();
             }else {
                 JOptionPane.showMessageDialog(this, "DIFFERENT PASSWORD DETEDTED!! \n\nKindly Check Your Password and Confirm Password");
@@ -479,6 +536,34 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
             return;
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameKeyPressed
+
+    private void txtUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyReleased
+        if(txtUsername.getText().length() >= 6 && txtUsername.getText().length() < 16){
+            lblCheckUsername.setText("NOW IT'S FINE");
+            lblCheckUsername.setForeground(Color.BLUE);
+        }
+        else{
+            lblCheckUsername.setText("'6' LETTERS REQUIRED");
+            lblCheckUsername.setForeground(Color.RED);
+        }
+        if(txtUsername.getText().length() >= 16){
+            JOptionPane.showMessageDialog(this, "MAXIMUM '15' LENGTH OF ALPHABETS FOR USERNAME !!");
+            txtUsername.setText(txtUsername.getText().substring(0,15));
+        }
+    }//GEN-LAST:event_txtUsernameKeyReleased
+
+    private void txtUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyTyped
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtUsernameKeyTyped
 
     /**
      * @param args the command line arguments
@@ -510,7 +595,8 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminModifyManagerAccount().setVisible(true);
+                String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
+                new AdminModifyManagerAccount(name, born, email, address, phone, username, password, type).setVisible(true);
             }
         });
     }
@@ -533,7 +619,8 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel lblCheck;
+    private javax.swing.JLabel lblCheckPassword;
+    private javax.swing.JLabel lblCheckUsername;
     private javax.swing.JRadioButton rbtnCitizen;
     private javax.swing.JRadioButton rbtnNonCitizen;
     private javax.swing.JTextField txtAddress;

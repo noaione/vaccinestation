@@ -17,8 +17,35 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
     /**
      * Creates new form AdminRegisterManagerAccount
      */
-    public AdminRegisterManagerAccount() {
+    public AdminRegisterManagerAccount(String cname, String cborn, String cemail, String caddress, String cphone, String cusername, String cpassword, String ctype) {
         initComponents();
+        String pname = cname;
+        String pborn = cborn;
+        String pemail = cemail;
+        String paddress = caddress;
+        String pphone = cphone;
+        String pusername = cusername;
+        String ppassword = cpassword;
+        String ptype = ctype;
+        
+        if(ptype.equals("Citizen")){
+            rbtnCitizen.setSelected(true);
+            txtCountry.setEnabled(false);
+            txtCountry.setFont(jLabel7.getFont());
+            txtCountry.setBackground(Color.DARK_GRAY);
+            txtCountry.setText("Malaysia");
+        }else{
+            rbtnNonCitizen.setSelected(true);
+        }
+        txtFullName.setText(pname + "");
+        //NOT YET SET THE BORN
+        //txtDOB.setCalendar(born);
+        txtEmail.setText(pemail + "");
+        txtAddress.setText("" + paddress);
+        txtPhone.setText(pphone + "");
+        txtUsername.setText(pusername);
+        txtPassword.setText(ppassword);
+        txtConPassword.setText(ppassword);
     }
 
     /**
@@ -44,7 +71,7 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         cmbMove = new javax.swing.JComboBox<>();
         txtConPassword = new javax.swing.JPasswordField();
-        lblCheck = new javax.swing.JLabel();
+        lblCheckUsername = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
@@ -60,6 +87,7 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
         txtAddress = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
+        lblCheckPassword = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,8 +102,20 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsernameKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtUsernameKeyTyped(evt);
+            }
+        });
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
             }
         });
 
@@ -127,6 +167,12 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
         cmbMove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmbMove.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=======CLICK HERE=======", "View Vaccine Slots", "View & Modify Request of Vaccine From Users", "Approved Request", "Modify Manager Account" }));
 
+        lblCheckUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblCheckUsernameKeyPressed(evt);
+            }
+        });
+
         jLabel7.setText("Email Address");
 
         jLabel13.setText("Full Name");
@@ -173,6 +219,12 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
             }
         });
 
+        lblCheckPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                lblCheckPasswordKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,7 +250,7 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 26, Short.MAX_VALUE))
+                        .addGap(0, 86, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,40 +273,37 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
                                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblCheckUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblCheckPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rbtnCitizen)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rbtnNonCitizen)))
-                        .addGap(45, 45, 45)
+                        .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                            .addComponent(txtCountry, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69))))))
+                                .addGap(59, 59, 59)))
+                        .addGap(43, 43, 43))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(209, 209, 209)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(130, 130, 130)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,7 +311,7 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,14 +350,15 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCheckUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnShow)))
+                        .addComponent(btnShow)
+                        .addComponent(lblCheckPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -336,22 +386,11 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
 
     private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_txtUsernameKeyPressed
 
     private void txtUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyTyped
         // TODO add your handling code here:
-        if(txtUsername.getText().length() >= 5 && txtUsername.getText().length() < 16){
-            lblCheck.setText("NOW IT'S FINE");
-        }else if(txtUsername.getText().length() <=4){
-            lblCheck.setText("'6' LETTERS REQUIRED");
-        }else{
-            lblCheck.setText("MAXIMUM LETTERS !! REDUCE IT !!");
-        }
-        if(txtUsername.getText().length() >= 15){
-            JOptionPane.showMessageDialog(this, "MAXIMUM '15' LENGTH OF ALPHABETS FOR USERNAME !!");
-            txtUsername.setText(txtUsername.getText().substring(0,14));
-        }
+        
     }//GEN-LAST:event_txtUsernameKeyTyped
 
     private void rbtnCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCitizenActionPerformed
@@ -435,8 +474,8 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
             }else if(username.isEmpty()){
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>USERNAME<< HERE!!");
                 txtUsername.requestFocusInWindow();
-            }else if(txtUsername.getText().length() <= 4){
-                JOptionPane.showMessageDialog(this, "MINIMUM '5' LENGTH OF ALPHABETS FOR USERNAME !!");
+            }else if(txtUsername.getText().length() <= 5){
+                JOptionPane.showMessageDialog(this, "MINIMUM '6' LENGTH OF ALPHABETS FOR USERNAME !!");
                 txtUsername.requestFocusInWindow();
             }else if(password.isEmpty()){
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>PASSWORD<< HERE!!");
@@ -486,6 +525,51 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPhoneKeyTyped
 
+    private void lblCheckPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblCheckPasswordKeyTyped
+        // TODO add your handling code here:        
+    }//GEN-LAST:event_lblCheckPasswordKeyTyped
+
+    private void lblCheckUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblCheckUsernameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblCheckUsernameKeyPressed
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+        // TODO add your handling code here:  
+    }//GEN-LAST:event_txtPasswordKeyTyped
+
+    private void txtUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyReleased
+        if(txtUsername.getText().length() >= 6 && txtUsername.getText().length() < 16){
+            lblCheckUsername.setText("NOW IT'S FINE");
+            lblCheckUsername.setForeground(Color.BLUE);
+        }
+        else{
+            lblCheckUsername.setText("'6' LETTERS REQUIRED");
+            lblCheckUsername.setForeground(Color.RED);
+        }
+        if(txtUsername.getText().length() >= 16){
+            JOptionPane.showMessageDialog(this, "MAXIMUM '15' LENGTH OF ALPHABETS FOR USERNAME !!");
+            txtUsername.setText(txtUsername.getText().substring(0,15));
+        }
+    }//GEN-LAST:event_txtUsernameKeyReleased
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        if(txtPassword.getText().length() >= 12 && txtPassword.getText().length() <= 21){
+            lblCheckPassword.setText("VERY STRONG !!");
+            lblCheckPassword.setForeground(Color.BLUE);
+        }else if(txtPassword.getText().length() >= 6 && txtPassword.getText().length() < 12){
+            lblCheckPassword.setText("STRONG !!");
+            lblCheckPassword.setForeground(Color.GREEN);
+        }
+        else{
+            lblCheckPassword.setText("WEAK !! '6' LETTERS REQUIRED");
+            lblCheckPassword.setForeground(Color.RED);
+        }
+        if(txtPassword.getText().length() == 21){
+            JOptionPane.showMessageDialog(this, "MAXIMUM '20' LENGTH OF ALPHABETS FOR USERNAME !!");
+            txtPassword.setText(txtPassword.getText().substring(0,20));
+        }
+    }//GEN-LAST:event_txtPasswordKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -516,7 +600,8 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminRegisterManagerAccount().setVisible(true);
+                String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
+                new AdminRegisterManagerAccount(name, born, email, address, phone, username, password, type).setVisible(true);
             }
         });
     }
@@ -540,7 +625,8 @@ public class AdminRegisterManagerAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel lblCheck;
+    private javax.swing.JLabel lblCheckPassword;
+    private javax.swing.JLabel lblCheckUsername;
     private javax.swing.JRadioButton rbtnCitizen;
     private javax.swing.JRadioButton rbtnNonCitizen;
     private javax.swing.JTextField txtAddress;

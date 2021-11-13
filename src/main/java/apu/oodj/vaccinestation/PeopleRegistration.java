@@ -61,89 +61,64 @@ public class PeopleRegistration extends javax.swing.JFrame {
     private void initComponents() {
 
         btnType = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtConPassword = new javax.swing.JPasswordField();
-        jLabel7 = new javax.swing.JLabel();
-        btnRegister = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        txtFullName = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        btnShow = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        txtAddress = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtPhone = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JPasswordField();
-        rbtnCitizen = new javax.swing.JRadioButton();
-        rbtnNonCitizen = new javax.swing.JRadioButton();
-        jLabel5 = new javax.swing.JLabel();
-        btnMove = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        cmbMove = new javax.swing.JComboBox<>();
-        lblCheck = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        txtCountry = new javax.swing.JTextField();
         txtDOB = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtFullName = new javax.swing.JTextField();
+        rbtnNonCitizen = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtAddress = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtPhone = new javax.swing.JTextField();
+        btnMove = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lblCheckPassword = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cmbMove = new javax.swing.JComboBox<>();
+        txtConPassword = new javax.swing.JPasswordField();
+        lblCheckUsername = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        btnRegister = new javax.swing.JButton();
+        txtCountry = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        jLabel8 = new javax.swing.JLabel();
+        btnShow = new javax.swing.JButton();
+        rbtnCitizen = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel1.setText("REGISTER YOUR ACCOUNT BELOW !!");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel2.setText("HI ! USERS");
-
-        jLabel6.setText("Username");
-
-        jLabel7.setText("Email Address");
-
-        btnRegister.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnRegister.setText("Register");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("Password");
+        txtDOB.setDateFormatString("d MMM, yyyy");
 
         jLabel9.setText("Confirm Password");
 
-        jLabel11.setText("Country");
+        jLabel12.setText("Date of Birth (DOB)");
 
-        btnShow.setText("jButton1");
-        btnShow.addActionListener(new java.awt.event.ActionListener() {
+        rbtnNonCitizen.setText("Non-Citizen");
+        rbtnNonCitizen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowActionPerformed(evt);
+                rbtnNonCitizenActionPerformed(evt);
             }
         });
 
-        jLabel12.setText("Date of Birth (DOB)");
+        jLabel4.setText("Home Address");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("WHO IS THE MANAGER ??");
+
+        jLabel11.setText("Country");
 
         txtAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAddressActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("Phone Number");
-
-        txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPhoneKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPhoneKeyTyped(evt);
-            }
-        });
-
-        jLabel4.setText("Home Address");
 
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,12 +129,91 @@ public class PeopleRegistration extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsernameKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtUsernameKeyTyped(evt);
             }
         });
 
-        btnType.add(rbtnCitizen);
+        jLabel3.setText("Phone Number");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel1.setText("REGISTER NEW MANAGER ACCOUNT BELOW !! ");
+
+        txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyTyped(evt);
+            }
+        });
+
+        btnMove.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnMove.setForeground(new java.awt.Color(0, 153, 0));
+        btnMove.setText("Move");
+        btnMove.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
+        btnMove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel2.setText("HI ! ADMIN ");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setText("Move To :");
+
+        lblCheckPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                lblCheckPasswordKeyTyped(evt);
+            }
+        });
+
+        jLabel6.setText("Username");
+
+        cmbMove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmbMove.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=======CLICK HERE=======", "View Vaccine Slots", "View & Modify Request of Vaccine From Users", "Approved Request", "Modify Manager Account" }));
+
+        lblCheckUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblCheckUsernameKeyPressed(evt);
+            }
+        });
+
+        jLabel7.setText("Email Address");
+
+        jLabel13.setText("Full Name");
+
+        btnRegister.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
+            }
+        });
+
+        jLabel8.setText("Password");
+
+        btnShow.setText("jButton1");
+        btnShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowActionPerformed(evt);
+            }
+        });
+
         rbtnCitizen.setText("Citizen");
         rbtnCitizen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,49 +226,12 @@ public class PeopleRegistration extends javax.swing.JFrame {
             }
         });
 
-        btnType.add(rbtnNonCitizen);
-        rbtnNonCitizen.setText("Non-Citizen");
-        rbtnNonCitizen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnNonCitizenActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("WHO ARE YOU ??");
-
-        btnMove.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnMove.setForeground(new java.awt.Color(0, 153, 0));
-        btnMove.setText("Move");
-        btnMove.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
-        btnMove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setText("Move To :");
-
-        cmbMove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmbMove.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=======CLICK HERE=======", "Login Page" }));
-
-        jLabel13.setText("Full Name");
-
-        txtDOB.setDateFormatString("d MMM, yyyy");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(rbtnCitizen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbtnNonCitizen)
-                        .addGap(199, 199, 199))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -234,7 +251,7 @@ public class PeopleRegistration extends javax.swing.JFrame {
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 86, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,34 +274,37 @@ public class PeopleRegistration extends javax.swing.JFrame {
                                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblCheckUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblCheckPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(105, 105, 105))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap()))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rbtnCitizen)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbtnNonCitizen)))
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCountry, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59)))
+                        .addGap(43, 43, 43))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(209, 209, 209)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(130, 130, 130)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,14 +313,17 @@ public class PeopleRegistration extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbtnCitizen)
-                    .addComponent(rbtnNonCitizen)
-                    .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbtnCitizen)
+                            .addComponent(rbtnNonCitizen))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -328,14 +351,15 @@ public class PeopleRegistration extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCheckUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnShow)))
+                        .addComponent(btnShow)
+                        .addComponent(lblCheckPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -357,19 +381,99 @@ public class PeopleRegistration extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rbtnNonCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNonCitizenActionPerformed
+        // TODO add your handling code here:
+        txtCountry.setText("");
+        txtCountry.setFont(jLabel7.getFont());
+        txtCountry.setBackground(Color.WHITE);
+        txtCountry.setEnabled(true);
+    }//GEN-LAST:event_rbtnNonCitizenActionPerformed
+
+    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddressActionPerformed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameKeyPressed
+
+    private void txtUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyReleased
+        if(txtUsername.getText().length() >= 6 && txtUsername.getText().length() < 16){
+            lblCheckUsername.setText("NOW IT'S FINE");
+            lblCheckUsername.setForeground(Color.BLUE);
+        }
+        else{
+            lblCheckUsername.setText("'6' LETTERS REQUIRED");
+            lblCheckUsername.setForeground(Color.RED);
+        }
+        if(txtUsername.getText().length() >= 16){
+            JOptionPane.showMessageDialog(this, "MAXIMUM '15' LENGTH OF ALPHABETS FOR USERNAME !!");
+            txtUsername.setText(txtUsername.getText().substring(0,15));
+        }
+    }//GEN-LAST:event_txtUsernameKeyReleased
+
+    private void txtUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameKeyTyped
+
+    private void txtPhoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPhoneKeyPressed
+
+    private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
+        // TODO add your handling code here:
+        char press = evt.getKeyChar();
+        if(!(Character.isDigit(press))){
+            JOptionPane.showMessageDialog(this, "PHONE NUMBER SHOULD BE NUMERIC (0-9) !!");
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPhoneKeyTyped
+
+    private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = cmbMove.getSelectedIndex();
+        if(selectedIndex == 0){
+            JOptionPane.showMessageDialog(this, "PLEASE CHOOSE THE AVAILABLE OPTION BELOW\n                        OTHER THAN THIS !!");
+        }else if(selectedIndex == 1){
+            new AdminVaccineSlots().show();
+            this.hide();
+        }else if(selectedIndex == 2){
+            new AdminViewModifyVaccineReq().show();
+            this.hide();
+        }else if(selectedIndex == 3){
+            new AdminApprovedRequest().show();
+            this.hide();
+        }else if(selectedIndex == 4){
+            new AdminCheckUsernameModifyManagerAccount().show();
+            this.hide();
+        }
+    }//GEN-LAST:event_btnMoveActionPerformed
+
+    private void lblCheckPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblCheckPasswordKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblCheckPasswordKeyTyped
+
+    private void lblCheckUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblCheckUsernameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblCheckUsernameKeyPressed
+
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         String type;
-        String name = txtFullName.getText();       
+        String name = txtFullName.getText();
         String born = txtDOB.getDate().toString();
-        String email = txtEmail.getText();        
-        String homeAddress = txtAddress.getText();  
-        String phoneNumber = txtPhone.getText(); 
+        String email = txtEmail.getText();
+        String homeAddress = txtAddress.getText();
+        String phoneNumber = txtPhone.getText();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         String confirmpassword = txtConPassword.getText();
         String country = txtCountry.getText();
-        
+
         if(rbtnCitizen.isSelected()){
             type = "Citizen";
         }else{
@@ -398,8 +502,8 @@ public class PeopleRegistration extends javax.swing.JFrame {
             }else if(username.isEmpty()){
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>USERNAME<< HERE!!");
                 txtUsername.requestFocusInWindow();
-            }else if(txtUsername.getText().length() <= 4){
-                JOptionPane.showMessageDialog(this, "MINIMUM '5' LENGTH OF ALPHABETS FOR USERNAME !!");
+            }else if(txtUsername.getText().length() <= 5){
+                JOptionPane.showMessageDialog(this, "MINIMUM '6' LENGTH OF ALPHABETS FOR USERNAME !!");
                 txtUsername.requestFocusInWindow();
             }else if(password.isEmpty()){
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>PASSWORD<< HERE!!");
@@ -415,13 +519,32 @@ public class PeopleRegistration extends javax.swing.JFrame {
             }
         }else{
             JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE >>TICK THE BUTTON<< THAT YOU ARE CITIZEN OR NOT!!");
-            return;         
+            return;
         }
-       
-        
-
     }//GEN-LAST:event_btnRegisterActionPerformed
-    boolean showPassword = false;
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        if(txtPassword.getText().length() >= 12 && txtPassword.getText().length() <= 21){
+            lblCheckPassword.setText("VERY STRONG !!");
+            lblCheckPassword.setForeground(Color.BLUE);
+        }else if(txtPassword.getText().length() >= 6 && txtPassword.getText().length() < 12){
+            lblCheckPassword.setText("STRONG !!");
+            lblCheckPassword.setForeground(Color.GREEN);
+        }
+        else{
+            lblCheckPassword.setText("WEAK !! '6' LETTERS REQUIRED");
+            lblCheckPassword.setForeground(Color.RED);
+        }
+        if(txtPassword.getText().length() == 21){
+            JOptionPane.showMessageDialog(this, "MAXIMUM '20' LENGTH OF ALPHABETS FOR USERNAME !!");
+            txtPassword.setText(txtPassword.getText().substring(0,20));
+        }
+    }//GEN-LAST:event_txtPasswordKeyReleased
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordKeyTyped
+
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         // TODO add your handling code here:
         if (showPassword == false) {
@@ -433,10 +556,6 @@ public class PeopleRegistration extends javax.swing.JFrame {
         showPassword = !showPassword;
     }//GEN-LAST:event_btnShowActionPerformed
 
-    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressActionPerformed
-
     private void rbtnCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCitizenActionPerformed
         // TODO add your handling code here:
         txtCountry.setEnabled(false);
@@ -445,69 +564,10 @@ public class PeopleRegistration extends javax.swing.JFrame {
         txtCountry.setText("Malaysia");
     }//GEN-LAST:event_rbtnCitizenActionPerformed
 
-    private void rbtnNonCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNonCitizenActionPerformed
-        // TODO add your handling code here:
-        txtCountry.setText("");
-        txtCountry.setFont(jLabel7.getFont());
-        txtCountry.setBackground(Color.WHITE);
-        txtCountry.setEnabled(true);
-    }//GEN-LAST:event_rbtnNonCitizenActionPerformed
-
-    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtUsernameKeyPressed
-
-    private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
-        // TODO add your handling code here:
-        char press = evt.getKeyChar();
-        if(!(Character.isDigit(press))){
-            JOptionPane.showMessageDialog(this, "PHONE NUMBER SHOULD BE NUMERIC (0-9) !!");
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtPhoneKeyTyped
-
-    private void txtUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyTyped
-        // TODO add your handling code here:
-        if(txtUsername.getText().length() >= 5 && txtUsername.getText().length() < 16){
-            lblCheck.setText("NOW IT'S FINE");   
-        }else if(txtUsername.getText().length() <=4){
-            lblCheck.setText("'6' LETTERS REQUIRED");
-        }else{
-            lblCheck.setText("MAXIMUM LETTERS !! REDUCE IT !!");
-        }
-        if(txtUsername.getText().length() >= 15){
-            JOptionPane.showMessageDialog(this, "MAXIMUM '15' LENGTH OF ALPHABETS FOR USERNAME !!");
-            txtUsername.setText(txtUsername.getText().substring(0,14));
-        }
-    }//GEN-LAST:event_txtUsernameKeyTyped
-
-    private void txtPhoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyPressed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtPhoneKeyPressed
-
-    private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
-        // TODO add your handling code here:
-        int selectedIndex = cmbMove.getSelectedIndex();
-        if(selectedIndex == 0){
-            JOptionPane.showMessageDialog(this, "PLEASE CHOOSE THE AVAILABLE OPTION BELOW\n                        OTHER THAN THIS !!");
-        }else if(selectedIndex == 1){
-            String username = "", password = "";
-            new LoginPage(username, password).show();
-            this.hide();
-        }
-        
-    }//GEN-LAST:event_btnMoveActionPerformed
-
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
-
     private void rbtnCitizenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rbtnCitizenKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtnCitizenKeyPressed
-
+    boolean showPassword = false;
     /**
      * @param args the command line arguments
      */
@@ -563,7 +623,8 @@ public class PeopleRegistration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel lblCheck;
+    private javax.swing.JLabel lblCheckPassword;
+    private javax.swing.JLabel lblCheckUsername;
     private javax.swing.JRadioButton rbtnCitizen;
     private javax.swing.JRadioButton rbtnNonCitizen;
     private javax.swing.JTextField txtAddress;

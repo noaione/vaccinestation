@@ -182,7 +182,8 @@ public class HomepageAdmin extends javax.swing.JFrame {
 
     private void btnRegisterManagerAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterManagerAccActionPerformed
         // TODO add your handling code here:
-        new AdminRegisterManagerAccount().show();
+        String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
+        new AdminRegisterManagerAccount(name, born, email, address, phone, username, password, type).show();
         this.hide();
     }//GEN-LAST:event_btnRegisterManagerAccActionPerformed
 

@@ -11,12 +11,12 @@ import java.awt.Color;
  *
  * @author asus
  */
-public class AdminConfirmationRegisterManager extends javax.swing.JFrame {
+public class AdminConfirmationModifyManager extends javax.swing.JFrame {
 
     /**
-     * Creates new form AdminConfirmationRegisterManager
+     * Creates new form AdminConfirmationModifyManager
      */
-    public AdminConfirmationRegisterManager(String cname, String cborn, String cemail, String chomeAddress, String cphoneNumber, String cusername, String cpassword, String ctype, String ccountry) {
+    public AdminConfirmationModifyManager(String cname, String cborn, String cemail, String chomeAddress, String cphoneNumber, String cusername, String cpassword, String ctype, String ccountry) {
         initComponents();
         String name = cname;
         String born = cborn;
@@ -49,37 +49,31 @@ public class AdminConfirmationRegisterManager extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel9 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        lblType = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         lblPassword = new javax.swing.JPasswordField();
-        btnRegister = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        btnRegister1 = new javax.swing.JButton();
-        lblCountry = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lblFullName = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        lblDOB = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         lblAddress = new javax.swing.JLabel();
+        btnRegister = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         lblPhone = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnRegister1 = new javax.swing.JButton();
         lblEmail = new javax.swing.JLabel();
+        lblCountry = new javax.swing.JLabel();
         btnShow = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lblFullName = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblType = new javax.swing.JLabel();
+        lblDOB = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel9.setText("Password");
-
-        jLabel7.setText("Email Address");
-
-        jLabel12.setText("Date of Birth (DOB)");
 
         lblPassword.setEditable(false);
         lblPassword.setEnabled(false);
@@ -92,9 +86,14 @@ public class AdminConfirmationRegisterManager extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Username");
+
         jLabel10.setText("Country");
 
         jLabel8.setText("Type");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabel1.setText("PLEASE CONFIRM NEW MANAGER DATA BELOW ");
 
         btnRegister1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnRegister1.setText("EDIT");
@@ -104,17 +103,6 @@ public class AdminConfirmationRegisterManager extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Phone Number");
-
-        jLabel4.setText("Home Address");
-
-        jLabel11.setText("Full Name");
-
-        jLabel6.setText("Username");
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        jLabel1.setText("PLEASE CONFIRM MANAGER DATA BELOW ");
-
         btnShow.setText("jButton1");
         btnShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,8 +110,20 @@ public class AdminConfirmationRegisterManager extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Phone Number");
+
+        jLabel9.setText("Password");
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel2.setText("HI ! ADMIN ");
+
+        jLabel7.setText("Email Address");
+
+        jLabel4.setText("Home Address");
+
+        jLabel12.setText("Date of Birth (DOB)");
+
+        jLabel11.setText("Full Name");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,7 +132,7 @@ public class AdminConfirmationRegisterManager extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(153, 153, 153)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(304, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -190,8 +190,8 @@ public class AdminConfirmationRegisterManager extends javax.swing.JFrame {
                                 .addComponent(btnRegister1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 87, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -205,7 +205,7 @@ public class AdminConfirmationRegisterManager extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblType, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
+                    .addComponent(lblType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -262,7 +262,6 @@ public class AdminConfirmationRegisterManager extends javax.swing.JFrame {
         //SAVE TO TXTFILE(DATABASE) THEN MOVE TO LOGIN PAGE
         new LoginPage(cusername, cpassword).show();
         this.hide();
-
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnRegister1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegister1ActionPerformed
@@ -308,21 +307,21 @@ public class AdminConfirmationRegisterManager extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminConfirmationRegisterManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminConfirmationModifyManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminConfirmationRegisterManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminConfirmationModifyManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminConfirmationRegisterManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminConfirmationModifyManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminConfirmationRegisterManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminConfirmationModifyManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                String name = "";String born = "";String email = "";String homeAddress = "";String phoneNumber = "";String username = "";String password ="";String type = "";String country = "";
-                new AdminConfirmationRegisterManager(name, born, email, homeAddress, phoneNumber, username, password, type, country).setVisible(true);
+                String name = ""; String born = ""; String email = "";String homeAddress = ""; String phoneNumber = ""; String username = "";String password = ""; String type = ""; String country = "";
+                new AdminConfirmationModifyManager(name, born, email, homeAddress, phoneNumber, username, password, type, country).setVisible(true);
             }
         });
     }
