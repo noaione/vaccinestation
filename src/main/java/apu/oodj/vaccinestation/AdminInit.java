@@ -38,13 +38,13 @@ public class AdminInit extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtAdminUsername = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         confirmBtn = new javax.swing.JButton();
         txtAdminPassword = new javax.swing.JPasswordField();
         btnShow = new javax.swing.JButton();
         txtAdminConPassword = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
+        txtAdminUsername = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,17 +52,6 @@ public class AdminInit extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Admin Account");
-
-        txtAdminUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAdminUsernameActionPerformed(evt);
-            }
-        });
-        txtAdminUsername.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtAdminUsernameKeyTyped(evt);
-            }
-        });
 
         jLabel3.setText("Enter your password:");
 
@@ -92,9 +81,9 @@ public class AdminInit extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtAdminConPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAdminUsername, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAdminConPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                             .addComponent(confirmBtn, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAdminUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,9 +99,9 @@ public class AdminInit extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addGap(4, 4, 4)
-                .addComponent(txtAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -129,14 +118,6 @@ public class AdminInit extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtAdminUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdminUsernameKeyTyped
-        String txtData = txtAdminUsername.getText();
-        // Check if the text contains spaces, if yes then remove it since this is a username
-        if (txtData.contains(" ")) {
-            txtAdminUsername.setText(txtData.replace(" ", ""));
-        }
-    }//GEN-LAST:event_txtAdminUsernameKeyTyped
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
         String username = txtAdminUsername.getText();
