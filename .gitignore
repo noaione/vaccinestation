@@ -62,3 +62,4 @@ nbdist/
 appdata/
 .appdata/
 nb-configuration.xml
+staging/

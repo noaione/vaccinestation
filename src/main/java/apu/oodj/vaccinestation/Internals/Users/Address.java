@@ -4,6 +4,11 @@ public class Address {
     private String address;
     private String country;
 
+    public Address(String address) {
+        this.address = address;
+        this.country = "Malaysia";
+    }
+
     public Address(String address, String country) {
         this.address = address;
         this.country = country;
