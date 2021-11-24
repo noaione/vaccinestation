@@ -18,8 +18,18 @@ jobs:
           architecture: x64
           cache: maven
 
-      - name: Build with Maven
+      - name: Build and Test
         run: mvn --batch-mode --update-snapshots verify
 
-      - name: Test with Maven
-        run: mvn test
+      - name: Preparing JAR packaging
+        if: github.event_name == "push"
+        run: |
+          mkdir staging
+          cp target/*.jar staging
+
+      - name: Package
+        uses: actions/upload-artifact@v2
+        if: github.event_name == "push"
+        with:
+          name: VaccineStation_Java${{ matrix.java-version }}
+          path: staging
