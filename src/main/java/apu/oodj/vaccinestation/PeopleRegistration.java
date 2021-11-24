@@ -7,48 +7,54 @@ package apu.oodj.vaccinestation;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 import javax.swing.JOptionPane;
+
+import apu.oodj.vaccinestation.Enums.CitizenType;
+import apu.oodj.vaccinestation.Internals.Users.Address;
+import apu.oodj.vaccinestation.Internals.Users.Citizen;
 
 /**
  *
  * @author asus
  */
 public class PeopleRegistration extends javax.swing.JFrame {
+    private Citizen temporaryUser;
 
     /**
      * Creates new form PeopleRegistration
      */
-    public PeopleRegistration(String cname, String cborn, String cemail, String caddress, String cphone, String cusername, String cpassword, String ctype) {
+    public PeopleRegistration(Citizen user, boolean isFirstTime) {
         initComponents();
-        String pname = cname;
-        String pborn = cborn;
-        String pemail = cemail;
-        String paddress = caddress;
-        String pphone = cphone;
-        String pusername = cusername;
-        String ppassword = cpassword;
-        String ptype = ctype;
-        
-        if(ptype.equals("Citizen")){
+        temporaryUser = user;
+
+        if (temporaryUser.IsCitizen()) {
             rbtnCitizen.setSelected(true);
             txtCountry.setEnabled(false);
             txtCountry.setFont(jLabel7.getFont());
             txtCountry.setBackground(Color.DARK_GRAY);
             txtCountry.setText("Malaysia");
-        }else{
-            rbtnNonCitizen.setSelected(true);
+        } else {
+            rbtnForeigner.setSelected(true);
+            txtCountry.setText(temporaryUser.getCountry());
+            lblICNumber.setText("Passport");
         }
-        txtFullName.setText(pname + "");
-        //NOT YET SET THE BORN
-        //txtDOB.setCalendar(born);
-        txtEmail.setText(pemail + "");
-        txtAddress.setText("" + paddress);
-        txtPhone.setText(pphone + "");
-        txtUsername.setText(pusername);
-        txtPassword.setText(ppassword);
-        txtConPassword.setText(ppassword);
-
+        txtFullName.setText(temporaryUser.getName() + "");
+        if (!isFirstTime) {
+            Calendar cal = new GregorianCalendar();
+            cal.setTime(temporaryUser.getDOB());
+            txtDOB.setCalendar(cal);
+        }
+        txtICNumber.setText(temporaryUser.getIdentificationNumber());
+        txtEmail.setText(temporaryUser.getEmail() + "");
+        txtAddress.setText("" + temporaryUser.getHomeAddress());
+        txtPhone.setText(temporaryUser.getPhoneNumber() + "");
+        txtUsername.setText(temporaryUser.getUsername());
+        txtPassword.setText(temporaryUser.getPassword());
+        txtConPassword.setText(temporaryUser.getPassword());
     }
 
     /**
@@ -60,12 +66,10 @@ public class PeopleRegistration extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnType = new javax.swing.ButtonGroup();
         txtDOB = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtFullName = new javax.swing.JTextField();
-        rbtnNonCitizen = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -76,7 +80,6 @@ public class PeopleRegistration extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         btnMove = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         lblCheckPassword = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -90,7 +93,10 @@ public class PeopleRegistration extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
         btnShow = new javax.swing.JButton();
+        lblICNumber = new javax.swing.JLabel();
+        txtICNumber = new javax.swing.JTextField();
         rbtnCitizen = new javax.swing.JRadioButton();
+        rbtnForeigner = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,17 +106,10 @@ public class PeopleRegistration extends javax.swing.JFrame {
 
         jLabel12.setText("Date of Birth (DOB)");
 
-        rbtnNonCitizen.setText("Non-Citizen");
-        rbtnNonCitizen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnNonCitizenActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Home Address");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("WHO IS THE MANAGER ??");
+        jLabel5.setText("Country Citizenship");
 
         jLabel11.setText("Country");
 
@@ -140,7 +139,7 @@ public class PeopleRegistration extends javax.swing.JFrame {
         jLabel3.setText("Phone Number");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel1.setText("REGISTER NEW MANAGER ACCOUNT BELOW !! ");
+        jLabel1.setText("Register your new account below!");
 
         txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -160,9 +159,6 @@ public class PeopleRegistration extends javax.swing.JFrame {
                 btnMoveActionPerformed(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel2.setText("HI ! ADMIN ");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Move To :");
@@ -214,15 +210,25 @@ public class PeopleRegistration extends javax.swing.JFrame {
             }
         });
 
+        lblICNumber.setText("IC Number");
+
+        txtICNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtICNumberActionPerformed(evt);
+            }
+        });
+
         rbtnCitizen.setText("Citizen");
         rbtnCitizen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtnCitizenActionPerformed(evt);
             }
         });
-        rbtnCitizen.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                rbtnCitizenKeyPressed(evt);
+
+        rbtnForeigner.setText("Foreigner");
+        rbtnForeigner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnForeignerActionPerformed(evt);
             }
         });
 
@@ -231,110 +237,109 @@ public class PeopleRegistration extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnMove))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(65, 65, 65)
-                                        .addComponent(jLabel10)))
-                                .addGap(52, 52, 52)
-                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 86, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblICNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(10, 10, 10)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtConPassword)
                                     .addComponent(txtPassword)
                                     .addComponent(txtUsername)
-                                    .addComponent(txtEmail)
                                     .addComponent(txtAddress)
-                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCheckUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblCheckPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                                    .addComponent(txtDOB, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                                    .addComponent(txtICNumber)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnMove))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(jLabel10))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCheckUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblCheckPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 60, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rbtnCitizen)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rbtnNonCitizen)))
-                        .addGap(75, 75, 75)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCountry, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)))
-                        .addGap(43, 43, 43))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addGap(76, 76, 76))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(rbtnCitizen)
+                        .addGap(10, 10, 10)
+                        .addComponent(rbtnForeigner)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
             .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbtnCitizen)
-                            .addComponent(rbtnNonCitizen))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbtnCitizen)
+                    .addComponent(rbtnForeigner))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDOB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblICNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtICNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,7 +350,11 @@ public class PeopleRegistration extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -366,28 +375,20 @@ public class PeopleRegistration extends javax.swing.JFrame {
                     .addComponent(txtConPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnMove))
-                        .addGap(16, 16, 16))
-                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnMove)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))))
+                        .addGap(10, 10, 10)))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rbtnNonCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNonCitizenActionPerformed
-        // TODO add your handling code here:
-        txtCountry.setText("");
-        txtCountry.setFont(jLabel7.getFont());
-        txtCountry.setBackground(Color.WHITE);
-        txtCountry.setEnabled(true);
-    }//GEN-LAST:event_rbtnNonCitizenActionPerformed
 
     private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
         // TODO add your handling code here:
@@ -463,7 +464,7 @@ public class PeopleRegistration extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        String type;
+        CitizenType type;
         String name = txtFullName.getText();
         String born = txtDOB.getDate().toString();
         String email = txtEmail.getText();
@@ -473,14 +474,31 @@ public class PeopleRegistration extends javax.swing.JFrame {
         String password = txtPassword.getText();
         String confirmpassword = txtConPassword.getText();
         String country = txtCountry.getText();
+        String idNumber = txtICNumber.getText();
+        Calendar cal = txtDOB.getCalendar();
+        Date dt = cal.getTime();
 
-        if(rbtnCitizen.isSelected()){
-            type = "Citizen";
-        }else{
-            type = "Non-Citizen";
+        if (rbtnCitizen.isSelected()) {
+            type = CitizenType.Citizen;
+        } else {
+            type = CitizenType.Foreigner;
         }
 
-        if(rbtnCitizen.isSelected() || rbtnNonCitizen.isSelected()){
+        Address addr = new Address(homeAddress, country);
+
+        Citizen citizen = new Citizen(
+            username,
+            name,
+            email,
+            password,
+            idNumber,
+            type,
+            addr,
+            phoneNumber,
+            dt
+        );
+
+        if(rbtnCitizen.isSelected() || rbtnForeigner.isSelected()){
             if(country.isEmpty()){
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>COUNTRY<< HERE!!");
                 txtCountry.requestFocusInWindow();
@@ -511,8 +529,11 @@ public class PeopleRegistration extends javax.swing.JFrame {
             }else if(confirmpassword.isEmpty()){
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>CONFIRM PASSWORD<< HERE!!");
                 txtConPassword.requestFocusInWindow();
+            }else if(dt == null){
+                JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>DATE OF BIRTH<< HERE!!");
+                txtDOB.requestFocusInWindow();
             }else if(password.equals(confirmpassword)) {
-                new ConfirmationRegisterData(name, born, email, homeAddress, phoneNumber, username, password, type, country).show();
+                new ConfirmationRegisterData(citizen).show();
                 this.hide();
             }else {
                 JOptionPane.showMessageDialog(this, "DIFFERENT PASSWORD DETEDTED!! \n\nKindly Check Your Password and Confirm Password");
@@ -556,17 +577,31 @@ public class PeopleRegistration extends javax.swing.JFrame {
         showPassword = !showPassword;
     }//GEN-LAST:event_btnShowActionPerformed
 
-    private void rbtnCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCitizenActionPerformed
+    private void txtICNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtICNumberActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_txtICNumberActionPerformed
+
+    private void rbtnCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCitizenActionPerformed
+        System.out.println("SETTING TO CITIZEN");
+        // rbtnCitizen.setSelected(true);
+        rbtnForeigner.setSelected(false);
         txtCountry.setEnabled(false);
         txtCountry.setFont(jLabel7.getFont());
         txtCountry.setBackground(Color.DARK_GRAY);
         txtCountry.setText("Malaysia");
+        lblICNumber.setText("IC Number");
     }//GEN-LAST:event_rbtnCitizenActionPerformed
 
-    private void rbtnCitizenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rbtnCitizenKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtnCitizenKeyPressed
+    private void rbtnForeignerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnForeignerActionPerformed
+        System.out.println("SETTING TO FOREIGNER");
+        rbtnCitizen.setSelected(false);
+        // rbtnForeigner.setSelected(true);
+        txtCountry.setEnabled(true);
+        txtCountry.setFont(jLabel7.getFont());
+        txtCountry.setBackground(Color.white);
+        txtCountry.setText("");
+        lblICNumber.setText("Passport");
+    }//GEN-LAST:event_rbtnForeignerActionPerformed
     boolean showPassword = false;
     /**
      * @param args the command line arguments
@@ -594,12 +629,12 @@ public class PeopleRegistration extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PeopleRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        // (String username, String name, String email, String password, String idNumber, CitizenType citizenType, String address, String phoneNumber, Date dob
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
-                new PeopleRegistration(name, born, email, address, phone, username, password, type).setVisible(true);
+                // new PeopleRegistration(name, born, email, address, phone, username, password, type).setVisible(true);
             }
         });
     }
@@ -608,14 +643,12 @@ public class PeopleRegistration extends javax.swing.JFrame {
     private javax.swing.JButton btnMove;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnShow;
-    private javax.swing.ButtonGroup btnType;
     private javax.swing.JComboBox<String> cmbMove;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -625,14 +658,16 @@ public class PeopleRegistration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblCheckPassword;
     private javax.swing.JLabel lblCheckUsername;
+    private javax.swing.JLabel lblICNumber;
     private javax.swing.JRadioButton rbtnCitizen;
-    private javax.swing.JRadioButton rbtnNonCitizen;
+    private javax.swing.JRadioButton rbtnForeigner;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JPasswordField txtConPassword;
     private javax.swing.JTextField txtCountry;
     private com.toedter.calendar.JDateChooser txtDOB;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFullName;
+    private javax.swing.JTextField txtICNumber;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtUsername;

@@ -5,13 +5,28 @@
  */
 package apu.oodj.vaccinestation;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 import javax.swing.JOptionPane;
+
+import apu.oodj.vaccinestation.Enums.CitizenType;
+import apu.oodj.vaccinestation.Internals.FileHandling;
+import apu.oodj.vaccinestation.Internals.Users.Administrator;
+import apu.oodj.vaccinestation.Internals.Users.Citizen;
+import apu.oodj.vaccinestation.Internals.Users.Manager;
+import apu.oodj.vaccinestation.Internals.Users.User;
 
 /**
  *
  * @author asus
  */
 public class LoginPage extends javax.swing.JFrame {
+    private ArrayList<String> rawUserData;
+    private ArrayList<User> users;
 
     /**
      * Creates new form PeopleForm
@@ -20,6 +35,23 @@ public class LoginPage extends javax.swing.JFrame {
         initComponents();
         txtUsername.setText(username + "");
         txtPassword.setText(password + "");
+
+        String[] userData;
+        try {
+            userData = FileHandling.ReadFile("userdata.txt");
+            rawUserData = new ArrayList<String>(Arrays.asList(userData));
+        } catch (IOException exc) {
+            exc.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Unable to open database, please contact admin");
+            this.dispose();
+        }
+
+        ArrayList<User> userSets = new ArrayList<>();
+
+        for (String user : rawUserData) {
+            userSets.add(User.ParseData(user));
+        }
+        this.users = userSets;
     }
 
     /**
@@ -174,18 +206,53 @@ public class LoginPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        //MATCHING USERNAME AND INPUT TO DATABASE
-        //FOR THE MEANTIME
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-        new HomepageUsers(username, password).show();
-        this.hide();
+
+        int foundIndex = -1;
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            System.out.println("Comparing: " + user.getUsername() + " and " + username);
+            if (user.getUsername().equals(username)) {
+                if (user.getPassword().equals(password)) {
+                    foundIndex = i;
+                    break;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Password is incorrect");
+                    return;
+                }
+            }
+        }
+        if (foundIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Username cannot be found in user data");
+            return;
+        }
+
+        String rawData = rawUserData.get(foundIndex);
+        User tempUser = User.ParseData(rawData);
+        if (tempUser.IsAdmin()) {
+            // Use admin form
+            Administrator admin = Administrator.ParseData(rawData);
+            new HomepageAdmin(admin).setVisible(true);
+        } else if (tempUser.IsManager()) {
+            // Use manager form
+            Manager manager = Manager.ParseData(rawData);
+            new HomepageManager(manager).setVisible(true);
+        } else {
+            // Use user form
+            Citizen citizen = Citizen.ParseData(rawData);
+            new HomepageUsers(citizen).setVisible(true);
+        }
+        this.setVisible(false);
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
-        new PeopleRegistration(name, born, email, address, phone, username, password, type).show();
+        // String username, String name, String email, String password, String idNumber, CitizenType citizenType, String address, String phoneNumber, Date dob
+        Citizen citUser = new Citizen(
+            "", "", "", "", "", CitizenType.Citizen, "", "", new Date()
+        );
+        new PeopleRegistration(citUser, true).show();
         this.hide();
         /*
         PeopleRegistration pr = new PeopleRegistration();
@@ -199,8 +266,10 @@ public class LoginPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "PLEASE CHOOSE THE AVAILABLE OPTION BELOW\n                        OTHER THAN THIS !!");
         }
         if(selectedIndex == 1){
-            String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
-            new PeopleRegistration(name, born, email, address, phone, username, password, type).show();
+            Citizen citUser = new Citizen(
+                "", "", "", "", "", CitizenType.Citizen, "", "", new Date()
+            );
+            new PeopleRegistration(citUser, true).show();
             this.hide();
         }
         

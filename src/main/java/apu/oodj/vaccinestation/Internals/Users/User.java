@@ -11,30 +11,34 @@ import apu.oodj.vaccinestation.Internals.RandomId;
 public class User {
     // Internal information
     private String id;
-    String name;
-    String email;
-    String password;
-    UserType type;
+    private String username;
+    private String name;
+    private String email;
+    private String password;
+    private UserType type;
 
-    public User(String name, String email, String password) {
+    public User(String username, String name, String email, String password) {
         // Randomize ID based on timestamp.
         this.id = RandomId.generate();
+        this.username = username;
         this.name = name;
         this.email = email;
         this.password = password;
         this.type = UserType.User;
     }
 
-    public User(String name, String email, String password, UserType type) {
+    public User(String username, String name, String email, String password, UserType type) {
         this.id = RandomId.generate();
+        this.username = username;
         this.name = name;
         this.email = email;
         this.password = password;
         this.type = type;
     }
 
-    public User(String id, String name, String email, String password, UserType type) {
+    public User(String id, String username, String name, String email, String password, UserType type) {
         this.id = id;
+        this.username = username;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -53,6 +57,10 @@ public class User {
         return name;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -63,6 +71,26 @@ public class User {
 
     public UserType getType() {
         return type;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
     }
 
     public Boolean IsUser() {
@@ -84,11 +112,12 @@ public class User {
     public String ExportData() {
         // Export data into the text database.
         String[] content = new String[] {
-                this.id,
-                this.name,
-                this.email,
-                this.password,
-                this.type.toDataFormat()
+            this.id,
+            this.username,
+            this.name,
+            this.email,
+            this.password,
+            this.type.toDataFormat()
         };
         return String.join(";;;", content);
     }
@@ -101,6 +130,6 @@ public class User {
     public static User ParseData(String data) {
         // Parse data from the text database.
         String[] content = data.split(";;;");
-        return new User(content[0], content[1], content[2], content[3], UserType.fromString(content[4]));
+        return new User(content[0], content[1], content[2], content[3], content[4], UserType.fromString(content[5]));
     }
 }

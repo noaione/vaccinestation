@@ -7,21 +7,32 @@ package apu.oodj.vaccinestation;
 
 import javax.swing.JOptionPane;
 
+import apu.oodj.vaccinestation.Internals.Users.Citizen;
+
 /**
  *
  * @author asus
  */
 public class HomepageUsers extends javax.swing.JFrame {
+    private Citizen citizen;
 
     /**
      * Creates new form HomepageUsers
      */
-    public HomepageUsers(String pusername, String ppassword) {
+    public HomepageUsers(Citizen user) {
+        this.citizen = user;
         initComponents();
-        String username = pusername;
-        String password = ppassword;
+        String username = user.getUsername();
+        String password = user.getPassword();
         lblUsername.setText(username + "");
         lblPassword.setText(password + "");
+    }
+
+    public HomepageUsers() {
+        initComponents();
+
+        lblUsername.setText("");
+        lblPassword.setText("");
     }
 
     /**
@@ -244,8 +255,7 @@ public class HomepageUsers extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                String username = ""; String password = "";
-                new HomepageUsers(username, password).setVisible(true);
+                new HomepageUsers().setVisible(true);
             }
         });
     }

@@ -156,7 +156,7 @@ public class AdminInit extends javax.swing.JFrame {
             return;
         }
         // Success, now register
-        Administrator admin = new Administrator("Administrator", username, password);
+        Administrator admin = new Administrator(username, "Administrator", "admin@localhost", password);
         String adminAsString = admin.ExportData();
 
         // Write to file

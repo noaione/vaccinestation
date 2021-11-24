@@ -275,7 +275,8 @@ public class AdminConfirmationModifyManager extends javax.swing.JFrame {
         String cpassword = lblPassword.getText();
         String ctype = lblType.getText();
         //String cname = name, cborn = born, cemail = email, caddress = address, cphone = phone, cusername = username, cpassword = password, ctype = type;
-        new PeopleRegistration(cname, cborn, cemail, caddress, cphone, cusername, cpassword, ctype).show();
+        
+        // PeopleRegistration(cname, cborn, cemail, caddress, cphone, cusername, cpassword, ctype).show();
         this.hide();
     }//GEN-LAST:event_btnRegister1ActionPerformed
     boolean showPassword = false;

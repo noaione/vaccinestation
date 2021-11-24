@@ -7,15 +7,26 @@ package apu.oodj.vaccinestation;
 
 import java.awt.Color;
 
+import apu.oodj.vaccinestation.Internals.Users.Manager;
+
 /**
  *
  * @author asus
  */
 public class HomepageManager extends javax.swing.JFrame {
+    private Manager user;
 
     /**
      * Creates new form ManagerForm
      */
+    public HomepageManager(Manager user) {
+        initComponents();
+        this.user = user;
+        btnApprove.setBackground(Color.GREEN);
+        btnReject.setBackground(Color.RED);
+        btnModify.setBackground(Color.cyan);
+    }
+
     public HomepageManager() {
         initComponents();
         btnApprove.setBackground(Color.GREEN);

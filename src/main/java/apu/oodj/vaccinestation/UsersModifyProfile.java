@@ -372,7 +372,7 @@ public class UsersModifyProfile extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>CONFIRM PASSWORD<< HERE!!");
                 txtConPassword.requestFocusInWindow();
             }else if(password.equals(confirmpassword)) {
-                new ConfirmationRegisterData(name, born, email, homeAddress, phoneNumber, username, password, type, country).show();
+                // new ConfirmationRegisterData(name, born, email, homeAddress, phoneNumber, username, password, type, country).show();
                 this.hide();
             }else {
                 JOptionPane.showMessageDialog(this, "DIFFERENT PASSWORD DETEDTED!! \n\nKindly Check Your Password and Confirm Password");

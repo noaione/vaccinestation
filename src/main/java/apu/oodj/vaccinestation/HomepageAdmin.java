@@ -7,17 +7,31 @@ package apu.oodj.vaccinestation;
 
 import java.awt.Color;
 
+import apu.oodj.vaccinestation.Internals.Users.Administrator;
+
 /**
  *
  * @author asus
  */
 public class HomepageAdmin extends javax.swing.JFrame {
+    private Administrator user;
 
     /**
      * Creates new form AdminForm
      */
     public HomepageAdmin() {
         initComponents();
+        btnVaccineSlots.setBackground(Color.GRAY);
+        btnViewModifyVaccineReq.setBackground(Color.BLUE);
+        btnApproveRequest.setBackground(Color.MAGENTA);
+        btnRegisterManagerAcc.setBackground(Color.GREEN);
+        btnModifyManagerAcc.setBackground(Color.CYAN);
+        btnLogOut.setBackground(Color.RED);
+    }
+
+    public HomepageAdmin(Administrator user) {
+        initComponents();
+        this.user = user;
         btnVaccineSlots.setBackground(Color.GRAY);
         btnViewModifyVaccineReq.setBackground(Color.BLUE);
         btnApproveRequest.setBackground(Color.MAGENTA);
