@@ -22,14 +22,14 @@ jobs:
         run: mvn --batch-mode --update-snapshots verify
 
       - name: Preparing JAR packaging
-        if: github.event_name == "push"
+        if: github.event_name == push
         run: |
           mkdir staging
           cp target/*.jar staging
 
       - name: Package
         uses: actions/upload-artifact@v2
-        if: github.event_name == "push"
+        if: github.event_name == push
         with:
           name: VaccineStation_Java${{ matrix.java-version }}
           path: staging
