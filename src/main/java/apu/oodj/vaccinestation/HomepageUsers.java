@@ -28,7 +28,7 @@ public class HomepageUsers extends javax.swing.JFrame {
         lblPassword.setText(password + "");
     }
 
-    public HomepageUsers() {
+    public HomepageUsers(String username,String password) {
         initComponents();
 
         lblUsername.setText("");
@@ -255,7 +255,7 @@ public class HomepageUsers extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomepageUsers().setVisible(true);
+                new HomepageUsers("", "").setVisible(true);
             }
         });
     }

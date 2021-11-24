@@ -55,6 +55,7 @@ public class PeopleRegistration extends javax.swing.JFrame {
         txtUsername.setText(temporaryUser.getUsername());
         txtPassword.setText(temporaryUser.getPassword());
         txtConPassword.setText(temporaryUser.getPassword());
+        //txtDOB.setEnabled(false);
     }
 
     /**
@@ -66,6 +67,11 @@ public class PeopleRegistration extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnType = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         txtDOB = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -144,6 +150,9 @@ public class PeopleRegistration extends javax.swing.JFrame {
         txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPhoneKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPhoneKeyTyped(evt);
@@ -423,6 +432,7 @@ public class PeopleRegistration extends javax.swing.JFrame {
 
     private void txtPhoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyPressed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtPhoneKeyPressed
 
     private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
@@ -602,6 +612,10 @@ public class PeopleRegistration extends javax.swing.JFrame {
         txtCountry.setText("");
         lblICNumber.setText("Passport");
     }//GEN-LAST:event_rbtnForeignerActionPerformed
+
+    private void txtPhoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPhoneKeyReleased
     boolean showPassword = false;
     /**
      * @param args the command line arguments
@@ -643,6 +657,11 @@ public class PeopleRegistration extends javax.swing.JFrame {
     private javax.swing.JButton btnMove;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnShow;
+    private javax.swing.ButtonGroup btnType;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JComboBox<String> cmbMove;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
