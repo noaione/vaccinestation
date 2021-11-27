@@ -55,7 +55,6 @@ public class PeopleRegistration extends javax.swing.JFrame {
         txtUsername.setText(temporaryUser.getUsername());
         txtPassword.setText(temporaryUser.getPassword());
         txtConPassword.setText(temporaryUser.getPassword());
-        //txtDOB.setEnabled(false);
     }
 
     /**
