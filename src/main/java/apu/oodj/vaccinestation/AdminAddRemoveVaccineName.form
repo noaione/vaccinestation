@@ -174,9 +174,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNewVaccineName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="This Box is Highly Secured !! Click &apos;BUTTON&apos; Above To Activate This TextBox"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnAddNewVaccine">
       <Properties>

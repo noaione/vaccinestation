@@ -84,8 +84,6 @@ public class AdminAddRemoveVaccineName extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("ADD NEW VACCINE ??");
 
-        txtNewVaccineName.setText("This Box is Highly Secured !! Click 'BUTTON' Above To Activate This TextBox");
-
         btnAddNewVaccine.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAddNewVaccine.setText("OK");
         btnAddNewVaccine.addActionListener(new java.awt.event.ActionListener() {
