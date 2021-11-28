@@ -174,4 +174,20 @@ public class Citizen extends User {
         );
         return citizen;
     }
+
+    public Citizen Copy() {
+        return new Citizen(
+            this.getId(),
+            this.getUsername(),
+            this.getName(),
+            this.getEmail(),
+            this.getPassword(),
+            this.getType(),
+            this.getIdentificationNumber(),
+            this.getCitizenType(),
+            this.getAddress().Copy(),
+            this.getPhoneNumber(),
+            this.getDOB()
+        );
+    }
 }

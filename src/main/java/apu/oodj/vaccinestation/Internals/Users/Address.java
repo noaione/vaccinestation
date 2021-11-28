@@ -37,4 +37,8 @@ public class Address {
         };
         return String.join(";;;", extraData);
     }
+
+    public Address Copy() {
+        return new Address(address, country);
+    }
 }

@@ -8,17 +8,21 @@ package apu.oodj.vaccinestation;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
+import apu.oodj.vaccinestation.Internals.Users.Citizen;
+
 /**
  *
  * @author asus
  */
 public class UsersModifyProfile extends javax.swing.JFrame {
+    private Citizen user;
 
     /**
      * Creates new form UsersModifyProfile
      */
-    public UsersModifyProfile() {
+    public UsersModifyProfile(Citizen user) {
         initComponents();
+        this.user = user;
     }
 
     /**
@@ -148,7 +152,7 @@ public class UsersModifyProfile extends javax.swing.JFrame {
 
         btnMove.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnMove.setForeground(new java.awt.Color(0, 153, 0));
-        btnMove.setText("Cancle / Back");
+        btnMove.setText("Cancel");
         btnMove.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
         btnMove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -415,7 +419,7 @@ public class UsersModifyProfile extends javax.swing.JFrame {
 
     private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
         // TODO add your handling code here:
-        new PeopleProfile("", "").show();
+        new PeopleProfile(this.user).show();
         this.hide();
     }//GEN-LAST:event_btnMoveActionPerformed
 
@@ -449,7 +453,7 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsersModifyProfile().setVisible(true);
+                new UsersModifyProfile(null).setVisible(true);
             }
         });
     }

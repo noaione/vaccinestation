@@ -32,13 +32,6 @@ public class HomepageUsers extends javax.swing.JFrame {
         btnVaccinationStatus.setBackground(Color.yellow);
     }
 
-    public HomepageUsers(String username,String password) {
-        initComponents();
-
-        lblUsername.setText("");
-        lblPassword.setText("");
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -206,15 +199,13 @@ public class HomepageUsers extends javax.swing.JFrame {
         //IF THE USER DONE REGISTRATION GO TO UsersDoneRegistration
         //IF THE USER DONE VACCINATION GO TO UsersDoneVaccination AND HEAD TO UsersViewStatusVaccination
         //FOR TEMPORARY
-        new UsersRegisterVaccine().show();
+        new UsersRegisterVaccine(this.citizen).show();
         this.hide();
     }//GEN-LAST:event_btnRegisterVaccineActionPerformed
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
         // TODO add your handling code here:
-        String username = lblUsername.getText();
-        String password = lblPassword.getText();
-        new PeopleProfile(username, password).show();
+        new PeopleProfile(this.citizen).show();
         this.hide();
     }//GEN-LAST:event_btnProfileActionPerformed
 
@@ -274,7 +265,7 @@ public class HomepageUsers extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomepageUsers("", "").setVisible(true);
+                new HomepageUsers(null).setVisible(true);
             }
         });
     }

@@ -7,17 +7,21 @@ package apu.oodj.vaccinestation;
 
 import javax.swing.JOptionPane;
 
+import apu.oodj.vaccinestation.Internals.Users.Citizen;
+
 /**
  *
  * @author asus
  */
 public class UsersStatusNotDoneVaccine extends javax.swing.JFrame {
+    private Citizen user;
 
     /**
      * Creates new form UsersStatusNotDoneVaccine
      */
-    public UsersStatusNotDoneVaccine() {
+    public UsersStatusNotDoneVaccine(Citizen user) {
         initComponents();
+        this.user = user;
     }
 
     /**
@@ -101,13 +105,13 @@ public class UsersStatusNotDoneVaccine extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new UsersRegisterVaccine().show();
+        new UsersRegisterVaccine(this.user).show();
         this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
         // TODO add your handling code here:
-        new HomepageUsers("", "").show();
+        new HomepageUsers(this.user).show();
         this.hide();
     }//GEN-LAST:event_btnMoveActionPerformed
 
@@ -141,7 +145,7 @@ public class UsersStatusNotDoneVaccine extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsersStatusNotDoneVaccine().setVisible(true);
+                new UsersStatusNotDoneVaccine(null).setVisible(true);
             }
         });
     }

@@ -11,6 +11,10 @@ public class Administrator extends User {
         super(id, username, name, email, password, type);
     }
 
+    public Administrator Copy() {
+        return new Administrator(this.getId(), this.getUsername(), this.getName(), this.getEmail(), this.getPassword(), this.getType());
+    }
+
     /**
      * Parse the data from text database into Manager object.
      * @param data the data to be parsed.

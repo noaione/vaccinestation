@@ -7,17 +7,21 @@ package apu.oodj.vaccinestation;
 
 import javax.swing.JOptionPane;
 
+import apu.oodj.vaccinestation.Internals.Users.Citizen;
+
 /**
  *
  * @author asus
  */
 public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
+    private Citizen user;
 
     /**
      * Creates new form UsersConfirmRegisterVaccine
      */
-    public UsersConfirmRegisterVaccine() {
+    public UsersConfirmRegisterVaccine(Citizen user) {
         initComponents();
+        this.user = user;
     }
 
     /**
@@ -87,7 +91,7 @@ public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
         jLabel10.setText("STOCKS AVAILABLE");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Cancle / Back");
+        jButton1.setText("Cancel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -192,7 +196,7 @@ public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new UsersRegisterVaccine().show();
+        new UsersRegisterVaccine(this.user).show();
         this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
     boolean showPassword = false;
@@ -226,7 +230,7 @@ public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsersConfirmRegisterVaccine().setVisible(true);
+                new UsersConfirmRegisterVaccine(null).setVisible(true);
             }
         });
     }

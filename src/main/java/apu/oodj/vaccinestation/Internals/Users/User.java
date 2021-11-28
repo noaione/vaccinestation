@@ -132,4 +132,8 @@ public class User {
         String[] content = data.split(";;;");
         return new User(content[0], content[1], content[2], content[3], content[4], UserType.fromString(content[5]));
     }
+
+    public User Copy() {
+        return new User(this.id, this.username, this.name, this.email, this.password, this.type);
+    }
 }

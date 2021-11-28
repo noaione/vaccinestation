@@ -7,17 +7,21 @@ package apu.oodj.vaccinestation;
 
 import java.awt.Color;
 
+import apu.oodj.vaccinestation.Internals.Users.Manager;
+
 /**
  *
  * @author asus
  */
 public class HomepageManager extends javax.swing.JFrame {
+    Manager user;
 
     /**
      * Creates new form ManagerApproveRejectRequest
      */
-    public HomepageManager() {
+    public HomepageManager(Manager user) {
         initComponents();
+        this.user = user;
         btnVaccineSlots.setBackground(Color.YELLOW);
         btnUserRequest.setBackground(Color.CYAN);
     }
@@ -98,13 +102,13 @@ public class HomepageManager extends javax.swing.JFrame {
 
     private void btnVaccineSlotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccineSlotsActionPerformed
         // TODO add your handling code here:
-        new ManagerVaccineSlots().show();
+        new ManagerVaccineSlots(this.user).show();
         this.hide();
     }//GEN-LAST:event_btnVaccineSlotsActionPerformed
 
     private void btnUserRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserRequestActionPerformed
         // TODO add your handling code here:
-        new ManagerApproveRejectRequest().show();
+        new ManagerApproveRejectRequest(this.user).show();
         this.hide();
     }//GEN-LAST:event_btnUserRequestActionPerformed
 
@@ -141,7 +145,7 @@ public class HomepageManager extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomepageManager().setVisible(true);
+                new HomepageManager(null).setVisible(true);
             }
         });
     }

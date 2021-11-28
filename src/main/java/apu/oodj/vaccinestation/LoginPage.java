@@ -204,7 +204,7 @@ public class LoginPage extends javax.swing.JFrame {
         } else if (tempUser.IsManager()) {
             // Use manager form
             Manager manager = Manager.ParseData(rawData);
-            new ManagerApproveRejectRequest(manager).setVisible(true);
+            new HomepageManager(manager).setVisible(true);
         } else {
             // Use user form
             Citizen citizen = Citizen.ParseData(rawData);

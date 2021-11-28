@@ -8,17 +8,21 @@ package apu.oodj.vaccinestation;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
+import apu.oodj.vaccinestation.Internals.Users.Administrator;
+
 /**
  *
  * @author asus
  */
 public class AdminVaccineSlots extends javax.swing.JFrame {
+    private Administrator admin;
 
     /**
      * Creates new form AdminVaccineSlots
      */
-    public AdminVaccineSlots() {
+    public AdminVaccineSlots(Administrator user) {
         initComponents();
+        this.admin = user;
         lblAdd.setBackground(Color.GRAY);
         lblReduce.setBackground(Color.GRAY);
     }
@@ -35,9 +39,7 @@ public class AdminVaccineSlots extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        btnMove = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        cmbMove = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -46,8 +48,8 @@ public class AdminVaccineSlots extends javax.swing.JFrame {
         lblAdd = new javax.swing.JTextField();
         btnClickReduce = new javax.swing.JButton();
         lblReduce = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
         btnClickReduce1 = new javax.swing.JButton();
+        btnGoBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,26 +69,8 @@ public class AdminVaccineSlots extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setText("AVAILABLE VACCINE STOCKS ");
 
-        btnMove.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnMove.setForeground(new java.awt.Color(0, 153, 0));
-        btnMove.setText("Move");
-        btnMove.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
-        btnMove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveActionPerformed(evt);
-            }
-        });
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Add or Remove Vaccine Name ??");
-
-        cmbMove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmbMove.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=======CLICK HERE=======", "View & Modify Request of Vaccine From Users", "Approved Request", "Register Manager Account", "Modify Manager Account" }));
-        cmbMove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbMoveActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("NEW VACCINE STOCKS ARRIVED??");
@@ -130,14 +114,19 @@ public class AdminVaccineSlots extends javax.swing.JFrame {
 
         lblReduce.setEditable(false);
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setText("Move To :");
-
         btnClickReduce1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnClickReduce1.setText("CLICK HERE !!");
         btnClickReduce1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClickReduce1ActionPerformed(evt);
+            }
+        });
+
+        btnGoBack.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGoBack.setText("Go Back");
+        btnGoBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGoBackActionPerformed(evt);
             }
         });
 
@@ -181,13 +170,11 @@ public class AdminVaccineSlots extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnMove))
+                                .addGap(227, 227, 227)
+                                .addComponent(btnClickReduce1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(151, 151, 151)
-                                .addComponent(btnClickReduce1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(9, 9, 9)
+                                .addComponent(btnGoBack)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -212,49 +199,17 @@ public class AdminVaccineSlots extends javax.swing.JFrame {
                     .addComponent(btnClickReduce, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblReduce, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(btnReduce, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnClickReduce1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMove)
-                    .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addComponent(btnClickReduce1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGoBack)
+                .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
-        // TODO add your handling code here:
-        int selectedIndex = cmbMove.getSelectedIndex();
-        if(selectedIndex == 0){
-            JOptionPane.showMessageDialog(this, "PLEASE CHOOSE THE AVAILABLE OPTION BELOW\n                        OTHER THAN THIS !!");
-        }else if(selectedIndex == 1){
-            new AdminViewModifyVaccineReq().show();
-            this.hide();
-        }else if(selectedIndex == 2){
-            new AdminApprovedRequest().show();
-            this.hide();
-        }else if(selectedIndex == 3){
-            String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
-            new AdminRegisterManagerAccount(name, born, email, address, phone, username, password, type).show();
-            this.hide();
-        }else if(selectedIndex == 4){
-            new AdminCheckUsernameModifyManagerAccount().show();
-            this.hide();
-        }
-    }//GEN-LAST:event_btnMoveActionPerformed
-
-    private void cmbMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMoveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbMoveActionPerformed
 
     private void btnClickAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClickAddActionPerformed
         // TODO add your handling code here:
@@ -288,9 +243,14 @@ public class AdminVaccineSlots extends javax.swing.JFrame {
 
     private void btnClickReduce1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClickReduce1ActionPerformed
         // TODO add your handling code here:
-        new AdminAddRemoveVaccineName().show();
+        new AdminAddRemoveVaccineName(this.admin).show();
         this.hide();
     }//GEN-LAST:event_btnClickReduce1ActionPerformed
+
+    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
+        new HomepageAdmin(this.admin).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGoBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,7 +282,7 @@ public class AdminVaccineSlots extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminVaccineSlots().setVisible(true);
+                new AdminVaccineSlots(null).setVisible(true);
             }
         });
     }
@@ -332,12 +292,10 @@ public class AdminVaccineSlots extends javax.swing.JFrame {
     private javax.swing.JButton btnClickAdd;
     private javax.swing.JButton btnClickReduce;
     private javax.swing.JButton btnClickReduce1;
-    private javax.swing.JButton btnMove;
+    private javax.swing.JButton btnGoBack;
     private javax.swing.JButton btnReduce;
-    private javax.swing.JComboBox<String> cmbMove;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;

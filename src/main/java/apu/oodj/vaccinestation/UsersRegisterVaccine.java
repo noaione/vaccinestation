@@ -7,17 +7,21 @@ package apu.oodj.vaccinestation;
 
 import javax.swing.JOptionPane;
 
+import apu.oodj.vaccinestation.Internals.Users.Citizen;
+
 /**
  *
  * @author asus
  */
 public class UsersRegisterVaccine extends javax.swing.JFrame {
+    private Citizen user;
 
     /**
      * Creates new form UsersRegisterVaccine
      */
-    public UsersRegisterVaccine() {
+    public UsersRegisterVaccine(Citizen user) {
         initComponents();
+        this.user = user;
     }
 
     /**
@@ -126,7 +130,7 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
 
     private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
         // TODO add your handling code here:
-        new HomepageUsers("", "").show();
+        new HomepageUsers(this.user).show();
         this.hide();
     }//GEN-LAST:event_btnMoveActionPerformed
 
@@ -160,7 +164,7 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsersRegisterVaccine().setVisible(true);
+                new UsersRegisterVaccine(null).setVisible(true);
             }
         });
     }

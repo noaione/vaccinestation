@@ -22,8 +22,6 @@ public class HomepageAdmin extends javax.swing.JFrame {
     public HomepageAdmin() {
         initComponents();
         btnVaccineSlots.setBackground(Color.GRAY);
-        btnViewModifyVaccineReq.setBackground(Color.BLUE);
-        btnApproveRequest.setBackground(Color.MAGENTA);
         btnRegisterManagerAcc.setBackground(Color.GREEN);
         btnModifyManagerAcc.setBackground(Color.CYAN);
         btnLogOut.setBackground(Color.RED);
@@ -33,8 +31,6 @@ public class HomepageAdmin extends javax.swing.JFrame {
         initComponents();
         this.user = user;
         btnVaccineSlots.setBackground(Color.GRAY);
-        btnViewModifyVaccineReq.setBackground(Color.BLUE);
-        btnApproveRequest.setBackground(Color.MAGENTA);
         btnRegisterManagerAcc.setBackground(Color.GREEN);
         btnModifyManagerAcc.setBackground(Color.CYAN);
         btnLogOut.setBackground(Color.RED);
@@ -54,8 +50,6 @@ public class HomepageAdmin extends javax.swing.JFrame {
         btnRegisterManagerAcc = new javax.swing.JButton();
         btnModifyManagerAcc = new javax.swing.JButton();
         btnVaccineSlots = new javax.swing.JButton();
-        btnViewModifyVaccineReq = new javax.swing.JButton();
-        btnApproveRequest = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,7 +63,7 @@ public class HomepageAdmin extends javax.swing.JFrame {
         jLabel2.setText("WHAT DO YOU WANT TO DO TODAY ?? ");
 
         btnRegisterManagerAcc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnRegisterManagerAcc.setText("REGISTER NEW MANAGER ACCOUNT");
+        btnRegisterManagerAcc.setText("REGISTER NEW STATION");
         btnRegisterManagerAcc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisterManagerAccActionPerformed(evt);
@@ -92,22 +86,6 @@ public class HomepageAdmin extends javax.swing.JFrame {
             }
         });
 
-        btnViewModifyVaccineReq.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnViewModifyVaccineReq.setText("ACCEPT & REJECT VACCINATION REQUEST");
-        btnViewModifyVaccineReq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewModifyVaccineReqActionPerformed(evt);
-            }
-        });
-
-        btnApproveRequest.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnApproveRequest.setText("APPROVED REQUEST");
-        btnApproveRequest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApproveRequestActionPerformed(evt);
-            }
-        });
-
         btnLogOut.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnLogOut.setText("LOG OUT");
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
@@ -120,57 +98,45 @@ public class HomepageAdmin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(235, 235, 235))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(btnModifyManagerAcc)
-                                        .addGap(19, 19, 19))
-                                    .addComponent(btnRegisterManagerAcc, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addComponent(btnViewModifyVaccineReq)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(btnApproveRequest))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addComponent(btnVaccineSlots))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                        .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(btnRegisterManagerAcc))
+                            .addComponent(btnModifyManagerAcc)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(199, 199, 199)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(32, 32, 32)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVaccineSlots, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnViewModifyVaccineReq, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnApproveRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegisterManagerAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnModifyManagerAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -178,39 +144,25 @@ public class HomepageAdmin extends javax.swing.JFrame {
 
     private void btnVaccineSlotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccineSlotsActionPerformed
         // TODO add your handling code here:
-        new AdminVaccineSlots().show();
+        new AdminVaccineSlots(this.user).show();
         this.hide();
     }//GEN-LAST:event_btnVaccineSlotsActionPerformed
 
-    private void btnViewModifyVaccineReqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewModifyVaccineReqActionPerformed
-        // TODO add your handling code here:
-        new AdminViewModifyVaccineReq().show();
-        this.hide();
-    }//GEN-LAST:event_btnViewModifyVaccineReqActionPerformed
-
-    private void btnApproveRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveRequestActionPerformed
-        // TODO add your handling code here:
-        new AdminApprovedRequest().show();
-        this.hide();
-    }//GEN-LAST:event_btnApproveRequestActionPerformed
-
     private void btnRegisterManagerAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterManagerAccActionPerformed
         // TODO add your handling code here:
-        String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
-        new AdminRegisterManagerAccount(name, born, email, address, phone, username, password, type).show();
-        this.hide();
+        new AdminCreateStation(this.user).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnRegisterManagerAccActionPerformed
 
     private void btnModifyManagerAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyManagerAccActionPerformed
         // TODO add your handling code here:
-        new AdminCheckUsernameModifyManagerAccount().show();
+        new AdminCheckUsernameModifyManagerAccount(this.user).show();
         this.hide();
     }//GEN-LAST:event_btnModifyManagerAccActionPerformed
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
         // TODO add your handling code here:
-        String username = ""; String password = "";
-        new LoginPage(username, password).show();
+        new LoginPage("", "").show();
         this.hide();
     }//GEN-LAST:event_btnLogOutActionPerformed
 
@@ -251,12 +203,10 @@ public class HomepageAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnApproveRequest;
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnModifyManagerAcc;
     private javax.swing.JButton btnRegisterManagerAcc;
     private javax.swing.JButton btnVaccineSlots;
-    private javax.swing.JButton btnViewModifyVaccineReq;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

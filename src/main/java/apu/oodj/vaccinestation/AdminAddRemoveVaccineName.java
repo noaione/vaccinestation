@@ -8,17 +8,21 @@ package apu.oodj.vaccinestation;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
+import apu.oodj.vaccinestation.Internals.Users.Administrator;
+
 /**
  *
  * @author asus
  */
 public class AdminAddRemoveVaccineName extends javax.swing.JFrame {
+    private Administrator admin;
 
     /**
      * Creates new form AdminAddRemoveVaccineName
      */
-    public AdminAddRemoveVaccineName() {
+    public AdminAddRemoveVaccineName(Administrator admin) {
         initComponents();
+        this.admin = admin;
         txtRemoveVaccine.setEnabled(false);
         txtRemoveVaccine.setText("This Box is Highly Secured !! So If You Really Want to Delete Vaccine, Click The 'BUTTON' Above");
         txtRemoveVaccine.setBackground(Color.black);
@@ -278,8 +282,8 @@ public class AdminAddRemoveVaccineName extends javax.swing.JFrame {
 
     private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
         // TODO add your handling code here:
-        new AdminVaccineSlots().show();
-        this.hide();
+        new AdminVaccineSlots(this.admin).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnMoveActionPerformed
 
     /**
@@ -312,7 +316,7 @@ public class AdminAddRemoveVaccineName extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminAddRemoveVaccineName().setVisible(true);
+                new AdminAddRemoveVaccineName(null).setVisible(true);
             }
         });
     }

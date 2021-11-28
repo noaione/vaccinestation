@@ -90,6 +90,33 @@ public class FileHandling {
         fw.close();
     }
 
+    public static void ReplaceLine(String fileName, long index, String newText) throws IOException {
+        String[] lines = ReadFile(fileName);
+        if (index >= lines.length) {
+            WriteString(fileName, newText);
+            return;
+        }
+        lines[(int) index] = newText;
+        WriteString(fileName, lines, false);
+    }
+
+    public static void ReplaceById(String fileName, String id, String newText) throws IOException {
+        String[] lines = ReadFile(fileName);
+        int index = -1;
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i].startsWith(id)) {
+                index = i;
+                break;
+            }
+        }
+        if (index >= 0) {
+            lines[index] = newText;
+            WriteString(fileName, lines, false);
+        } else {
+            WriteString(fileName, newText);
+        }
+    }
+
     public static void main(String[] args) {
         try {
             String[] data = ReadFile("test.txt");

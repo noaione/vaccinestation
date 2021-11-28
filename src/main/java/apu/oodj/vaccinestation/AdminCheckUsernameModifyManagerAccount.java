@@ -6,19 +6,28 @@
 package apu.oodj.vaccinestation;
 
 import java.awt.Color;
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
+
+import apu.oodj.vaccinestation.Internals.FileHandling;
+import apu.oodj.vaccinestation.Internals.Users.Administrator;
+import apu.oodj.vaccinestation.Internals.Users.Manager;
+import apu.oodj.vaccinestation.Internals.Users.User;
 
 /**
  *
  * @author asus
  */
 public class AdminCheckUsernameModifyManagerAccount extends javax.swing.JFrame {
+    private Administrator admin;
 
     /**
      * Creates new form AdminModifyManagerAccount
      */
-    public AdminCheckUsernameModifyManagerAccount() {
+    public AdminCheckUsernameModifyManagerAccount(Administrator admin) {
         initComponents();
+        this.admin = admin;
         //THE MANAGER DATA WILL FILL THE TEXTFIELD AUTOMATICALLY HERE
     }
 
@@ -31,11 +40,8 @@ public class AdminCheckUsernameModifyManagerAccount extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnMove = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        cmbMove = new javax.swing.JComboBox<>();
         lblCheck = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -44,29 +50,14 @@ public class AdminCheckUsernameModifyManagerAccount extends javax.swing.JFrame {
         btnShow = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        btnGoBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        btnMove.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnMove.setForeground(new java.awt.Color(0, 153, 0));
-        btnMove.setText("Move");
-        btnMove.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
-        btnMove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel2.setText("HI ! ADMIN ");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setText("Move To :");
-
         jLabel6.setText("Username");
-
-        cmbMove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmbMove.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=======CLICK HERE=======", "View Vaccine Slots", "View & Modify Request of Vaccine From Users", "Approved Request", "Register Manager Account" }));
 
         btnRegister.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnRegister.setText("CHECK");
@@ -105,6 +96,14 @@ public class AdminCheckUsernameModifyManagerAccount extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel14.setText("MODIFY MANAGER ACCOUNT ");
 
+        btnGoBack.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGoBack.setText("Go Back");
+        btnGoBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGoBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,7 +125,11 @@ public class AdminCheckUsernameModifyManagerAccount extends javax.swing.JFrame {
                             .addComponent(lblCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnGoBack)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -134,20 +137,11 @@ public class AdminCheckUsernameModifyManagerAccount extends javax.swing.JFrame {
                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
-                                .addComponent(jLabel1)))
-                        .addGap(94, 94, 94))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnMove))
+                                .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(125, 125, 125)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel10))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,46 +168,44 @@ public class AdminCheckUsernameModifyManagerAccount extends javax.swing.JFrame {
                         .addComponent(btnShow)))
                 .addGap(18, 18, 18)
                 .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMove))
-                .addGap(16, 16, 16))
+                .addGap(18, 18, 18)
+                .addComponent(btnGoBack)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
-        // TODO add your handling code here:
-        int selectedIndex = cmbMove.getSelectedIndex();
-        if(selectedIndex == 0){
-            JOptionPane.showMessageDialog(this, "PLEASE CHOOSE THE AVAILABLE OPTION BELOW\n                        OTHER THAN THIS !!");
-        }else if(selectedIndex == 1){
-            new AdminVaccineSlots().show();
-            this.hide();
-        }else if(selectedIndex == 2){
-            new AdminViewModifyVaccineReq().show();
-            this.hide();
-        }else if(selectedIndex == 3){
-            new AdminApprovedRequest().show();
-            this.hide();
-        }else if(selectedIndex == 4){
-            String name = "", born = "", email = "", address = "", phone = "", username = "", password = "", type = "";
-            new AdminRegisterManagerAccount(name, born, email, address, phone, username, password, type).show();
-            this.hide();
-        }
-    }//GEN-LAST:event_btnMoveActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         //MATCH WITH DATA ON DATABASE
-        //FOR TEMPORARY   
-        new AdminModifyManagerAccount("", "", "", "", "", "", "", "").show();
+        String[] usersRaw;
+        try {
+            usersRaw = FileHandling.ReadFile("userdata");
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Unable to read user database, please contact admin!");
+            return;
+        }
+
+        Manager match = null;
+        for (String user : usersRaw) {
+            User u = User.ParseData(user);
+            if (u.IsManager()) {
+                if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+                    match = Manager.ParseData(user);
+                    break;
+                }
+            }
+        }
+        if (match == null) {
+            JOptionPane.showMessageDialog(this, "Invalid username or password!");
+            return;
+        }
+
+        new AdminModifyManagerAccount(this.admin, match).show();
         this.hide();
         
     }//GEN-LAST:event_btnRegisterActionPerformed
@@ -240,6 +232,11 @@ public class AdminCheckUsernameModifyManagerAccount extends javax.swing.JFrame {
         }
         showPassword = !showPassword;
     }//GEN-LAST:event_btnShowActionPerformed
+
+    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
+        new HomepageAdmin(this.admin).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGoBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,18 +269,16 @@ public class AdminCheckUsernameModifyManagerAccount extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminCheckUsernameModifyManagerAccount().setVisible(true);
+                new AdminCheckUsernameModifyManagerAccount(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnMove;
+    private javax.swing.JButton btnGoBack;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnShow;
-    private javax.swing.JComboBox<String> cmbMove;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
