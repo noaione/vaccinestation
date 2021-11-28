@@ -121,7 +121,7 @@ public class PeopleProfile extends javax.swing.JFrame {
         jLabel11.setText("Move To :");
 
         cmbMove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmbMove.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=======CLICK HERE=======", "Login Page", "Home", "Registration Vaccine", "View Status Vaccine" }));
+        cmbMove.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=======CLICK HERE=======", "Homepage", "Registration Vaccine", "View Status Vaccine" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,16 +264,12 @@ public class PeopleProfile extends javax.swing.JFrame {
         if(selectedIndex == 0){
             JOptionPane.showMessageDialog(this, "PLEASE CHOOSE THE AVAILABLE OPTION BELOW\n                        OTHER THAN THIS !!");
         }else if(selectedIndex == 1){
-            String pusername = "", ppassword = "";
-            new LoginPage(pusername, ppassword).show();
-            this.hide();
-        }else if(selectedIndex == 2){
             new HomepageUsers(username, password).show();
             this.hide();
-        }else if(selectedIndex == 3){
+        }else if(selectedIndex == 2){
             new UsersRegisterVaccine().show();
             this.hide();
-        }else if(selectedIndex == 4){
+        }else if(selectedIndex == 3){
             new UsersViewStatusVaccination().show();
             this.hide();
         }

@@ -8,6 +8,7 @@ package apu.oodj.vaccinestation;
 import javax.swing.JOptionPane;
 
 import apu.oodj.vaccinestation.Internals.Users.Citizen;
+import java.awt.Color;
 
 /**
  *
@@ -26,6 +27,9 @@ public class HomepageUsers extends javax.swing.JFrame {
         String password = user.getPassword();
         lblUsername.setText(username + "");
         lblPassword.setText(password + "");
+        btnProfile.setBackground(Color.cyan);
+        btnRegisterVaccine.setBackground(Color.MAGENTA);
+        btnVaccinationStatus.setBackground(Color.yellow);
     }
 
     public HomepageUsers(String username,String password) {
@@ -48,7 +52,7 @@ public class HomepageUsers extends javax.swing.JFrame {
         btnRegisterVaccine = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btnVaccinationStatus = new javax.swing.JButton();
         lblFullName = new javax.swing.JLabel();
         lblTPNum = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
@@ -84,11 +88,11 @@ public class HomepageUsers extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 204));
         jLabel2.setText("WHERE DO YOU WANT TO GO? ");
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton4.setText("VACCINATION STATUS");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnVaccinationStatus.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnVaccinationStatus.setText("VACCINATION STATUS");
+        btnVaccinationStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnVaccinationStatusActionPerformed(evt);
             }
         });
 
@@ -150,7 +154,7 @@ public class HomepageUsers extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnRegisterVaccine)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnVaccinationStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(153, 153, 153))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -183,7 +187,7 @@ public class HomepageUsers extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(btnVaccinationStatus))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
@@ -214,9 +218,24 @@ public class HomepageUsers extends javax.swing.JFrame {
         this.hide();
     }//GEN-LAST:event_btnProfileActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnVaccinationStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccinationStatusActionPerformed
+        //if user not done vaccine
+        /*go to
+        new UsersStatusNotDoneVaccine().show();
+        this.hide();*/
+        
+        //if user done registration
+        /*
+        new UsersDoneRegistration().show();
+        this.hide();
+        */
+        
+        //if user done vaccine
+        /*go to
+        new UsersDoneVaccination().show();
+        this.hide();
+        */
+    }//GEN-LAST:event_btnVaccinationStatusActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -263,8 +282,8 @@ public class HomepageUsers extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnRegisterVaccine;
+    private javax.swing.JButton btnVaccinationStatus;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblAddress;

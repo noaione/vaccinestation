@@ -4,6 +4,8 @@
  */
 package apu.oodj.vaccinestation;
 
+import java.awt.Color;
+
 /**
  *
  * @author N4O
@@ -15,6 +17,7 @@ public class FirstTimeRun extends javax.swing.JFrame {
      */
     public FirstTimeRun() {
         initComponents();
+        btnContinue.setBackground(Color.cyan);
     }
 
     /**

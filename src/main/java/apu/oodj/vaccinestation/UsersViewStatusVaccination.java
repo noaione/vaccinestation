@@ -37,9 +37,7 @@ public class UsersViewStatusVaccination extends javax.swing.JFrame {
         lblPhone = new javax.swing.JLabel();
         btnMove = new javax.swing.JButton();
         lblEmail = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         lblDose = new javax.swing.JLabel();
-        cmbMove = new javax.swing.JComboBox<>();
         lblIDNum = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblFullName = new javax.swing.JLabel();
@@ -64,7 +62,7 @@ public class UsersViewStatusVaccination extends javax.swing.JFrame {
 
         btnMove.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnMove.setForeground(new java.awt.Color(0, 153, 0));
-        btnMove.setText("Move");
+        btnMove.setText("Home");
         btnMove.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
         btnMove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,13 +72,7 @@ public class UsersViewStatusVaccination extends javax.swing.JFrame {
 
         lblEmail.setText("l");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setText("Move To :");
-
         lblDose.setText("l");
-
-        cmbMove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmbMove.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=======CLICK HERE=======", "DetermineUsers(Personnel / People)", "Login Page" }));
 
         lblIDNum.setText("l");
 
@@ -133,14 +125,7 @@ public class UsersViewStatusVaccination extends javax.swing.JFrame {
                                     .addComponent(lblVaccine, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnMove))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(jLabel11)))))
+                        .addComponent(btnMove, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -174,13 +159,9 @@ public class UsersViewStatusVaccination extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDose, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMove))
-                .addGap(25, 25, 25))
+                .addGap(27, 27, 27)
+                .addComponent(btnMove)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,14 +169,8 @@ public class UsersViewStatusVaccination extends javax.swing.JFrame {
 
     private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
         // TODO add your handling code here:
-        int selectedIndex = cmbMove.getSelectedIndex();
-        if(selectedIndex == 0){
-            JOptionPane.showMessageDialog(this, "PLEASE CHOOSE THE AVAILABLE OPTION BELOW\n                        OTHER THAN THIS !!");
-        }else if(selectedIndex == 1){
-            String username = "", password = "";
-            new LoginPage(username, password).show();
-            this.hide();
-        }
+        new HomepageUsers("", "").show();
+        this.hide();
     }//GEN-LAST:event_btnMoveActionPerformed
 
     /**
@@ -236,10 +211,8 @@ public class UsersViewStatusVaccination extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMove;
-    private javax.swing.JComboBox<String> cmbMove;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
