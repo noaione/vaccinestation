@@ -1,4 +1,4 @@
-package apu.oodj.vaccinestation;
+package apu.oodj.vaccinestation.VaccineTest;
 
 import static org.junit.Assert.*;
 
