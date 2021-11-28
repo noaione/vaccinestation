@@ -14,8 +14,18 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 
 import apu.oodj.vaccinestation.Enums.CitizenType;
+import apu.oodj.vaccinestation.Internals.FileHandling;
 import apu.oodj.vaccinestation.Internals.Users.Address;
 import apu.oodj.vaccinestation.Internals.Users.Citizen;
+import apu.oodj.vaccinestation.Internals.Users.User;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -507,7 +517,26 @@ public class PeopleRegistration extends javax.swing.JFrame {
             dt
         );
 
-        if(rbtnCitizen.isSelected() || rbtnForeigner.isSelected()){
+        //Read File Data and Checking same Username or not.
+        String[] usersRawData;
+        try {
+            usersRawData = FileHandling.ReadFile("userdata.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "FAILED TO READ USER DATA, PLEASE CONTACT ADMIN");
+            return;
+        }
+
+        for (String rawData : usersRawData) {
+            User u = User.ParseData(rawData);
+            if (u.getUsername().equals(username)) {
+                JOptionPane.showMessageDialog(this, "USERNAME ALREADY EXISTS, PLEASE TRY ANOTHER USERNAME");
+                return;
+            }
+        }
+        
+        
+        if(rbtnCitizen.isSelected() || rbtnForeigner.isSelected()){  
             if(country.isEmpty()){
                 JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>COUNTRY<< HERE!!");
                 txtCountry.requestFocusInWindow();
