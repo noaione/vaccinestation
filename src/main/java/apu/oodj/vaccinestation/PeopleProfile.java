@@ -5,9 +5,13 @@
  */
 package apu.oodj.vaccinestation;
 
+import apu.oodj.vaccinestation.Internals.Users.Address;
 import javax.swing.JOptionPane;
 
 import apu.oodj.vaccinestation.Internals.Users.Citizen;
+import java.awt.Color;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -22,10 +26,26 @@ public class PeopleProfile extends javax.swing.JFrame {
     public PeopleProfile(Citizen user) {
         initComponents();
         this.user = user;
+        String userid = user.getId();
+        String fullname = user.getName().trim();
+        String id = user.getIdentificationNumber();
+        String email = user.getEmail();
+        String address = user.getHomeAddress();
+        String phone = user.getPhoneNumber();
+        String dob = user.getDOB().toString();
         String u = user.getUsername();
         String p = user.getPassword();
+        lblIDNumber.setText(userid + "");
+        lblFullName.setText(fullname + "");
+        lblICNum.setText(id + "");
+        lblEmail.setText(email + "");
+        lblAddress.setText(address + "");
+        lblPhone.setText(phone + "");
+        lblDOB.setText(dob + "");
         lblUsername.setText(u + "");
         lblPassword.setText(p + "");
+        lblPassword.setBackground(Color.DARK_GRAY);
+        btnModify.setBackground(Color.MAGENTA);
     }
 
     /**
@@ -44,11 +64,11 @@ public class PeopleProfile extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnModify = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
-        lblTPNum = new javax.swing.JLabel();
+        lblICNum = new javax.swing.JLabel();
         lblFullName = new javax.swing.JLabel();
         lblAddress = new javax.swing.JLabel();
         lblDOB = new javax.swing.JLabel();
@@ -57,6 +77,7 @@ public class PeopleProfile extends javax.swing.JFrame {
         btnShow = new javax.swing.JButton();
         lblPassword = new javax.swing.JPasswordField();
         btnMove = new javax.swing.JButton();
+        lblIDNumber = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,10 +96,10 @@ public class PeopleProfile extends javax.swing.JFrame {
 
         jLabel7.setText("Password");
 
-        jButton2.setText("MODIFY");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnModify.setText("MODIFY");
+        btnModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnModifyActionPerformed(evt);
             }
         });
 
@@ -88,7 +109,7 @@ public class PeopleProfile extends javax.swing.JFrame {
 
         lblEmail.setText("l");
 
-        lblTPNum.setText("l");
+        lblICNum.setText("l");
 
         lblFullName.setText("l");
 
@@ -118,6 +139,8 @@ public class PeopleProfile extends javax.swing.JFrame {
                 btnMoveActionPerformed(evt);
             }
         });
+
+        lblIDNumber.setText("--------------");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,32 +186,36 @@ public class PeopleProfile extends javax.swing.JFrame {
                                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblTPNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lblICNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(lblFullName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                     .addComponent(btnMove, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
+                        .addContainerGap()
+                        .addComponent(lblIDNumber)
+                        .addGap(153, 153, 153)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIDNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTPNum, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblICNum, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -217,7 +244,7 @@ public class PeopleProfile extends javax.swing.JFrame {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnShow)))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btnMove, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
@@ -237,9 +264,11 @@ public class PeopleProfile extends javax.swing.JFrame {
         showPassword = !showPassword;
     }//GEN-LAST:event_btnShowActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        new UsersModifyProfile(this.user).show();
+        this.hide();
+    }//GEN-LAST:event_btnModifyActionPerformed
 
     private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
         new HomepageUsers(this.user).setVisible(true);
@@ -282,9 +311,9 @@ public class PeopleProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnModify;
     private javax.swing.JButton btnMove;
     private javax.swing.JButton btnShow;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -298,9 +327,10 @@ public class PeopleProfile extends javax.swing.JFrame {
     private javax.swing.JLabel lblDOB;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFullName;
+    private javax.swing.JLabel lblICNum;
+    private javax.swing.JLabel lblIDNumber;
     private javax.swing.JPasswordField lblPassword;
     private javax.swing.JLabel lblPhone;
-    private javax.swing.JLabel lblTPNum;
     private javax.swing.JLabel lblUsername;
     // End of variables declaration//GEN-END:variables
 }

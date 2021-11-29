@@ -55,7 +55,7 @@ public class AdminConfirmationModifyManager extends javax.swing.JFrame {
     private void initComponents() {
 
         lblPassword = new javax.swing.JPasswordField();
-        btnRegister = new javax.swing.JButton();
+        btnConfirm = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblPhone = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -76,11 +76,11 @@ public class AdminConfirmationModifyManager extends javax.swing.JFrame {
         lblPassword.setEditable(false);
         lblPassword.setEnabled(false);
 
-        btnRegister.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnRegister.setText("CONFIRM");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirm.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnConfirm.setText("CONFIRM");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
+                btnConfirmActionPerformed(evt);
             }
         });
 
@@ -166,7 +166,7 @@ public class AdminConfirmationModifyManager extends javax.swing.JFrame {
                         .addGap(60, 60, 60))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEditAgain, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -203,7 +203,7 @@ public class AdminConfirmationModifyManager extends javax.swing.JFrame {
                     .addComponent(btnShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditAgain, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelAll, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -212,7 +212,7 @@ public class AdminConfirmationModifyManager extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         try {
             FileHandling.ReplaceById("userdata", oldManager.getId(), this.newManager.ExportData());
         } catch (IOException e) {
@@ -224,7 +224,7 @@ public class AdminConfirmationModifyManager extends javax.swing.JFrame {
         //SAVE TO TXTFILE(DATABASE) THEN MOVE TO LOGIN PAGE
         new LoginPage(this.newManager.getUsername(), this.newManager.getPassword()).setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnRegisterActionPerformed
+    }//GEN-LAST:event_btnConfirmActionPerformed
 
     private void btnEditAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditAgainActionPerformed
         // TODO add your handling code here:
@@ -290,8 +290,8 @@ public class AdminConfirmationModifyManager extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelAll;
+    private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnEditAgain;
-    private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnShow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

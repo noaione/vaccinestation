@@ -142,7 +142,7 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
         jLabel13.setText("Full Name");
 
         btnRegister.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnRegister.setText("Register");
+        btnRegister.setText("Modify");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisterActionPerformed(evt);

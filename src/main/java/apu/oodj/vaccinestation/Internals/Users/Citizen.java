@@ -56,7 +56,7 @@ public class Citizen extends User {
     public CitizenType getCitizenType() {
         return citizenType;
     }
-
+    
     public Address getAddress() {
         return address;
     }
@@ -189,5 +189,9 @@ public class Citizen extends User {
             this.getPhoneNumber(),
             this.getDOB()
         );
+    }
+
+    public void setType(CitizenType type) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

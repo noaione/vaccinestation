@@ -63,7 +63,7 @@ public class ConfirmationRegisterData extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
-        btnRegister1 = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         lblFullName = new javax.swing.JLabel();
         lblDOB = new javax.swing.JLabel();
         lblAddress = new javax.swing.JLabel();
@@ -116,11 +116,11 @@ public class ConfirmationRegisterData extends javax.swing.JFrame {
             }
         });
 
-        btnRegister1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnRegister1.setText("EDIT");
-        btnRegister1.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnEdit.setText("EDIT");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegister1ActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
@@ -164,7 +164,7 @@ public class ConfirmationRegisterData extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(btnRegister1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addComponent(btnCancelRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -264,7 +264,7 @@ public class ConfirmationRegisterData extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegister1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(90, 90, 90))
         );
@@ -287,11 +287,11 @@ public class ConfirmationRegisterData extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRegisterActionPerformed
 
-    private void btnRegister1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegister1ActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
         new PeopleRegistration(tempCiti, false).show();
         this.hide();
-    }//GEN-LAST:event_btnRegister1ActionPerformed
+    }//GEN-LAST:event_btnEditActionPerformed
     boolean showPassword = false;
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         //TODO add your handling code here:
@@ -348,8 +348,8 @@ public class ConfirmationRegisterData extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelRegis;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnRegister;
-    private javax.swing.JButton btnRegister1;
     private javax.swing.JButton btnShow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
