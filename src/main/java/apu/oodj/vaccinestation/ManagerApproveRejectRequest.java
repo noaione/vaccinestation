@@ -6,9 +6,19 @@
 package apu.oodj.vaccinestation;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 
+import apu.oodj.vaccinestation.Internals.FileHandling;
+import apu.oodj.vaccinestation.Internals.Managerial.VaccineRequest;
 import apu.oodj.vaccinestation.Internals.Users.Manager;
+import apu.oodj.vaccinestation.Model.VaccineRequestModel;
+import apu.oodj.vaccinestation.ModelRenderer.VaccineRequestRenderer;
+
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -16,6 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class ManagerApproveRejectRequest extends javax.swing.JFrame {
     private Manager user;
+    private ArrayList<VaccineRequest> allRequests;
 
     /**
      * Creates new form ManagerForm
@@ -26,6 +37,38 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
         btnApprove.setBackground(Color.GREEN);
         btnReject.setBackground(Color.RED);
         btnModify.setBackground(Color.cyan);
+
+        String[] requests;
+        try {
+            requests = FileHandling.ReadFile("vaccinerequest");
+        } catch (FileNotFoundException ex) {
+            requests = new String[] {};
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Unable to read vaccine request data, please contact Admin!");
+            new HomepageManager(user).setVisible(true);
+            this.setVisible(false);
+            return;
+        }
+        this.allRequests = new ArrayList<>();
+
+        for (String request : requests)
+        {
+            VaccineRequest data = VaccineRequest.ParseData(request);
+            if (data.isVaccinated())
+                continue;
+            this.allRequests.add(data);
+        }
+
+        this.refreshModelDataAndRenderer();
+    }
+
+    private void refreshModelDataAndRenderer() {
+        // Display all pending requests on the JTable userSubmissionTable table
+        VaccineRequestModel model = new VaccineRequestModel(this.allRequests);
+        userSubmissionTable.setModel(model);
+        userSubmissionTable.setDefaultRenderer(String.class, new VaccineRequestRenderer());
+        userSubmissionTable.setAutoCreateRowSorter(true);
     }
 
     /**
@@ -58,30 +101,17 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("KINDLY MANAGING APPOINTMENT BELOW !!");
 
-        userSubmissionTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Full Name", "User ID", "Vaccine Name", "Dose (1/2)", "Submitted Date", "Vaccination Date"
-            }
-        ));
+        userSubmissionTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        userSubmissionTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(userSubmissionTable);
 
         btnApprove.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnApprove.setText("Approve");
+        btnApprove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApproveActionPerformed(evt);
+            }
+        });
 
         btnReject.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnReject.setText("Reject");
@@ -176,6 +206,10 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
         new HomepageManager(this.user).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnGoBackActionPerformed
+
+    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnApproveActionPerformed
 
     /**
      * @param args the command line arguments

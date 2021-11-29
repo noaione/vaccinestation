@@ -5,9 +5,21 @@
  */
 package apu.oodj.vaccinestation;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
+import apu.oodj.vaccinestation.Internals.FileHandling;
+import apu.oodj.vaccinestation.Internals.Managerial.Station;
+import apu.oodj.vaccinestation.Internals.Managerial.VaccineRequest;
 import apu.oodj.vaccinestation.Internals.Users.Citizen;
+import apu.oodj.vaccinestation.Internals.Vaccine.StoredVaccine;
+import apu.oodj.vaccinestation.Internals.Vaccine.Vaccine;
 
 /**
  *
@@ -15,13 +27,63 @@ import apu.oodj.vaccinestation.Internals.Users.Citizen;
  */
 public class UsersRegisterVaccine extends javax.swing.JFrame {
     private Citizen user;
+    private Boolean isSecondDose;
+    private ArrayList<Vaccine> vaccines;
+    private ArrayList<Station> stations;
 
     /**
      * Creates new form UsersRegisterVaccine
      */
-    public UsersRegisterVaccine(Citizen user) {
+    public UsersRegisterVaccine(Citizen user, Boolean twoDose) {
         initComponents();
         this.user = user;
+        this.isSecondDose = twoDose;
+
+        String[] rawVaccines;
+        String[] rawStations;
+        try {
+            rawVaccines = FileHandling.ReadFile("vaccines");
+            rawStations = FileHandling.ReadFile("station");
+        } catch (FileNotFoundException ex) {
+            rawVaccines = new String[] {};
+            rawStations = new String[] {};
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to read vaccines/stations information, please contact Admin!");
+            new HomepageUsers(this.user).setVisible(true);
+            this.setVisible(false);
+            return;
+        }
+
+        this.vaccines = new ArrayList<Vaccine>();
+        this.stations = new ArrayList<Station>();
+        for (String rawVaccine : rawVaccines) {
+            vaccines.add(Vaccine.ParseData(rawVaccine));
+        }
+        for (String rawStation : rawStations) {
+            stations.add(Station.ParseData(rawStation));
+        }
+
+        this.refreshVaccineAndStationList();
+    }
+
+    public void refreshVaccineAndStationList() {
+        DefaultComboBoxModel<Vaccine> model = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<Station> model2 = new DefaultComboBoxModel<>();
+        for (Vaccine vaccine : vaccines) {
+            model.addElement(vaccine);
+        }
+        for (Station station : stations) {
+            model2.addElement(station);
+        }
+        cmbVaccine.setModel(model);
+        cmbStation.setModel(model2);
+        if (this.isSecondDose) {
+            cmbDose.setSelectedIndex(1);
+        } else {
+            cmbDose.setSelectedIndex(0);
+        }
+        cmbDose.setEnabled(false);
     }
 
     /**
@@ -38,8 +100,12 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cmbDose = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnCheckStock = new javax.swing.JButton();
         btnMove = new javax.swing.JButton();
+        cmbStation = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtVacDate = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,7 +113,6 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
         jLabel1.setText("REGISTRATION VACCINE");
 
         cmbVaccine.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        cmbVaccine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sinovac", "Pfizer", "Sinopharm" }));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Vaccine Name");
@@ -57,11 +122,11 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
 
         cmbDose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("CHECK STOCK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCheckStock.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCheckStock.setText("CHECK STOCK");
+        btnCheckStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCheckStockActionPerformed(evt);
             }
         });
 
@@ -75,6 +140,16 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
             }
         });
 
+        cmbStation.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Station");
+
+        txtVacDate.setDateFormatString("d MMM, yyyy");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("Vaccine Date");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,31 +157,39 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(cmbVaccine, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(cmbDose, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(btnMove, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                        .addComponent(btnMove, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtVacDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCheckStock, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(cmbVaccine, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(cmbStation, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(cmbDose, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel1)
-                .addGap(36, 36, 36)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -114,9 +197,13 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbVaccine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbDose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtVacDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCheckStock)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                 .addComponent(btnMove)
                 .addGap(22, 22, 22))
         );
@@ -124,14 +211,81 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnCheckStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckStockActionPerformed
+        Station station = (Station) cmbStation.getSelectedItem();
+        if (station == null) {
+            JOptionPane.showMessageDialog(this, "Please select a station");
+            return;
+        }
+        Vaccine vac = (Vaccine) cmbVaccine.getSelectedItem();
+        if (vac == null) {
+            JOptionPane.showMessageDialog(this, "Please select a vaccine");
+            return;
+        }
+        int dose = cmbDose.getSelectedIndex() + 1;
+        Calendar cal = txtVacDate.getCalendar();
+        Date dt = cal.getTime();
+        if (dt == null) {
+            JOptionPane.showMessageDialog(this, "Please select a date");
+            return;
+        }
+
+        String[] vaccineStorage;
+        try {
+            vaccineStorage = FileHandling.ReadFile("storedvaccines");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error reading stored vaccines database, please contact admin!");
+            return;
+        }
+
+        StoredVaccine sv = null;
+        for (String store : vaccineStorage) {
+            StoredVaccine stored = StoredVaccine.ParseData(store);
+            if (stored.getAssociatedStationId().equals(station.getId())) {
+                sv = stored;
+                break;
+            }
+        }
+        if (sv == null) {
+            JOptionPane.showMessageDialog(this, "No vaccines stored at this station");
+            return;
+        }
+
+        Vaccine storedVac = sv.gainVaccine(vac.getId());
+        if (storedVac == null) {
+            JOptionPane.showMessageDialog(this, "Cannot found any stock for the selected vaccine and station!");
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Vaccine: " + storedVac.getName() + "\nDose: " + dose + "\n\nDo you want to register yourself at this station? (Stock available!)", "Confirmation", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        try {
+            FileHandling.ReplaceById("storedvaccine", sv.getStoreId(), sv.ExportData());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error writing to stored vaccines database, please contact admin!");
+            return;
+        }
+
+        Date currentTime = new Date();
+
+        VaccineRequest vcr = new VaccineRequest(
+            this.user.getId(), storedVac, dose, currentTime, dt, station
+        );
+
+        new UsersConfirmRegisterVaccine(this.user, sv, vcr).setVisible(true);
+        this.setVisible(false);
+        // Move to next dialog box.
+    }//GEN-LAST:event_btnCheckStockActionPerformed
 
     private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
         // TODO add your handling code here:
-        new HomepageUsers(this.user).show();
-        this.hide();
+        new HomepageUsers(this.user).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnMoveActionPerformed
 
     /**
@@ -164,18 +318,22 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsersRegisterVaccine(null).setVisible(true);
+                new UsersRegisterVaccine(null, false).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCheckStock;
     private javax.swing.JButton btnMove;
     private javax.swing.JComboBox<String> cmbDose;
-    private javax.swing.JComboBox<String> cmbVaccine;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<Station> cmbStation;
+    private javax.swing.JComboBox<Vaccine> cmbVaccine;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private com.toedter.calendar.JDateChooser txtVacDate;
     // End of variables declaration//GEN-END:variables
 }

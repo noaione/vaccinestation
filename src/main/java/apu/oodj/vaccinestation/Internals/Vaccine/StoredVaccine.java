@@ -10,24 +10,24 @@ import apu.oodj.vaccinestation.Internals.RandomId;
 
 public class StoredVaccine {
     private String storeId;
-    private String associatedManagerId;
+    private String associatedStationId;
     private ArrayList<Vaccine> vaccines;
 
     public StoredVaccine(String managerId) {
         this.storeId = RandomId.generate("VaccStoreId");
-        this.associatedManagerId = managerId;
+        this.associatedStationId = managerId;
         this.vaccines = new ArrayList<Vaccine>();
     }
 
-    public StoredVaccine(String storeId, String associatedManagerId) {
+    public StoredVaccine(String storeId, String associatedStationId) {
         this.storeId = storeId;
-        this.associatedManagerId = associatedManagerId;
+        this.associatedStationId = associatedStationId;
         this.vaccines = new ArrayList<>();
     }
 
-    public StoredVaccine(String storeId, String associatedManagerId, ArrayList<Vaccine> vaccines) {
+    public StoredVaccine(String storeId, String associatedStationId, ArrayList<Vaccine> vaccines) {
         this.storeId = storeId;
-        this.associatedManagerId = associatedManagerId;
+        this.associatedStationId = associatedStationId;
         this.vaccines = vaccines;
     }
 
@@ -35,8 +35,8 @@ public class StoredVaccine {
         return storeId;
     }
 
-    public String getAssociatedManagerId() {
-        return associatedManagerId;
+    public String getAssociatedStationId() {
+        return associatedStationId;
     }
 
     public ArrayList<Vaccine> getVaccines() {
@@ -96,6 +96,22 @@ public class StoredVaccine {
         vaccines.remove(vaccine);
     }
 
+    public Vaccine gainVaccine(String vaccineId) {
+        int index = -1;
+        for (int i = 0; i < vaccines.size(); i++) {
+            if (vaccines.get(i).getId().equals(vaccineId)) {
+                index = i;
+                break;
+            }
+        }
+        if (index >= 0) {
+            Vaccine vac = vaccines.get(index);
+            vaccines.remove(index);
+            return vac;
+        }
+        return null;
+    }
+
     public long Count() {
         return vaccines.size();
     }
@@ -103,7 +119,7 @@ public class StoredVaccine {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("StoreId: " + storeId + "\n");
-        sb.append("AssociatedManagerId: " + associatedManagerId + "\n");
+        sb.append("AssociatedManagerId: " + associatedStationId + "\n");
         sb.append("Vaccines: " + vaccines.toString() + "\n");
         return sb.toString();
     }
@@ -111,7 +127,7 @@ public class StoredVaccine {
     public String ExportData() {
         String[] bases = new String[] {
             storeId,
-            associatedManagerId,
+            associatedStationId,
         };
         String[] vaccineStrings = new String[vaccines.size()];
         for (int i = 0; i < vaccines.size(); i++) {

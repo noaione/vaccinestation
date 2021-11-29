@@ -90,6 +90,28 @@ public class FileHandling {
         fw.close();
     }
 
+    public static void WriteString(String fileName, List<String> texts) throws IOException {
+        String path = BuildPath(fileName);
+        FileWriter fw = new FileWriter(path, true);
+        PrintWriter pl = new PrintWriter(fw);
+        for (String text : texts) {
+            pl.println(text);
+        }
+        pl.close();
+        fw.close();
+    }
+
+    public static void WriteString(String fileName, List<String> texts, Boolean append) throws IOException {
+        String path = BuildPath(fileName);
+        FileWriter fw = new FileWriter(path, append);
+        PrintWriter pl = new PrintWriter(fw);
+        for (String text : texts) {
+            pl.println(text);
+        }
+        pl.close();
+        fw.close();
+    }
+
     public static void ReplaceLine(String fileName, long index, String newText) throws IOException {
         String[] lines = ReadFile(fileName);
         if (index >= lines.length) {
@@ -115,6 +137,18 @@ public class FileHandling {
         } else {
             WriteString(fileName, newText);
         }
+    }
+
+    public static void RemoveById(String fileName, String id) throws IOException {
+        String[] lines = ReadFile(fileName);
+        ArrayList<String> newLines = new ArrayList<>();
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i].startsWith(id)) {
+                continue;
+            }
+            newLines.add(lines[i]);
+        }
+        WriteString(fileName, newLines, false);
     }
 
     public static void main(String[] args) {

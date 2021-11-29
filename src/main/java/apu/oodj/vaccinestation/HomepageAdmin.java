@@ -79,7 +79,7 @@ public class HomepageAdmin extends javax.swing.JFrame {
         });
 
         btnVaccineSlots.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnVaccineSlots.setText("VIEW VACCINE SLOTS");
+        btnVaccineSlots.setText("ADD/REMOVE VACCINE");
         btnVaccineSlots.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVaccineSlotsActionPerformed(evt);
@@ -101,24 +101,23 @@ public class HomepageAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(btnVaccineSlots))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(btnRegisterManagerAcc))
-                            .addComponent(btnModifyManagerAcc)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(199, 199, 199)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(btnVaccineSlots))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(btnRegisterManagerAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(btnModifyManagerAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,13 +142,11 @@ public class HomepageAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVaccineSlotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccineSlotsActionPerformed
-        // TODO add your handling code here:
-        new AdminVaccineSlots(this.user).show();
-        this.hide();
+        new AdminAddRemoveVaccine(this.user).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVaccineSlotsActionPerformed
 
     private void btnRegisterManagerAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterManagerAccActionPerformed
-        // TODO add your handling code here:
         new AdminCreateStation(this.user).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegisterManagerAccActionPerformed

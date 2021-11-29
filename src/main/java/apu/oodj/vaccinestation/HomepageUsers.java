@@ -7,8 +7,13 @@ package apu.oodj.vaccinestation;
 
 import javax.swing.JOptionPane;
 
+import apu.oodj.vaccinestation.Internals.FileHandling;
+import apu.oodj.vaccinestation.Internals.Managerial.VaccineRequest;
 import apu.oodj.vaccinestation.Internals.Users.Citizen;
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +21,7 @@ import java.awt.Color;
  */
 public class HomepageUsers extends javax.swing.JFrame {
     private Citizen citizen;
+    private final int MAXIMUM_DOSAGE = 2;
 
     /**
      * Creates new form HomepageUsers
@@ -54,7 +60,7 @@ public class HomepageUsers extends javax.swing.JFrame {
         lblDOB = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnLogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,11 +111,11 @@ public class HomepageUsers extends javax.swing.JFrame {
 
         lblPassword.setText("jLabel3");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setText("LOG OUT");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnLogOut.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnLogOut.setText("LOG OUT");
+        btnLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnLogOutActionPerformed(evt);
             }
         });
 
@@ -151,7 +157,7 @@ public class HomepageUsers extends javax.swing.JFrame {
                         .addGap(153, 153, 153))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,7 +192,7 @@ public class HomepageUsers extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
 
@@ -195,45 +201,63 @@ public class HomepageUsers extends javax.swing.JFrame {
 
     private void btnRegisterVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterVaccineActionPerformed
         //THIS SHOULD BE CHECK THE USER HAVE DONE VACCINE OR NOT
-        //IF THE USER NOT YET DONE VACCINE GO TO UsersRegisterVaccine
-        //IF THE USER DONE REGISTRATION GO TO UsersDoneRegistration
-        //IF THE USER DONE VACCINATION GO TO UsersDoneVaccination AND HEAD TO UsersViewStatusVaccination
-        //FOR TEMPORARY
-        new UsersRegisterVaccine(this.citizen).show();
-        this.hide();
+        String[] vacRequestRaws;
+        try {
+            vacRequestRaws = FileHandling.ReadFile("vaccinerequest");
+        } catch (FileNotFoundException e) {
+            vacRequestRaws = new String[] {};
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Unable to read request list, please contact admin!");
+            return;
+        }
+
+        ArrayList<VaccineRequest> vacRequestList = new ArrayList<>();
+        for (String raw : vacRequestRaws) {
+            VaccineRequest vc = VaccineRequest.ParseData(raw);
+            if (vc.getUserId().equals(this.citizen.getId())) {
+                vacRequestList.add(vc);
+            }
+        }
+        Boolean hasPending = false;
+        int vacDosageCount = 0;
+        for (VaccineRequest vc : vacRequestList) {
+            // Check if we have pending request
+            // First, check if we have any that still need to be processed.
+            // Second, check if we have any that are approved but the user has not vaccinated yet!
+            if (vc.isProcessing() || (vc.isApproved() && !vc.isVaccinated())) {
+                hasPending = true;
+            }
+            if (vc.isVaccinated()) {
+                vacDosageCount++;
+            }
+        }
+        if (hasPending) {
+            JOptionPane.showMessageDialog(this, "You have a pending request, please wait for the admin to process it!");
+            return;
+        }
+        if (vacRequestList.size() >= this.MAXIMUM_DOSAGE) {
+            JOptionPane.showMessageDialog(this, "Your vaccination is already done! Thank you for participating!");
+            return;
+        }
+        new UsersRegisterVaccine(this.citizen, vacDosageCount >= 1).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnRegisterVaccineActionPerformed
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
-        // TODO add your handling code here:
-        new PeopleProfile(this.citizen).show();
-        this.hide();
+        new PeopleProfile(this.citizen).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnProfileActionPerformed
 
     private void btnVaccinationStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccinationStatusActionPerformed
-        //if user not done vaccine
-        /*go to
-        new UsersStatusNotDoneVaccine().show();
-        this.hide();*/
-        
-        //if user done registration
-        /*
-        new UsersDoneRegistration().show();
-        this.hide();
-        */
-        
-        //if user done vaccine
-        /*go to
-        new UsersDoneVaccination().show();
-        this.hide();
-        */
+        new UsersVaccineStatus(this.citizen).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVaccinationStatusActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String username = ""; String password = "";
-        new LoginPage(username, password).show();
-        this.hide();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
+        new LoginPage("", "").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogOutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,10 +295,10 @@ public class HomepageUsers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnRegisterVaccine;
     private javax.swing.JButton btnVaccinationStatus;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblAddress;

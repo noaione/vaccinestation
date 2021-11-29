@@ -5,9 +5,14 @@
  */
 package apu.oodj.vaccinestation;
 
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
+import apu.oodj.vaccinestation.Internals.FileHandling;
+import apu.oodj.vaccinestation.Internals.Managerial.VaccineRequest;
 import apu.oodj.vaccinestation.Internals.Users.Citizen;
+import apu.oodj.vaccinestation.Internals.Vaccine.StoredVaccine;
 
 /**
  *
@@ -15,13 +20,26 @@ import apu.oodj.vaccinestation.Internals.Users.Citizen;
  */
 public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
     private Citizen user;
+    private StoredVaccine storage;
+    private VaccineRequest vaccine;
 
     /**
      * Creates new form UsersConfirmRegisterVaccine
      */
-    public UsersConfirmRegisterVaccine(Citizen user) {
+    public UsersConfirmRegisterVaccine(Citizen user, StoredVaccine storage, VaccineRequest vaccine) {
         initComponents();
         this.user = user;
+        this.storage = storage;
+        this.vaccine = vaccine;
+
+        lblFullName.setText(user.getName());
+        lblIDNum.setText(user.getIdentificationNumber());
+        lblEmail.setText(user.getEmail());
+        lblPhone.setText(user.getEmail());
+        lblVaccine.setText(vaccine.getVaccine().getName());
+        StringBuilder sb = new StringBuilder();
+        sb.append(vaccine.getDose());
+        lblDose.setText(sb.toString());
     }
 
     /**
@@ -46,9 +64,9 @@ public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lblPhone = new javax.swing.JLabel();
         lblDose = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnRegisterVac = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,22 +97,22 @@ public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
 
         lblDose.setText("l");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("REGISTER");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegisterVac.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRegisterVac.setText("REGISTER");
+        btnRegisterVac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRegisterVacActionPerformed(evt);
             }
         });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("STOCKS AVAILABLE");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Cancel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
 
@@ -137,10 +155,10 @@ public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(278, 278, 278)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRegisterVac, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(353, 353, 353)))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
@@ -178,27 +196,45 @@ public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegisterVac, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(90, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "THE AUTHORIZED FIND THE LOCATION FOR YOU\nPLEASE ALWAYS CHECK YOUR ACCOUNT\n AND CLICK 'VIEW STATUS' FOR THE VACCINATION DATE AND LOCATION !!");
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnRegisterVacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterVacActionPerformed
+        try {
+            FileHandling.WriteString("vaccinerequest", this.vaccine.ExportData());
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error writing back vaccine info to file, please contact Admin!");
+            return;
+        }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        new UsersRegisterVaccine(this.user).show();
-        this.hide();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        JOptionPane.showMessageDialog(this, "Registered! Please check the request status at your homepage later!");
+        new HomepageUsers(this.user).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnRegisterVacActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // Add back to storage list
+        this.storage.addVaccine(this.vaccine.getVaccine());
+        try {
+            FileHandling.WriteString("storedvaccine", this.storage.ExportData(), false);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error writing back vaccine info to file, please contact Admin!");
+            return;
+        }
+
+        new UsersRegisterVaccine(this.user, this.vaccine.getDose() == 2).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
     boolean showPassword = false;
     /**
      * @param args the command line arguments
@@ -230,14 +266,14 @@ public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsersConfirmRegisterVaccine(null).setVisible(true);
+                new UsersConfirmRegisterVaccine(null, null, null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnRegisterVac;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;

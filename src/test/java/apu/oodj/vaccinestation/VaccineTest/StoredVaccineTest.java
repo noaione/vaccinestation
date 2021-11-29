@@ -14,7 +14,7 @@ public class StoredVaccineTest {
         Vaccine vac = new Vaccine("VacMockId", "Mock", 2, "Mocked", VaccineType.InactivatedVirus);
         StoredVaccine storage = new StoredVaccine("StoreMockId", "MockId");
         assertEquals(storage.getStoreId(), "StoreMockId");
-        assertEquals(storage.getAssociatedManagerId(), "MockId");
+        assertEquals(storage.getAssociatedStationId(), "MockId");
         assertEquals(storage.Count(), 0);
         storage.addVaccines(vac, 2);
         assertEquals(storage.Count(), 2);
@@ -62,13 +62,13 @@ public class StoredVaccineTest {
         StoredVaccine storage = StoredVaccine.ParseData(test1);
 
         assertEquals(storage.getStoreId(), "StoreMockId");
-        assertEquals(storage.getAssociatedManagerId(), "MockId");
+        assertEquals(storage.getAssociatedStationId(), "MockId");
         assertEquals(storage.Count(), 0);
 
         storage = StoredVaccine.ParseData(test2);
 
         assertEquals(storage.getStoreId(), "StoreMockId2");
-        assertEquals(storage.getAssociatedManagerId(), "MockId2");
+        assertEquals(storage.getAssociatedStationId(), "MockId2");
         assertEquals(storage.Count(), 2);
     }
 }

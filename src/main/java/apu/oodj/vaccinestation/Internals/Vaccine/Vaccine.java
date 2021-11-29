@@ -71,14 +71,9 @@ public class Vaccine {
         return dosage > 1;
     }
 
+    @Override
     public String toString() {
-        return "Vaccine{" +
-                "Id='" + Id + '\'' +
-                ", name='" + name + '\'' +
-                ", dosage=" + dosage +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", type=" + type +
-                '}';
+        return this.name;
     }
 
     public String ExportData() {
@@ -100,6 +95,16 @@ public class Vaccine {
             Integer.parseInt(dataArray[2]),
             dataArray[3],
             VaccineType.fromString(dataArray[4])
+        );
+    }
+
+    public Vaccine Copy() {
+        return new Vaccine(
+            Id,
+            name,
+            dosage,
+            manufacturer,
+            type
         );
     }
 }

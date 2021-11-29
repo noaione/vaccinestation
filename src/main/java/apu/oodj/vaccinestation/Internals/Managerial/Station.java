@@ -75,4 +75,8 @@ public class Station {
         String[] dataArray = data.split(";;;");
         return new Station(dataArray[0], dataArray[1], dataArray[2], dataArray[3]);
     }
+
+    public String toString() {
+        return this.name;
+    }
 }

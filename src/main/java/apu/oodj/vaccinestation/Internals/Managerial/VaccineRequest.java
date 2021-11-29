@@ -13,6 +13,7 @@ public class VaccineRequest {
     static String ISO8601 = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
     private String Id;
+    private String userId;
     private Vaccine vaccine;
     private int dose;
     private Date submitDate;
@@ -20,39 +21,50 @@ public class VaccineRequest {
     // 0 is not processed, 1 is approved, -1 is rejected
     private int status;
     private Station station;
+    private Boolean isVaccinated;
 
-    public VaccineRequest(Vaccine vac, int dose, Date submitDate, Date vaccineDate, Station station) {
+    public VaccineRequest(String uuid, Vaccine vac, int dose, Date submitDate, Date vaccineDate, Station station) {
         this.Id = RandomId.generate("VacReq");
+        this.userId = uuid;
         this.vaccine = vac;
         this.dose = dose;
         this.submitDate = submitDate;
         this.vaccineDate = vaccineDate;
         this.status = 0;
         this.station = station;
+        this.isVaccinated = false;
     }
 
-    public VaccineRequest(Vaccine vac, int dose, Date submitDate, Date vaccineDate, int status, Station station) {
+    public VaccineRequest(String uuid, Vaccine vac, int dose, Date submitDate, Date vaccineDate, int status, Station station) {
         this.Id = RandomId.generate("VacReq");
+        this.userId = uuid;
         this.vaccine = vac;
         this.dose = dose;
         this.submitDate = submitDate;
         this.vaccineDate = vaccineDate;
         this.status = status;
         this.station = station;
+        this.isVaccinated = false;
     }
 
-    public VaccineRequest(String Id, Vaccine vac, int dose, Date submitDate, Date vaccineDate, int status, Station station) {
+    public VaccineRequest(String Id, String uuid, Vaccine vac, int dose, Date submitDate, Date vaccineDate, int status, Station station, int isVaccinated) {
         this.Id = Id;
+        this.userId = uuid;
         this.vaccine = vac;
         this.dose = dose;
         this.submitDate = submitDate;
         this.vaccineDate = vaccineDate;
         this.status = status;
         this.station = station;
+        this.isVaccinated = isVaccinated == 1;
     }
 
     public String getId() {
         return Id;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public Vaccine getVaccine() {
@@ -73,6 +85,10 @@ public class VaccineRequest {
 
     public void setId(String Id) {
         this.Id = Id;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public void setVaccine(Vaccine vaccine) {
@@ -121,6 +137,17 @@ public class VaccineRequest {
         this.station = station;
     }
 
+    public Boolean isVaccinated() {
+        return isVaccinated;
+    }
+
+    public void setVaccinated(Boolean isVaccinated) {
+        // Check if approved, if isn't just ignore it silently
+        if (this.isApproved()) {
+            this.isVaccinated = isVaccinated;
+        }
+    }
+
     public String getSubmitDateAsISO() {
         TimeZone tz = TimeZone.getTimeZone("UTC");
         DateFormat df = new SimpleDateFormat(VaccineRequest.ISO8601);
@@ -140,8 +167,15 @@ public class VaccineRequest {
         String subDate = this.getSubmitDateAsISO();
         String vacInfo = this.vaccine.ExportData();
 
+        int isVacNum = 0;
+        if (this.isVaccinated) {
+            isVacNum = 1;
+        }
+
         StringBuilder sb = new StringBuilder();
         sb.append(this.Id);
+        sb.append("<<<<");
+        sb.append(this.userId);
         sb.append("<<<<");
         sb.append(vacInfo);
         sb.append("<<<<");
@@ -154,6 +188,8 @@ public class VaccineRequest {
         sb.append(this.status);
         sb.append("<<<<");
         sb.append(this.station.ExportData());
+        sb.append("<<<<");
+        sb.append(isVacNum);
 
         return sb.toString();
     }
@@ -164,21 +200,23 @@ public class VaccineRequest {
         Date parsedSubDate;
         Date parsedVacDate;
         try {
-            parsedSubDate = isoFmt.parse(dataArray[3]);
-            parsedVacDate = isoFmt.parse(dataArray[4]);
+            parsedSubDate = isoFmt.parse(dataArray[4]);
+            parsedVacDate = isoFmt.parse(dataArray[5]);
         } catch (ParseException e) {
             throw new RuntimeException("Unable to parse one of the date!");
         }
 
-        Vaccine vaccine = Vaccine.ParseData(dataArray[1]);
+        Vaccine vaccine = Vaccine.ParseData(dataArray[2]);
         return new VaccineRequest(
             dataArray[0],
+            dataArray[1],
             vaccine,
-            Integer.parseInt(dataArray[2]),
+            Integer.parseInt(dataArray[3]),
             parsedSubDate,
             parsedVacDate,
-            Integer.parseInt(dataArray[5]),
-            Station.ParseData(dataArray[6])
+            Integer.parseInt(dataArray[6]),
+            Station.ParseData(dataArray[7]),
+            Integer.parseInt(dataArray[8])
         );
     }
 }
