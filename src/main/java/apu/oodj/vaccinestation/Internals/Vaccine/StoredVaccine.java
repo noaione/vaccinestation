@@ -47,8 +47,8 @@ public class StoredVaccine {
         vaccines.add(vaccine);
     }
 
-    public void addVaccines(Vaccine vaccine, int quantity) {
-        for (int i = 0; i < quantity; i++) {
+    public void addVaccines(Vaccine vaccine, long quantity) {
+        for (long i = 0; i < quantity; i++) {
             vaccines.add(vaccine);
         }
     }
@@ -90,6 +90,29 @@ public class StoredVaccine {
                 vaccines.remove(0);
             }
         }
+    }
+
+    public void removeVaccinesById(String vaccineId) {
+        ArrayList<Vaccine> temp = new ArrayList<>();
+        for (Vaccine vaccine : vaccines) {
+            if (!vaccine.getId().equals(vaccineId)) {
+                temp.add(vaccine);
+            }
+        }
+        vaccines = temp;
+    }
+
+    public void removeVaccinesById(String vaccineId, long count) {
+        ArrayList<Vaccine> temp = new ArrayList<>();
+        long deletedCount = 0;
+        for (Vaccine vaccine : vaccines) {
+            if (deletedCount < count && vaccine.getId().equals(vaccineId)) {
+                deletedCount++;
+                continue;
+            }
+            temp.add(vaccine);
+        }
+        vaccines = temp;
     }
 
     public void removeVaccine(Vaccine vaccine) {

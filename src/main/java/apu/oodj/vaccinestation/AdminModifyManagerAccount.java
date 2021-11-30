@@ -347,6 +347,7 @@ public class AdminModifyManagerAccount extends javax.swing.JFrame {
 
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
         new HomepageAdmin(this.admin).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnGoBackActionPerformed
 
     /**

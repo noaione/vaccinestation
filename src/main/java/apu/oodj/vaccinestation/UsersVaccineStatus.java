@@ -93,7 +93,7 @@ public class UsersVaccineStatus extends javax.swing.JFrame {
             }
             lblFullName.setText(user.getName());
             lblIDNum.setText(user.getIdentificationNumber());
-            lblVacDate.setText(firstDose.getVaccineDateAsISO());
+            lblVacDate.setText(firstDose.getVaccineDate().toString());
             lblVaccineName.setText(firstDose.getVaccine().getName());
             lblVaccineDose.setText("Dose 1");
         } else if (firstDose != null && firstDose.isVaccinated()) {
@@ -104,7 +104,7 @@ public class UsersVaccineStatus extends javax.swing.JFrame {
             lblRequestTitle.setText("Done");
             lblFullName.setText(user.getName());
             lblIDNum.setText(user.getIdentificationNumber());
-            lblVacDate.setText(firstDose.getVaccineDateAsISO());
+            lblVacDate.setText(firstDose.getVaccineDate().toString());
             lblVaccineName.setText(firstDose.getVaccine().getName());
             lblVaccineDose.setText("Dose 1");
         }
@@ -113,17 +113,18 @@ public class UsersVaccineStatus extends javax.swing.JFrame {
     private void moveToSecondDose() {
         currentPos = 2;
         btnNextDose.setEnabled(true);
-        lblRequestTitle.setText("Requests");
         btnNextDose.setText("Dose 1");
 
         lblFullName.setText(user.getName());
         lblIDNum.setText(user.getIdentificationNumber());
-        lblVacDate.setText(firstDose.getVaccineDateAsISO());
-        lblVaccineName.setText(firstDose.getVaccine().getName());
+        lblVacDate.setText(secondDose.getVaccineDate().toString());
+        lblVaccineName.setText(secondDose.getVaccine().getName());
         lblVaccineDose.setText("Dose 2");
+        lblRequestTitle.setText("Done");
         lblRequestStat.setVisible(false);
 
         if (!secondDose.isVaccinated()) {
+            lblRequestTitle.setText("Requests");
             lblRequestStat.setVisible(true);
             switch (secondDose.getStatus()) {
                 case 1:
@@ -223,8 +224,8 @@ public class UsersVaccineStatus extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lblIDNum, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDoseLayout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblVacDate, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDoseLayout.createSequentialGroup()
                         .addGroup(panelDoseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

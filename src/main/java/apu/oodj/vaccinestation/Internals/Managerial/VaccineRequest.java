@@ -219,4 +219,13 @@ public class VaccineRequest {
             Integer.parseInt(dataArray[8])
         );
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof VaccineRequest) {
+            VaccineRequest vr = (VaccineRequest) o;
+            return this.Id.equals(vr.getId());
+        }
+        return false;
+    }
 }

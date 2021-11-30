@@ -14,6 +14,7 @@ import apu.oodj.vaccinestation.Internals.Users.User;
 public class VaccineRequestModel extends AbstractTableModel {
     private List<VaccineRequest> requests;
     private List<User> users;
+    private boolean appointmentMode;
 
     private final String[] columnNames = new String[] {
         "?", "User Id", "Full Name", "Vaccine Name", "Dose (1/2)", "Submitted Date", "Vaccination Date",
@@ -23,8 +24,9 @@ public class VaccineRequestModel extends AbstractTableModel {
         String.class, String.class, String.class, String.class, Integer.class, Date.class, Date.class,
     };
 
-    public VaccineRequestModel(List<VaccineRequest> requests) {
+    public VaccineRequestModel(List<VaccineRequest> requests, boolean isAppointmentMode) {
         this.requests = requests;
+        this.appointmentMode = isAppointmentMode;
 
         String[] rawUserStrings;
         try {
@@ -72,15 +74,26 @@ public class VaccineRequestModel extends AbstractTableModel {
         return null;
     }
 
-    public String statusToString(int status) {
+    public VaccineRequest getRequest(int row) {
+        return requests.get(row);
+    }
+
+    private String statusToString(int status) {
         switch (status) {
             case 1:
-                return "✓";
+                return "Approved";
             case -1:
-                return "✗";
+                return "Denied";
             default:
-                return "?";
+                return "Pending";
         }
+    }
+
+    private String vacStatusToString(Boolean status) {
+        if (status) {
+            return "Done";
+        }
+        return "Not Done";
     }
 
     @Override
@@ -88,8 +101,13 @@ public class VaccineRequestModel extends AbstractTableModel {
     {
         VaccineRequest row = requests.get(rowIndex);
         User user = findUserFromId(row.getUserId());
+        System.out.println("VaccReqModel: " + rowIndex + " | " + columnIndex);
         if (columnIndex == 0) {
-            return statusToString(row.getStatus());
+            if (appointmentMode) {
+                return statusToString(row.getStatus());
+            } else {
+                return vacStatusToString(row.isVaccinated());
+            }
         } else if (columnIndex == 1) {
             return row.getUserId();
         } else if (columnIndex == 2) {

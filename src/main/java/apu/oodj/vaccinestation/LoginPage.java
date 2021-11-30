@@ -74,6 +74,7 @@ public class LoginPage extends javax.swing.JFrame {
         btnRegister = new javax.swing.JButton();
         btnShow = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,6 +112,16 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
+        btnExit.setBackground(new java.awt.Color(204, 0, 0));
+        btnExit.setForeground(new java.awt.Color(255, 255, 255));
+        btnExit.setText("Exit");
+        btnExit.setToolTipText("");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,6 +154,10 @@ public class LoginPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 14, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(btnExit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +181,9 @@ public class LoginPage extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegister)
-                .addGap(70, 70, 70))
+                .addGap(27, 27, 27)
+                .addComponent(btnExit)
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -214,20 +231,18 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        // TODO add your handling code here:
         // String username, String name, String email, String password, String idNumber, CitizenType citizenType, String address, String phoneNumber, Date dob
         Citizen citUser = new Citizen(
             "", "", "", "", "", CitizenType.Citizen, "", "", new Date()
         );
-        new PeopleRegistration(citUser, true).show();
-        this.hide();
+        new PeopleRegistration(citUser, true).setVisible(true);
+        this.setVisible(false);
         /*
         PeopleRegistration pr = new PeopleRegistration();
         pr.setVisible(true);*/
     }//GEN-LAST:event_btnRegisterActionPerformed
     boolean showPassword = false;
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
-        // TODO add your handling code here:
         if (showPassword == false) {
             txtPassword.setEchoChar((char)0);
         }
@@ -236,6 +251,11 @@ public class LoginPage extends javax.swing.JFrame {
         }
         showPassword = !showPassword;
     }//GEN-LAST:event_btnShowActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        this.dispose();
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,6 +295,7 @@ public class LoginPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnShow;

@@ -225,7 +225,7 @@ public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
         // Add back to storage list
         this.storage.addVaccine(this.vaccine.getVaccine());
         try {
-            FileHandling.WriteString("storedvaccine", this.storage.ExportData(), false);
+            FileHandling.WriteString("storedvaccines", this.storage.ExportData(), false);
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error writing back vaccine info to file, please contact Admin!");

@@ -107,4 +107,16 @@ public class Vaccine {
             type
         );
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        // check if it's instance of Vaccine
+        if (obj instanceof Vaccine) {
+            // cast to Vaccine
+            Vaccine vaccine = (Vaccine) obj;
+            // compare Id
+            return vaccine.getId().equals(this.getId());
+        }
+        return false;
+    }
 }

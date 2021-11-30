@@ -6,7 +6,13 @@
 package apu.oodj.vaccinestation;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
+import apu.oodj.vaccinestation.Internals.FileHandling;
+import apu.oodj.vaccinestation.Internals.Managerial.Station;
 import apu.oodj.vaccinestation.Internals.Users.Manager;
 
 /**
@@ -14,7 +20,8 @@ import apu.oodj.vaccinestation.Internals.Users.Manager;
  * @author asus
  */
 public class HomepageManager extends javax.swing.JFrame {
-    Manager user;
+    private Manager user;
+    private Station station;
 
     /**
      * Creates new form ManagerApproveRejectRequest
@@ -24,7 +31,36 @@ public class HomepageManager extends javax.swing.JFrame {
         this.user = user;
         btnVaccineSlots.setBackground(Color.YELLOW);
         btnUserRequest.setBackground(Color.CYAN);
+        btnUserVacInfo.setBackground(Color.ORANGE);
         btnLogOut.setBackground(Color.RED);
+
+        String[] stationInfo;
+        try {
+            stationInfo = FileHandling.ReadFile("station");
+        } catch (FileNotFoundException e) {
+            stationInfo = new String[] {};
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Unable to open station information! Please contact admin!");
+            new LoginPage(user.getUsername(), "").setVisible(true);
+            this.setVisible(false);
+            return;
+        }
+
+        for (String info : stationInfo) {
+            Station st = Station.ParseData(info);
+            if (st.getManagerId().equals(user.getId())) {
+                this.station = st;
+                break;
+            }
+        }
+
+        if (this.station == null) {
+            JOptionPane.showMessageDialog(this, "Unable to find station information for your account! Please contact admin!");
+            new LoginPage(user.getUsername(), "").setVisible(true);
+            this.setVisible(false);
+            return;
+        }
     }
 
     /**
@@ -41,6 +77,7 @@ public class HomepageManager extends javax.swing.JFrame {
         btnVaccineSlots = new javax.swing.JButton();
         btnUserRequest = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
+        btnUserVacInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +111,14 @@ public class HomepageManager extends javax.swing.JFrame {
             }
         });
 
+        btnUserVacInfo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnUserVacInfo.setText("VIEW VACCINATION STATUS");
+        btnUserVacInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserVacInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,13 +132,14 @@ public class HomepageManager extends javax.swing.JFrame {
                         .addGap(125, 125, 125)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
+                        .addContainerGap()
+                        .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnUserRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVaccineSlots)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnUserVacInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnVaccineSlots, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,7 +153,9 @@ public class HomepageManager extends javax.swing.JFrame {
                 .addComponent(btnVaccineSlots, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnUserRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnUserVacInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -116,22 +164,25 @@ public class HomepageManager extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVaccineSlotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccineSlotsActionPerformed
-        // TODO add your handling code here:
-        new ManagerVaccineSlots(this.user).show();
-        this.hide();
+        // new ManagerVaccineSlots(this.user).show();
+        new ManagerModifyVaccineStock(this.user, this.station).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVaccineSlotsActionPerformed
 
     private void btnUserRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserRequestActionPerformed
-        // TODO add your handling code here:
-        new ManagerApproveRejectRequest(this.user).show();
-        this.hide();
+        new ManagerApproveRejectRequest(this.user).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnUserRequestActionPerformed
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
-        // TODO add your handling code here:
-        new LoginPage("", "").show();
-        this.hide();
+        new LoginPage("", "").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnLogOutActionPerformed
+
+    private void btnUserVacInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserVacInfoActionPerformed
+        new ManagerMarkVaccination(this.user).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnUserVacInfoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +225,7 @@ public class HomepageManager extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnUserRequest;
+    private javax.swing.JButton btnUserVacInfo;
     private javax.swing.JButton btnVaccineSlots;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

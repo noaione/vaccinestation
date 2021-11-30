@@ -136,4 +136,13 @@ public class User {
     public User Copy() {
         return new User(this.id, this.username, this.name, this.email, this.password, this.type);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof User) {
+            User other = (User) obj;
+            return this.id.equals(other.getId());
+        }
+        return false;
+    }
 }
