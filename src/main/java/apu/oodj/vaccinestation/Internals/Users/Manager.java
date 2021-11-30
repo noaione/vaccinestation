@@ -23,11 +23,13 @@ public class Manager extends User {
         this.phoneNumber = phoneNumber;
     }
 
+    @Override
     public String ExportData() {
         String topData = super.ExportData();
         return topData + ";;;" + phoneNumber;
     }
 
+    @Override
     public Manager Copy() {
         return new Manager(this.getId(), this.getUsername(), this.getName(), this.getEmail(), this.getPassword(), this.getType(), phoneNumber);
     }

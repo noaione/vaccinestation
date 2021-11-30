@@ -295,7 +295,6 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCheckStockActionPerformed
 
     private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
-        // TODO add your handling code here:
         new HomepageUsers(this.user).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnMoveActionPerformed

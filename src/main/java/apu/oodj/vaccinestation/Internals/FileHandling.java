@@ -37,7 +37,13 @@ public class FileHandling {
     public static String[] ReadFile(String fileName) throws IOException {
         String path = BuildPath(fileName);
         File fp = new File(path);
-        Scanner reader = new Scanner(fp);
+        Scanner reader;
+        try {
+            reader = new Scanner(fp);
+        } catch (FileNotFoundException e) {
+            // Handle error early
+            return new String[] {};
+        }
         List<String> lines = new ArrayList<>();
         while (reader.hasNextLine()) {
             String data = reader.nextLine().trim();

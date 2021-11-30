@@ -11,6 +11,7 @@ public class Administrator extends User {
         super(id, username, name, email, password, type);
     }
 
+    @Override
     public Administrator Copy() {
         return new Administrator(this.getId(), this.getUsername(), this.getName(), this.getEmail(), this.getPassword(), this.getType());
     }
