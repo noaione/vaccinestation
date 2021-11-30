@@ -1,29 +1,26 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package apu.oodj.vaccinestation;
 
-import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import apu.oodj.vaccinestation.Internals.FileHandling;
 import apu.oodj.vaccinestation.Internals.Managerial.VaccineRequest;
-import apu.oodj.vaccinestation.Internals.Users.Manager;
-import apu.oodj.vaccinestation.Internals.Users.User;
+import apu.oodj.vaccinestation.Internals.Users.*;
 import apu.oodj.vaccinestation.Model.VaccineRequestModel;
-
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author asus
+ * @author N4O
  */
-public class ManagerApproveRejectRequest extends javax.swing.JFrame {
+public class ManagerMarkVaccination extends javax.swing.JFrame {
     private Manager user;
     private List<User> uList;
     private ArrayList<VaccineRequest> allRequests;
@@ -34,14 +31,11 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
     private int searchMode;
 
     /**
-     * Creates new form ManagerForm
+     * Creates new form ManagerMarkVaccination
      */
-    public ManagerApproveRejectRequest(Manager user) {
+    public ManagerMarkVaccination(Manager user) {
         initComponents();
         this.user = user;
-        btnApprove.setBackground(Color.GREEN);
-        btnReject.setBackground(Color.RED);
-        btnModify.setBackground(Color.cyan);
 
         String[] requests;
         try {
@@ -72,7 +66,6 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
         this.allRequests = new ArrayList<>();
         this.uList = new ArrayList<>();
         this.searchMode = 0;
-        checkShowPendingOnly.setSelected(true);
 
         for (String request : requests)
         {
@@ -122,23 +115,16 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
 
     private void refreshModelDataAndRenderer() {
         // Display all pending requests on the JTable userSubmissionTable table
-        boolean isPendingOnly = checkShowPendingOnly.isSelected();
         ArrayList<VaccineRequest> onlyPending = new ArrayList<>();
         for (VaccineRequest request : this.allRequests)
         {
-            if (!request.isVaccinated()) {
-                if (isPendingOnly && request.isProcessing()) {
-                    if (this.shouldSearchQueryContinue(request)) {
-                        onlyPending.add(request);
-                    }
-                } else if (!isPendingOnly) {
-                    if (this.shouldSearchQueryContinue(request)) {
-                        onlyPending.add(request);
-                    }
+            if (request.isApproved()) {
+                if (this.shouldSearchQueryContinue(request)) {
+                    onlyPending.add(request);
                 }
             }
         }
-        VaccineRequestModel model = new VaccineRequestModel(onlyPending, true);
+        VaccineRequestModel model = new VaccineRequestModel(onlyPending, false);
         userSubmissionTable.setModel(model);
         userSubmissionTable.setAutoCreateRowSorter(true);
     }
@@ -152,76 +138,43 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        btnApprove = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         userSubmissionTable = new javax.swing.JTable();
-        btnApprove = new javax.swing.JButton();
-        btnReject = new javax.swing.JButton();
-        btnModify = new javax.swing.JButton();
-        btnSearchByName = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        txtSearchField = new javax.swing.JTextField();
-        btnResetSearch = new javax.swing.JButton();
-        btnGoBack = new javax.swing.JButton();
-        checkShowPendingOnly = new javax.swing.JCheckBox();
         btnSearchById = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        btnGoBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnResetSearch = new javax.swing.JButton();
+        txtSearchField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        btnSearchByName = new javax.swing.JButton();
+        btnReject = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        jLabel1.setText("HI ! MANAGER ");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Kindly manage the vaccination appointment below!");
-
-        userSubmissionTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        userSubmissionTable.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(userSubmissionTable);
-
         btnApprove.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnApprove.setText("Approve");
+        btnApprove.setText("Mark Done");
         btnApprove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApproveActionPerformed(evt);
             }
         });
 
-        btnReject.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnReject.setText("Reject");
-        btnReject.addActionListener(new java.awt.event.ActionListener() {
+        userSubmissionTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        userSubmissionTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(userSubmissionTable);
+
+        btnSearchById.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSearchById.setText("Search User ID");
+        btnSearchById.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRejectActionPerformed(evt);
+                btnSearchByIdActionPerformed(evt);
             }
         });
 
-        btnModify.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnModify.setText("Modify");
-        btnModify.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModifyActionPerformed(evt);
-            }
-        });
-
-        btnSearchByName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnSearchByName.setText("Search Full Name");
-        btnSearchByName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchByNameActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel3.setText("Search For User");
-
-        btnResetSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnResetSearch.setText("Reset Search");
-        btnResetSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetSearchActionPerformed(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Kindly manage the vaccination status below!");
 
         btnGoBack.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnGoBack.setText("Go Back");
@@ -231,18 +184,34 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
             }
         });
 
-        checkShowPendingOnly.setText("Show Pending Only");
-        checkShowPendingOnly.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                checkShowPendingOnlyItemStateChanged(evt);
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel1.setText("Hello Manager!");
+
+        btnResetSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnResetSearch.setText("Reset Search");
+        btnResetSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetSearchActionPerformed(evt);
             }
         });
 
-        btnSearchById.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnSearchById.setText("Search User ID");
-        btnSearchById.addActionListener(new java.awt.event.ActionListener() {
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel3.setText("Search For User");
+
+        btnSearchByName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSearchByName.setText("Search Full Name");
+        btnSearchByName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchByIdActionPerformed(evt);
+                btnSearchByNameActionPerformed(evt);
+            }
+        });
+
+        btnReject.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnReject.setText("Mark Undone");
+        btnReject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejectActionPerformed(evt);
             }
         });
 
@@ -255,39 +224,36 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 59, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnApprove, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnApprove, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(btnReject, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnReject, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(btnGoBack, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(btnSearchById, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnResetSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(checkShowPendingOnly)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                                        .addComponent(btnResetSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 172, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(txtSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(222, 222, 222))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(121, 121, 121))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(220, 220, 220))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,8 +267,7 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnApprove, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReject, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnReject, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(4, 4, 4)
@@ -311,24 +276,19 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnResetSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchById, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkShowPendingOnly))
+                    .addComponent(btnSearchById, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(btnGoBack, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
-        new HomepageManager(this.user).setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnGoBackActionPerformed
 
     private boolean saveRequestChanges() {
         ArrayList<String> requestList = new ArrayList<>();
-        for (VaccineRequest vcr : this.allRequests) {
+        for (VaccineRequest vcr : allRequests) {
             requestList.add(vcr.ExportData());
         }
         try {
@@ -339,6 +299,57 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
         return true;
     }
 
+    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
+        int selIndex = this.userSubmissionTable.getSelectedRow();
+        if (selIndex < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row to mark as done");
+            return;
+        }
+
+        VaccineRequestModel requestModel = (VaccineRequestModel) this.userSubmissionTable.getModel();
+        VaccineRequest sel = requestModel.getRequest(selIndex);
+        if (sel == null) {
+            JOptionPane.showMessageDialog(null, "Please select a row to mark as done");
+            return;
+        }
+
+        int indexActual = this.indexRequestChanges(sel.getId());
+        if (indexActual < 0) {
+            JOptionPane.showMessageDialog(null, "Error: Could not find request in list");
+            return;
+        }
+
+        sel.setVaccinated(true);
+        allRequests.set(indexActual, sel);
+        boolean success = saveRequestChanges();
+        if (!success) {
+            JOptionPane.showMessageDialog(null, "Failed to save changes, please contact admin!");
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Vaccination status is now marked as done!");
+        this.refreshModelDataAndRenderer();
+    }//GEN-LAST:event_btnApproveActionPerformed
+
+    private void btnSearchByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchByIdActionPerformed
+        this.searchMode = 2;
+        this.refreshModelDataAndRenderer();
+    }//GEN-LAST:event_btnSearchByIdActionPerformed
+
+    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
+        new HomepageManager(this.user).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGoBackActionPerformed
+
+    private void btnResetSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetSearchActionPerformed
+        this.searchMode = 0;
+        this.refreshModelDataAndRenderer();
+    }//GEN-LAST:event_btnResetSearchActionPerformed
+
+    private void btnSearchByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchByNameActionPerformed
+        this.searchMode = 1;
+        this.refreshModelDataAndRenderer();
+    }//GEN-LAST:event_btnSearchByNameActionPerformed
+
     private int indexRequestChanges(String requestId) {
         for (int i = 0; i < this.allRequests.size(); i++) {
             if (this.allRequests.get(i).getId().equals(requestId)) {
@@ -348,48 +359,17 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
         return -1;
     }
 
-    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
-        int selIndex = this.userSubmissionTable.getSelectedRow();
-        if (selIndex < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a row to approve");
-            return;
-        }
-
-        VaccineRequestModel requestModel = (VaccineRequestModel) this.userSubmissionTable.getModel();
-        VaccineRequest sel = requestModel.getRequest(selIndex);
-        if (sel == null) {
-            JOptionPane.showMessageDialog(null, "Please select a row to approve");
-            return;
-        }
-
-        int indexActual = this.indexRequestChanges(sel.getId());
-        if (indexActual < 0) {
-            JOptionPane.showMessageDialog(null, "Error: Could not find request in list");
-            return;
-        }
-
-        sel.setStatus(1);
-        this.allRequests.set(indexActual, sel);
-        boolean success = saveRequestChanges();
-        if (!success) {
-            JOptionPane.showMessageDialog(null, "Failed to save changes, please contact admin!");
-            return;
-        }
-        JOptionPane.showMessageDialog(this, "Request approved!");
-        this.refreshModelDataAndRenderer();
-    }//GEN-LAST:event_btnApproveActionPerformed
-
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
         int selIndex = this.userSubmissionTable.getSelectedRow();
         if (selIndex < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a row to reject");
+            JOptionPane.showMessageDialog(null, "Please select a row to mark as undone");
             return;
         }
 
         VaccineRequestModel requestModel = (VaccineRequestModel) this.userSubmissionTable.getModel();
         VaccineRequest sel = requestModel.getRequest(selIndex);
         if (sel == null) {
-            JOptionPane.showMessageDialog(null, "Please select a row to reject");
+            JOptionPane.showMessageDialog(null, "Please select a row to mark as undone");
             return;
         }
 
@@ -399,65 +379,16 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
             return;
         }
 
-        sel.setStatus(-1);
+        sel.setVaccinated(false);
         allRequests.set(indexActual, sel);
         boolean success = saveRequestChanges();
         if (!success) {
             JOptionPane.showMessageDialog(null, "Failed to save changes, please contact admin!");
             return;
         }
-        JOptionPane.showMessageDialog(this, "Request rejected!");
+        JOptionPane.showMessageDialog(this, "Vaccination status is now marked as undone!");
         this.refreshModelDataAndRenderer();
     }//GEN-LAST:event_btnRejectActionPerformed
-
-    private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
-        int selIndex = this.userSubmissionTable.getSelectedRow();
-        if (selIndex < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a row to reject");
-            return;
-        }
-
-        VaccineRequest sel = allRequests.get(selIndex);
-        if (sel == null) {
-            JOptionPane.showMessageDialog(null, "Please select a row to reject");
-            return;
-        }
-
-        // get user
-        User umatch = null;
-        for (User um : uList) {
-            if (um.getId().equals(sel.getUserId())) {
-                umatch = um;
-                break;
-            }
-        }
-
-        if (umatch == null) {
-            JOptionPane.showMessageDialog(null, "Failed to find user, please contact admin!");
-            return;
-        }
-
-        
-    }//GEN-LAST:event_btnModifyActionPerformed
-
-    private void checkShowPendingOnlyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkShowPendingOnlyItemStateChanged
-        this.refreshModelDataAndRenderer();
-    }//GEN-LAST:event_checkShowPendingOnlyItemStateChanged
-
-    private void btnSearchByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchByNameActionPerformed
-        this.searchMode = 1;
-        this.refreshModelDataAndRenderer();
-    }//GEN-LAST:event_btnSearchByNameActionPerformed
-
-    private void btnSearchByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchByIdActionPerformed
-        this.searchMode = 2;
-        this.refreshModelDataAndRenderer();
-    }//GEN-LAST:event_btnSearchByIdActionPerformed
-
-    private void btnResetSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetSearchActionPerformed
-        this.searchMode = 0;
-        this.refreshModelDataAndRenderer();
-    }//GEN-LAST:event_btnResetSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -476,27 +407,20 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManagerApproveRejectRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerMarkVaccination.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManagerApproveRejectRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerMarkVaccination.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManagerApproveRejectRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerMarkVaccination.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManagerApproveRejectRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerMarkVaccination.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManagerApproveRejectRequest(null).setVisible(true);
+                new ManagerMarkVaccination(null).setVisible(true);
             }
         });
     }
@@ -504,12 +428,10 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApprove;
     private javax.swing.JButton btnGoBack;
-    private javax.swing.JButton btnModify;
     private javax.swing.JButton btnReject;
     private javax.swing.JButton btnResetSearch;
     private javax.swing.JButton btnSearchById;
     private javax.swing.JButton btnSearchByName;
-    private javax.swing.JCheckBox checkShowPendingOnly;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

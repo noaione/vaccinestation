@@ -276,7 +276,7 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
         }
 
         try {
-            FileHandling.ReplaceById("storedvaccine", sv.getStoreId(), sv.ExportData());
+            FileHandling.ReplaceById("storedvaccines", sv.getStoreId(), sv.ExportData());
         } catch (IOException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error writing to stored vaccines database, please contact admin!");
