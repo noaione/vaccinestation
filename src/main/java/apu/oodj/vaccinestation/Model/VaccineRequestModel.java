@@ -101,7 +101,6 @@ public class VaccineRequestModel extends AbstractTableModel {
     {
         VaccineRequest row = requests.get(rowIndex);
         User user = findUserFromId(row.getUserId());
-        System.out.println("VaccReqModel: " + rowIndex + " | " + columnIndex);
         if (columnIndex == 0) {
             if (appointmentMode) {
                 return statusToString(row.getStatus());

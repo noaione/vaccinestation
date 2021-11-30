@@ -264,7 +264,6 @@ public class ManagerModifyVaccineStock extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a vaccine to add!");
             return;
         }
-        System.out.println(sel);
         new ManagerModifyPerVaccineStock(this.manager, this.station, this.storage, sel).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCreateNewActionPerformed
