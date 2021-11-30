@@ -79,7 +79,7 @@ public class ConfirmationAdminInit extends javax.swing.JFrame {
             }
         });
 
-        confirmBtn2.setText("Cancle");
+        confirmBtn2.setText("Exit");
         confirmBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmBtn2ActionPerformed(evt);
@@ -147,13 +147,8 @@ boolean showPassword = false;
     }//GEN-LAST:event_btnShowActionPerformed
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
-        String username = lblAdminUsername.getText();
-        String password = txtAdminPassword.getText();
-        System.out.println(password);
-
         // Success, now register
-        Administrator admin = new Administrator(username, "Administrator", "admin@localhost", password);
-        String adminAsString = admin.ExportData();
+        String adminAsString = this.tempAdmin.ExportData();
 
         // Write to file
         try {
@@ -164,18 +159,23 @@ boolean showPassword = false;
             return;
         }
         JOptionPane.showMessageDialog(null, "Admin account successfully registered!");
+        new LoginPage(this.tempAdmin.getUsername(), "").setVisible(true);
         this.setVisible(false);
-        new LoginPage("", "").setVisible(true);
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void confirmBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtn1ActionPerformed
-        // TODO add your handling code here:
-        new AdminInit(this.tempAdmin).show();
-        this.hide();
+        new AdminInit(this.tempAdmin).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_confirmBtn1ActionPerformed
 
     private void confirmBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtn2ActionPerformed
-        // TODO add your handling code here:
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Cancel", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+        // exit application
+        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_confirmBtn2ActionPerformed
 
     /**
