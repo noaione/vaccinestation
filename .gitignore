@@ -63,3 +63,5 @@ appdata/
 .appdata/
 nb-configuration.xml
 staging/
+
+.vscode/*
