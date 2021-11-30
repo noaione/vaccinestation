@@ -184,12 +184,12 @@ public class ManagerVaccineSlots extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReduceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReduceActionPerformed
-        //SAVE TO DATABASEt
+        //SAVE TO DATABASE
         int reduce = Integer.parseInt(lblAdd.getText());
         lblReduce.setEditable(false);
         lblReduce.setBackground(Color.GRAY);
         lblReduce.setText("");
-        JOptionPane.showMessageDialog(this, reduce + " DOSE OF VACCINE HAVE BEEN ADDED TO DATABASE");
+        JOptionPane.showMessageDialog(this, reduce + " DOSE OF VACCINE HAVE BEEN REDUCED TO DATABASE");
     }//GEN-LAST:event_btnReduceActionPerformed
 
     private void btnClickAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClickAddActionPerformed

@@ -84,7 +84,7 @@ public class FirstTimeRun extends javax.swing.JFrame {
 
     private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinueActionPerformed
         // TODO add your handling code here:
-        new AdminInit().setVisible(true);
+        new AdminInit(null).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnContinueActionPerformed
 

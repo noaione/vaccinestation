@@ -19,12 +19,15 @@ import apu.oodj.vaccinestation.Internals.Users.Administrator;
  * @author N4O
  */
 public class AdminInit extends javax.swing.JFrame {
+    private Administrator admins;
 
     /**
      * Creates new form AdminInit
      */
-    public AdminInit() {
+    public AdminInit(Administrator admin) {
         initComponents();
+        this.admins = admin;
+        txtAdminUsername.setText(admin.getUsername());
     }
 
     /**
@@ -125,6 +128,14 @@ public class AdminInit extends javax.swing.JFrame {
         String conpassword = txtAdminConPassword.getText();
         System.out.println(password);
         System.out.println(conpassword);
+        
+        Administrator admin = new Administrator(
+                username,
+                "Administrator",
+                "admin@localhost",
+                password
+        );        
+        
         if (password.length() < 1) {
             // Show popup box
             JOptionPane.showMessageDialog(null, "Password cannot be empty");
@@ -155,7 +166,11 @@ public class AdminInit extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "DIFFERENT Password and Confirm Password");
             return;
         }
+        
+        new ConfirmationAdminInit(admin).show();
+        this.hide();
         // Success, now register
+        /*
         Administrator admin = new Administrator(username, "Administrator", "admin@localhost", password);
         String adminAsString = admin.ExportData();
 
@@ -169,7 +184,7 @@ public class AdminInit extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(null, "Admin account successfully registered!");
         this.setVisible(false);
-        new LoginPage("", "").setVisible(true);
+        new LoginPage("", "").setVisible(true);*/
     }//GEN-LAST:event_confirmBtnActionPerformed
     boolean showPassword = false;
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
@@ -213,7 +228,7 @@ public class AdminInit extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminInit().setVisible(true);
+                new AdminInit(null).setVisible(true);
             }
         });
     }
