@@ -43,13 +43,23 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
         String[] rawStations;
         try {
             rawVaccines = FileHandling.ReadFile("vaccines");
-            rawStations = FileHandling.ReadFile("station");
         } catch (FileNotFoundException ex) {
             rawVaccines = new String[] {};
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to read vaccines information, please contact Admin!");
+            new HomepageUsers(this.user).setVisible(true);
+            this.setVisible(false);
+            return;
+        }
+
+        try {
+            rawStations = FileHandling.ReadFile("station");
+        } catch (FileNotFoundException ex) {
             rawStations = new String[] {};
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Failed to read vaccines/stations information, please contact Admin!");
+            JOptionPane.showMessageDialog(this, "Failed to read stations information, please contact Admin!");
             new HomepageUsers(this.user).setVisible(true);
             this.setVisible(false);
             return;
@@ -233,6 +243,8 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
         String[] vaccineStorage;
         try {
             vaccineStorage = FileHandling.ReadFile("storedvaccines");
+        } catch (FileNotFoundException ex) {
+            vaccineStorage = new String[] {};
         } catch (IOException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error reading stored vaccines database, please contact admin!");
