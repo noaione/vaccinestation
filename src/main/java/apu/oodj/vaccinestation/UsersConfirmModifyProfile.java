@@ -25,6 +25,7 @@ public class UsersConfirmModifyProfile extends javax.swing.JFrame {
      */
     public UsersConfirmModifyProfile(Citizen user, Citizen newUser) {
         initComponents();
+        this.user = user;
         this.newUser = newUser;
         String name = newUser.getName();
         String born = newUser.getDOB().toString();
@@ -36,6 +37,13 @@ public class UsersConfirmModifyProfile extends javax.swing.JFrame {
         String type = newUser.getCitizenType().toString();
         String country = newUser.getCountry();
         String idNumber = newUser.getIdentificationNumber();
+        
+        // yg milih foreginer/citizen hapus aja
+        // sama yg kolom ID Number di disable
+        //ID yg mana
+        // IC Number atau Passport
+        //oh jdi critanya itunya juga ga bisa di ubah ya
+        // iya bntr
 
         lblFullName.setText(name + "");
         lblDOB.setText(born + "");

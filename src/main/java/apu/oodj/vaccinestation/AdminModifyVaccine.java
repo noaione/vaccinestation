@@ -29,6 +29,7 @@ public class AdminModifyVaccine extends javax.swing.JFrame {
         this.newVac = vaccine.Copy();
 
         this.lblVacName.setText(vaccine.getName());
+        this.txtManufacturer.setText(vaccine.getManufacturer());
         this.txtDosage.getModel().setValue(vaccine.getDosage());
         this.comboVaccineType.getModel().setSelectedItem(vaccine.getType().toFormFormat());
     }
@@ -40,6 +41,7 @@ public class AdminModifyVaccine extends javax.swing.JFrame {
         this.newVac = newVac;
 
         this.lblVacName.setText(newVac.getName());
+        this.txtManufacturer.setText(vaccine.getManufacturer());
         this.txtDosage.getModel().setValue(newVac.getDosage());
         this.comboVaccineType.getModel().setSelectedItem(newVac.getType().toFormFormat());
     }
@@ -90,6 +92,25 @@ public class AdminModifyVaccine extends javax.swing.JFrame {
         jLabel2.setText("Vaccine Name:");
 
         jLabel3.setText("Vaccine Manufacturer");
+
+        txtDosage.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtDosageInputMethodTextChanged(evt);
+            }
+        });
+        txtDosage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDosageKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDosageKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDosageKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("Vaccine Dosage");
 
@@ -169,6 +190,10 @@ public class AdminModifyVaccine extends javax.swing.JFrame {
         if (manufacturer.strip().length() < 1) {
             JOptionPane.showMessageDialog(this, "Please enter a manufacturer for the vaccine.");
             return;
+        }if(dosage < 1){
+            JOptionPane.showMessageDialog(this, "Can't set Dosage < 1");
+            txtDosage.setValue(1);
+            return;
         }
 
         // https://stackoverflow.com/questions/5455794/removing-whitespace-from-strings-in-java
@@ -187,6 +212,22 @@ public class AdminModifyVaccine extends javax.swing.JFrame {
         new AdminAddRemoveVaccine(this.admin).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnGoBackActionPerformed
+
+    private void txtDosageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDosageKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDosageKeyReleased
+
+    private void txtDosageKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDosageKeyPressed
+        // TODO add your handling code here:        
+    }//GEN-LAST:event_txtDosageKeyPressed
+
+    private void txtDosageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDosageKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDosageKeyTyped
+
+    private void txtDosageInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtDosageInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDosageInputMethodTextChanged
 
     /**
      * @param args the command line arguments

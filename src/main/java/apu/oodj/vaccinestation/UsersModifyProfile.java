@@ -33,14 +33,8 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         this.user = user;
         this.newUser = user.Copy();
         if (user.IsCitizen()) {
-            rbtnCitizen.setSelected(true);
-            txtCountry.setEnabled(false);
-            txtCountry.setFont(jLabel7.getFont());
-            txtCountry.setBackground(Color.DARK_GRAY);
-            txtCountry.setText("Malaysia");
+            lblICNumber.setText("IC Number");
         } else {
-            rbtnForeigner.setSelected(true);
-            txtCountry.setText(user.getCountry());
             lblICNumber.setText("Passport");
         }
         String iduser = user.getIdentificationNumber();
@@ -57,7 +51,7 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         
         lblIDNumber.setText(icnum + "");
         txtFullName.setText(fullname + "");
-        txtICNumber.setText(iduser + "");
+        lblICNum.setText(iduser + "");
         txtEmail.setText(email + "");
         txtAddress.setText(address + "");
         txtPhone.setText(phone + "");
@@ -68,19 +62,16 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         btnModify.setBackground(Color.cyan);
     }
     
+    //kaga keubah wkwk, delete aja kali ya?
+    //iya
+    
     public UsersModifyProfile(Citizen user, Citizen newUser) {
         initComponents();
         this.user = user;
         this.newUser = newUser;
         if (user.IsCitizen()) {
-            rbtnCitizen.setSelected(true);
-            txtCountry.setEnabled(false);
-            txtCountry.setFont(jLabel7.getFont());
-            txtCountry.setBackground(Color.DARK_GRAY);
-            txtCountry.setText("Malaysia");
+            lblICNumber.setText("IC Number");
         } else {
-            rbtnForeigner.setSelected(true);
-            txtCountry.setText(user.getCountry());
             lblICNumber.setText("Passport");
         }
         String iduser = user.getIdentificationNumber();
@@ -88,16 +79,16 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         Calendar cal = new GregorianCalendar();
             cal.setTime(user.getDOB());
             txtDOB.setCalendar(cal);
-        String icnum = user.getId();
-        String email = user.getEmail();
-        String address = user.getHomeAddress();
-        String phone = user.getPhoneNumber();
-        String username = user.getUsername();
-        String password = user.getPassword();
+        String icnum = newUser.getId();
+        String email = newUser.getEmail();
+        String address = newUser.getHomeAddress();
+        String phone = newUser.getPhoneNumber();
+        String username = newUser.getUsername();
+        String password = newUser.getPassword();
         
         lblIDNumber.setText(icnum + "");
         txtFullName.setText(fullname + "");
-        txtICNumber.setText(iduser + "");
+        lblICNum.setText(iduser + "");
         txtEmail.setText(email + "");
         txtAddress.setText(address + "");
         txtPhone.setText(phone + "");
@@ -117,7 +108,6 @@ public class UsersModifyProfile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtDOB = new com.toedter.calendar.JDateChooser();
@@ -128,18 +118,14 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         btnModify = new javax.swing.JButton();
-        txtCountry = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         btnShow = new javax.swing.JButton();
         txtPhone = new javax.swing.JTextField();
-        rbtnCitizen = new javax.swing.JRadioButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        rbtnForeigner = new javax.swing.JRadioButton();
         txtAddress = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -147,12 +133,9 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         lblUsername = new javax.swing.JLabel();
         btnMove = new javax.swing.JButton();
         lblICNumber = new javax.swing.JLabel();
-        txtICNumber = new javax.swing.JTextField();
+        lblICNum = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("WHO ARE YOU ?? ");
 
         jLabel8.setText("Password");
 
@@ -172,8 +155,6 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         jLabel4.setText("Home Address");
 
         jLabel13.setText("Full Name");
-
-        jLabel11.setText("Country");
 
         btnModify.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnModify.setText("Modify");
@@ -201,29 +182,10 @@ public class UsersModifyProfile extends javax.swing.JFrame {
             }
         });
 
-        rbtnCitizen.setText("Citizen");
-        rbtnCitizen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnCitizenActionPerformed(evt);
-            }
-        });
-        rbtnCitizen.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                rbtnCitizenKeyPressed(evt);
-            }
-        });
-
         jLabel12.setText("Date of Birth (DOB)");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel2.setText("HI ! USERS  ");
-
-        rbtnForeigner.setText("Foreigner");
-        rbtnForeigner.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnForeignerActionPerformed(evt);
-            }
-        });
 
         txtAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,11 +213,7 @@ public class UsersModifyProfile extends javax.swing.JFrame {
 
         lblICNumber.setText("IC Number");
 
-        txtICNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtICNumberActionPerformed(evt);
-            }
-        });
+        lblICNum.setText("--------------");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -292,28 +250,20 @@ public class UsersModifyProfile extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rbtnCitizen)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(rbtnForeigner)))
-                                .addGap(55, 55, 55)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCountry, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(59, 59, 59))))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(251, 251, 251))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(203, 203, 203)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(251, 251, 251))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(203, 203, 203))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -329,21 +279,16 @@ public class UsersModifyProfile extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                                             .addComponent(lblIDNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblICNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtICNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblICNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(lblICNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -352,19 +297,7 @@ public class UsersModifyProfile extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbtnCitizen)
-                            .addComponent(rbtnForeigner))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,7 +311,7 @@ public class UsersModifyProfile extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblICNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtICNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblICNum, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -426,67 +359,48 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         String name = txtFullName.getText();
         String born = txtDOB.getDate().toString();
         String email = txtEmail.getText();
-        String idNumber = txtICNumber.getText();
         String homeAddress = txtAddress.getText();
         String phoneNumber = txtPhone.getText();
         String username = lblUsername.getText();
         String password = txtPassword.getText();
         String confirmpassword = txtConPassword.getText();
-        String country = txtCountry.getText();
         Calendar cal = txtDOB.getCalendar();
         Date dt = cal.getTime();
 
-        
-        if(rbtnCitizen.isSelected()){
-            type = CitizenType.Citizen;
-        }else{
-            type = CitizenType.Foreigner;
-        }
-        
         this.newUser.setName(name);
         this.newUser.setEmail(email);
-        this.newUser.setId(idNumber);
         this.newUser.setAddress(homeAddress);
         this.newUser.setPhoneNumber(phoneNumber);
         this.newUser.setUsername(username);
         this.newUser.setPassword(password);
         this.newUser.setDOB(dt);
-        //this.newUser.setType(type);
         
-        if(rbtnCitizen.isSelected() || rbtnForeigner.isSelected()){
-            if(country.isEmpty()){
-                JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>COUNTRY<< HERE!!");
-                txtCountry.requestFocusInWindow();
-            }else if(name.isEmpty()){
-                JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>NAME<< HERE!!");
-                txtFullName.requestFocusInWindow();
-            }else if(born.isEmpty()){
-                JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>DOB<< HERE!!");
-                txtDOB.requestFocusInWindow();
-            }else if(email.isEmpty()){
-                JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>EMAIL<< HERE!!");
-                txtEmail.requestFocusInWindow();
-            }else if(homeAddress.isEmpty()){
-                JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>ADDRESS<< HERE!!");
-                txtAddress.requestFocusInWindow();
-            }else if(phoneNumber.isEmpty()){
-                JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>PHONE<< HERE!!");
-                txtPhone.requestFocusInWindow();
-            }else if(password.isEmpty()){
-                JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>PASSWORD<< HERE!!");
-                txtPassword.requestFocusInWindow();
-            }else if(confirmpassword.isEmpty()){
-                JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>CONFIRM PASSWORD<< HERE!!");
-                txtConPassword.requestFocusInWindow();
-            }else if(password.equals(confirmpassword)) {
-                new UsersConfirmModifyProfile(this.user, this.newUser).show();
-                this.hide();
-            }else {
-                JOptionPane.showMessageDialog(this, "DIFFERENT PASSWORD DETEDTED!! \n\nKindly Check Your Password and Confirm Password");
-            }
-        }else{
-            JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE >>TICK THE BUTTON<< THAT YOU ARE CITIZEN OR NOT!!");
-            return;
+        if(name.isEmpty()){
+            JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>NAME<< HERE!!");
+            txtFullName.requestFocusInWindow();
+        }else if(born.isEmpty()){
+            JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>DOB<< HERE!!");
+            txtDOB.requestFocusInWindow();
+        }else if(email.isEmpty()){
+            JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>EMAIL<< HERE!!");
+            txtEmail.requestFocusInWindow();
+        }else if(homeAddress.isEmpty()){
+            JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>ADDRESS<< HERE!!");
+            txtAddress.requestFocusInWindow();
+        }else if(phoneNumber.isEmpty()){
+            JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>PHONE<< HERE!!");
+            txtPhone.requestFocusInWindow();
+        }else if(password.isEmpty()){
+            JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>PASSWORD<< HERE!!");
+            txtPassword.requestFocusInWindow();
+        }else if(confirmpassword.isEmpty()){
+            JOptionPane.showMessageDialog(this, "EMPTY BOX DETECTED\nPLEASE FILL YOUR >>CONFIRM PASSWORD<< HERE!!");
+            txtConPassword.requestFocusInWindow();
+        }else if(password.equals(confirmpassword)) {
+            new UsersConfirmModifyProfile(this.user, this.newUser).show();
+            this.hide();
+        }else {
+            JOptionPane.showMessageDialog(this, "DIFFERENT PASSWORD DETEDTED!! \n\nKindly Check Your Password and Confirm Password");
         }
     }//GEN-LAST:event_btnModifyActionPerformed
     boolean showPassword = false;
@@ -514,46 +428,6 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPhoneKeyTyped
 
-    private void rbtnCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCitizenActionPerformed
-        // TODO add your handling code here:
-        rbtnForeigner.setSelected(false);
-        txtCountry.setEnabled(false);
-        txtCountry.setFont(jLabel7.getFont());
-        txtCountry.setBackground(Color.DARK_GRAY);
-        txtCountry.setText("Malaysia");
-        lblICNumber.setText("IC Number");
-        
-        
-        /*
-        rbtnNonCitizen.setSelected(false);
-        txtCountry.setEnabled(false);
-        txtCountry.setFont(jLabel7.getFont());
-        txtCountry.setBackground(Color.DARK_GRAY);
-        txtCountry.setText("Malaysia");*/
-    }//GEN-LAST:event_rbtnCitizenActionPerformed
-
-    private void rbtnCitizenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rbtnCitizenKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtnCitizenKeyPressed
-
-    private void rbtnForeignerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnForeignerActionPerformed
-        // TODO add your handling code here:
-        rbtnCitizen.setSelected(false);
-        // rbtnForeigner.setSelected(true);
-        txtCountry.setEnabled(true);
-        txtCountry.setFont(jLabel7.getFont());
-        txtCountry.setBackground(Color.white);
-        txtCountry.setText("");
-        lblICNumber.setText("Passport");
-        
-        /*
-        rbtnCitizen.setSelected(false);
-        txtCountry.setText("");
-        txtCountry.setFont(jLabel7.getFont());
-        txtCountry.setBackground(Color.WHITE);
-        txtCountry.setEnabled(true);*/
-    }//GEN-LAST:event_rbtnForeignerActionPerformed
-
     private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAddressActionPerformed
@@ -563,10 +437,6 @@ public class UsersModifyProfile extends javax.swing.JFrame {
         new PeopleProfile(this.user).show();
         this.hide();
     }//GEN-LAST:event_btnMoveActionPerformed
-
-    private void txtICNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtICNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtICNumberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -608,31 +478,26 @@ public class UsersModifyProfile extends javax.swing.JFrame {
     private javax.swing.JButton btnMove;
     private javax.swing.JButton btnShow;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblCheck;
+    private javax.swing.JLabel lblICNum;
     private javax.swing.JLabel lblICNumber;
     private javax.swing.JLabel lblIDNumber;
     private javax.swing.JLabel lblUsername;
-    private javax.swing.JRadioButton rbtnCitizen;
-    private javax.swing.JRadioButton rbtnForeigner;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JPasswordField txtConPassword;
-    private javax.swing.JTextField txtCountry;
     private com.toedter.calendar.JDateChooser txtDOB;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFullName;
-    private javax.swing.JTextField txtICNumber;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables

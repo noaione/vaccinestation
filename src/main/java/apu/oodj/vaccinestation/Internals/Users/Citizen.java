@@ -190,8 +190,4 @@ public class Citizen extends User {
             this.getDOB()
         );
     }
-
-    public void setType(CitizenType type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
