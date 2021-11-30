@@ -19,7 +19,10 @@ jobs:
           cache: maven
 
       - name: Build and Test
-        run: mvn --batch-mode --update-snapshots verify
+        run: |
+          mvn --batch-mode --update-snapshots verify
+          mvn package
+          ls target
 
       - name: Preparing JAR packaging
         if: startsWith(github.event_name, 'push')

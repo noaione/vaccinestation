@@ -7,6 +7,7 @@
   <groupId>apu.oodj.vaccinestation</groupId>
   <artifactId>vaccinestation</artifactId>
   <version>1.0</version>
+  <packaging>jar</packaging>
 
   <name>vaccinestation</name>
   <!-- FIXME change it to the project's website -->
@@ -81,6 +82,42 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>com.akathist.maven.plugins.launch4j</groupId>
+          <artifactId>launch4j-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>l4j-gui</id>
+              <phase>package</phase>
+              <goals>
+                <goal>launch4j</goal>
+              </goals>
+              <configuration>
+                <headerType>gui</headerType>
+                <outfile>target/vaccinestation.exe</outfile>
+                <jar>target/vaccinestation-1.0.jar</jar>
+                <errTitle>Vaccine Station</errTitle>
+                <classPath>
+                  <mainClass>apu.oodj.vaccinestation.EntryPoint</mainClass>
+                </classPath>
+                <jre>
+                  <minVersion>1.5.0</minVersion>
+                </jre>
+                <versionInfo>
+                  <fileVersion>1.0.0.0</fileVersion>
+                  <txtFileVersion>Vaccine Station v1.0</txtFileVersion>
+                  <fileDescription>A simple GUI for managing vaccine appointment and registration</fileDescription>
+                  <copyright>N4O and KevinKumala</copyright>
+                  <productVersion>1.0.0.0</productVersion>
+                  <txtProductVersion>Vaccine Station v1.0</txtProductVersion>
+                  <productName>Vaccine Station</productName>
+                  <internalName>ccne</internalName>
+                  <originalFilename>vaccinestation.exe</originalFilename>
+                </versionInfo>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
