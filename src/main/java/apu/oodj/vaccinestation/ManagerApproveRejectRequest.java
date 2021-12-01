@@ -417,7 +417,8 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
             return;
         }
 
-        VaccineRequest sel = allRequests.get(selIndex);
+        VaccineRequestModel requestModel = (VaccineRequestModel) this.userSubmissionTable.getModel();
+        VaccineRequest sel = requestModel.getRequest(selIndex);
         if (sel == null) {
             JOptionPane.showMessageDialog(null, "Please select a row to reject");
             return;
