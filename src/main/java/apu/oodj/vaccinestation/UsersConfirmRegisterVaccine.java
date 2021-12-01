@@ -35,7 +35,7 @@ public class UsersConfirmRegisterVaccine extends javax.swing.JFrame {
         lblFullName.setText(user.getName());
         lblIDNum.setText(user.getIdentificationNumber());
         lblEmail.setText(user.getEmail());
-        lblPhone.setText(user.getEmail());
+        lblPhone.setText(user.getPhoneNumber());
         lblVaccine.setText(vaccine.getVaccine().getName());
         StringBuilder sb = new StringBuilder();
         sb.append(vaccine.getDose());
