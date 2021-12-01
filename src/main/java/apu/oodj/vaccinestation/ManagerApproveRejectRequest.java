@@ -437,7 +437,8 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
             return;
         }
 
-        
+        new ManagerModifyAppointmentRequest(this.user, sel, umatch).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnModifyActionPerformed
 
     private void checkShowPendingOnlyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkShowPendingOnlyItemStateChanged
