@@ -34,6 +34,7 @@ public class HomepageUsers extends javax.swing.JFrame {
         lblUsername.setText(username + "");
         lblPassword.setText(password + "");
         btnProfile.setBackground(Color.cyan);
+        btnLogOut.setBackground(Color.red);
         btnRegisterVaccine.setBackground(Color.MAGENTA);
         btnVaccinationStatus.setBackground(Color.yellow);
     }
