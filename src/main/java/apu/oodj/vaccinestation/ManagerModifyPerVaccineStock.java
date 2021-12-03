@@ -6,7 +6,11 @@ package apu.oodj.vaccinestation;
 
 import java.util.ArrayList;
 
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.text.DefaultFormatter;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -27,6 +31,8 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
     private Station station;
     private Vaccine vaccine;
     private StoredVaccine storedVaccine;
+    private final Color yellowDark = new Color(153, 153, 0);
+    private final Color greenDark = new Color(0, 153, 0);
 
     private ArrayList<Vaccine> vaccineList;
 
@@ -49,8 +55,20 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
         vaccineList = sameVac;
 
         lblVacName.setText(vaccine.getName());
-        txtVacCount.setText(sameVac.size() + "");
         lblDifCount.setText("0");
+        lblDifCount.setForeground(yellowDark);
+
+        SpinnerNumberModel model = new SpinnerNumberModel();
+        model.setValue(sameVac.size());
+        model.setMinimum(0);
+        model.setStepSize(1);
+        txtStockCount.setModel(model);
+
+        // https://stackoverflow.com/a/7587253
+        JComponent comp = txtStockCount.getEditor();
+        JFormattedTextField field = (JFormattedTextField) comp.getComponent(0);
+        DefaultFormatter formatter = (DefaultFormatter) field.getFormatter();
+        formatter.setCommitsOnValidEdit(true);
     }
 
     /**
@@ -65,12 +83,12 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblVacName = new javax.swing.JLabel();
-        txtVacCount = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         btnModifyConfirm = new javax.swing.JButton();
         btnGoBack = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         lblDifCount = new javax.swing.JLabel();
+        txtStockCount = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,13 +99,6 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
         jLabel2.setText("Vaccine:");
 
         lblVacName.setText("-----");
-
-        txtVacCount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        txtVacCount.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtVacCountKeyReleased(evt);
-            }
-        });
 
         jLabel3.setText("Adjust Stock Count");
 
@@ -111,6 +122,12 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
 
         lblDifCount.setText("-----");
 
+        txtStockCount.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                txtStockCountStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,10 +135,12 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnGoBack))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3)
-                            .addComponent(txtVacCount, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -129,10 +148,8 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel4)
                             .addComponent(lblDifCount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnModifyConfirm, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnGoBack)))
+                            .addComponent(btnModifyConfirm, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtStockCount, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,7 +164,7 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtVacCount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtStockCount, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,30 +179,6 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtVacCountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVacCountKeyReleased
-        evt.consume();
-        String text = txtVacCount.getText();
-        long stocks;
-        try {
-            stocks = Long.parseLong(text);
-        } catch (NumberFormatException e) {
-            lblDifCount.setText("???");
-            lblDifCount.setForeground(Color.yellow);
-            return;
-        }
-
-        long diff = stocks - vaccineList.size();
-        DecimalFormat df = new DecimalFormat("#,##0.###");
-        lblDifCount.setText(df.format(diff));
-        if (diff == 0) {
-            lblDifCount.setForeground(Color.black);
-        } else if (diff < 0) {
-            lblDifCount.setForeground(Color.red);
-        } else {
-            lblDifCount.setForeground(Color.green);
-        }
-    }//GEN-LAST:event_txtVacCountKeyReleased
-
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to go back?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
@@ -195,21 +188,14 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGoBackActionPerformed
 
     private void btnModifyConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyConfirmActionPerformed
-        String text = txtVacCount.getText();
-        long stocks;
-        try {
-            stocks = Long.parseLong(text);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid number entered, please only include valid number");
-            return;
-        }
+        int stocks = (int) txtStockCount.getValue();
 
         if (stocks < 0) {
             JOptionPane.showMessageDialog(this, "Invalid number entered, number must be more than equals 0");
             return;
         }
 
-        long diff = stocks - vaccineList.size();
+        int diff = stocks - vaccineList.size();
         DecimalFormat df = new DecimalFormat("#,##0.###");
         String diffText = "+" + df.format(diff);
         if (diff < 0) {
@@ -243,6 +229,23 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
         new ManagerModifyVaccineStock(this.manager, this.station).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnModifyConfirmActionPerformed
+
+    private void txtStockCountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_txtStockCountStateChanged
+        int stocks = (int) txtStockCount.getValue();
+        int diff = stocks - vaccineList.size();
+        DecimalFormat df = new DecimalFormat("#,##0.###");
+        String diffText = "+" + df.format(diff);
+        if (diff == 0) {
+            diffText = "0";
+            lblDifCount.setForeground(this.yellowDark);
+        } else if (diff < 0) {
+            diffText = df.format(diff);
+            lblDifCount.setForeground(Color.RED);
+        } else {
+            lblDifCount.setForeground(this.greenDark);
+        }
+        lblDifCount.setText(diffText);
+    }//GEN-LAST:event_txtStockCountStateChanged
 
     /**
      * @param args the command line arguments
@@ -288,6 +291,6 @@ public class ManagerModifyPerVaccineStock extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblDifCount;
     private javax.swing.JLabel lblVacName;
-    private javax.swing.JFormattedTextField txtVacCount;
+    private javax.swing.JSpinner txtStockCount;
     // End of variables declaration//GEN-END:variables
 }
