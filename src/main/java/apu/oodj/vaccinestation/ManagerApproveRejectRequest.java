@@ -399,6 +399,11 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
             return;
         }
 
+        if (sel.isVaccinated()) {
+            JOptionPane.showMessageDialog(this, "Sorry, you are unable to change the rejection status since the user already finished the vaccination for this!");
+            return;
+        }
+
         sel.setStatus(-1);
         allRequests.set(indexActual, sel);
         boolean success = saveRequestChanges();
@@ -421,6 +426,11 @@ public class ManagerApproveRejectRequest extends javax.swing.JFrame {
         VaccineRequest sel = requestModel.getRequest(selIndex);
         if (sel == null) {
             JOptionPane.showMessageDialog(null, "Please select a row to reject");
+            return;
+        }
+
+        if (sel.isVaccinated()) {
+            JOptionPane.showMessageDialog(this, "Sorry, you are unable to modify the request since the user already finished the vaccination for this!");
             return;
         }
 
