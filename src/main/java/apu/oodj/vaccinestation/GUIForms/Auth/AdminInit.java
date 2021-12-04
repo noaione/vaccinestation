@@ -128,8 +128,6 @@ public class AdminInit extends javax.swing.JFrame {
         String username = txtAdminUsername.getText();
         String password = txtAdminPassword.getText();
         String conpassword = txtAdminConPassword.getText();
-        System.out.println(password);
-        System.out.println(conpassword);
         
         Administrator admin = new Administrator(
             username,

@@ -585,7 +585,6 @@ public class RegistrationPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txtICNumberActionPerformed
 
     private void rbtnCitizenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCitizenActionPerformed
-        System.out.println("SETTING TO CITIZEN");
         // rbtnCitizen.setSelected(true);
         rbtnForeigner.setSelected(false);
         txtCountry.setEnabled(false);
@@ -596,7 +595,6 @@ public class RegistrationPage extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtnCitizenActionPerformed
 
     private void rbtnForeignerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnForeignerActionPerformed
-        System.out.println("SETTING TO FOREIGNER");
         rbtnCitizen.setSelected(false);
         // rbtnForeigner.setSelected(true);
         txtCountry.setEnabled(true);
