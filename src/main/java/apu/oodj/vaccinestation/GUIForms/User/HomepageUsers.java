@@ -22,7 +22,6 @@ import java.util.ArrayList;
  */
 public class HomepageUsers extends javax.swing.JFrame {
     private Citizen citizen;
-    private final int MAXIMUM_DOSAGE = 2;
 
     /**
      * Creates new form HomepageUsers
@@ -238,7 +237,15 @@ public class HomepageUsers extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "You have a pending request, please wait for the admin to process it!");
             return;
         }
-        if (vacRequestList.size() >= this.MAXIMUM_DOSAGE) {
+        // Maximum temporary
+        int MAXIMUM_DOSAGE = 2;
+        try {
+            VaccineRequest firstVac = vacRequestList.get(0);
+            MAXIMUM_DOSAGE = firstVac.getVaccine().getDosage();
+        } catch (IndexOutOfBoundsException e) {
+            // Silent ignore
+        }
+        if (vacRequestList.size() >= MAXIMUM_DOSAGE) {
             JOptionPane.showMessageDialog(this, "Your vaccination is already done! Thank you for participating!");
             return;
         }

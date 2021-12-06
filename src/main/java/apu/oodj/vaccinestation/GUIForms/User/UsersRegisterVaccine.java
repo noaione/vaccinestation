@@ -68,7 +68,12 @@ public class UsersRegisterVaccine extends javax.swing.JFrame {
         this.vaccines = new ArrayList<Vaccine>();
         this.stations = new ArrayList<Station>();
         for (String rawVaccine : rawVaccines) {
-            vaccines.add(Vaccine.ParseData(rawVaccine));
+            Vaccine vcP = Vaccine.ParseData(rawVaccine);
+            // Somc vaccine only allows one type of vaccine
+            if (!vcP.IsMultiDosage() && twoDose) {
+                continue;
+            }
+            vaccines.add(vcP);
         }
         for (String rawStation : rawStations) {
             stations.add(Station.ParseData(rawStation));
