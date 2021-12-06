@@ -108,6 +108,10 @@ public class UsersVaccineStatus extends javax.swing.JFrame {
             lblVaccineName.setText(firstDose.getVaccine().getName());
             lblVaccineDose.setText("Dose 1");
         }
+
+        if (!this.firstDose.getVaccine().IsMultiDosage()) {
+            btnNextDose.setText("Dose 2 (Not applicable)");
+        }
     }
 
     private void moveToSecondDose() {
